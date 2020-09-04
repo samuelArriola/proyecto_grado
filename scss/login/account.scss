@@ -1,0 +1,50 @@
+.box{
+	padding: 20px;
+}
+.text-medium{
+	font-size: 1.0rem;   
+	font-weight: 500;
+}
+.input-default{
+	background-color: rgba(255,255,255,0.9);
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    height: 3rem;
+}
+
+.cont-account{
+	-webkit-transition:all 0.4s ease !important;
+       -moz-transition:all 0.4s ease !important;
+        -ms-transition:all 0.4s ease !important;
+         -o-transition:all 0.4s ease !important;
+            transition:all 0.4s ease !important;
+}
+
+.error{
+	margin-top: -20px;
+	margin-bottom: 20px;
+	font-size: .9rem;
+}
+
+.codigo{
+	margin-right: auto;
+    margin-left: auto;
+    float: unset !important;
+    label{
+    	font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+	.cont-account{
+		box-shadow: none;
+		width: 100%;
+	} 
+	.box{
+			padding: 10px;
+	}	
+
+}
+@import 'btn';

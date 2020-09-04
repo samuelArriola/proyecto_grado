@@ -1,0 +1,12 @@
+form{
+    border: solid;
+}
+#icono{
+    margin-left: 10000px;
+}
+#flotante { 
+        display:scroll;
+        position:fixed;
+        bottom:320px;
+        right:0px;  
+}
