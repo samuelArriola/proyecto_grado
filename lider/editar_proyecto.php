@@ -23,6 +23,9 @@
 	$rs = mysqli_query($con, $sql); 
 
 	
+	
+
+	
 
 ?>
 
@@ -60,15 +63,23 @@
 	<div style="text-align: center; margin-top: -75px; margin-left: 93%;"><?php echo $icon_estado[$row["esta_proy"]] ?><div style="font-size: 0.7em; margin-top: 8px;"> <?php echo $desc_estado[$row["esta_proy"]] ?></div></div></div>
 	
 	<div class="input-field col s12">
-	<b>Descripcion del proyecto:</b>
+	<b>Descripción del proyecto:</b>
 	   <textarea name="descripcion_proye" id="descripcion" class="materialize-textarea"><?php echo $row["desc_proy"]?> </textarea>
 	</div>
 
 	<div class="col s12"> 
          <b>Escoja la dependencia a la que pertenece el proyecto</b>
-        <select class="browser-default" name="dependencia">
-            <option value="<?php  echo $row['item_dep'] ?>"><?php  echo $row['item_dep'] ?></option>
+        <select class="browser-default" name="dependencia" id="dependencia">
+		 <?php if ( $row["item_dep"]==1) {		
+           echo' <option value="1" selected >Investigación</option>
+			<option value="2">Proyección Social</option>';
+		 }else if( $row["item_dep"]==2){ 
+			echo'<option value="1" >Investigación</option>
+			<option value="2"selected>Proyección Social</option>';
+		  }?>
         </select>
+
+		
     </div>
 	
 	<div class="input-field col s12">

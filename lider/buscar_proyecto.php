@@ -19,14 +19,14 @@
        $salida="";
        $q=4;
         
-       $sql = "SELECT * FROM inex_proyectos  ORDER BY item_proy  "; 
+       $sql = "SELECT * FROM inex_proyectos  ORDER BY item_proy DESC "; 
 
        if(isset($_POST['dato'])){
           $q=$_POST['dato'];
-         $sql = "SELECT * FROM inex_proyectos WHERE esta_proy LIKE '%$q%' "; 
+         $sql = "SELECT * FROM inex_proyectos WHERE esta_proy LIKE '%$q%' ORDER BY item_proy DESC "; 
        }
        if($q==4){
-         $sql = "SELECT * FROM inex_proyectos  ORDER BY item_proy  ";   
+         $sql = "SELECT * FROM inex_proyectos  ORDER BY item_proy DESC ";   
        }
        $resul=mysqli_query($con,$sql);
 

@@ -8,6 +8,7 @@ $(document).ready(function(){
         const datos={
             id:$("#id_pro").val(),
             nombre_proyec:$("#nombre_proye").val(),
+            dependencia:$("#dependencia").val(),
             descripcion:$("#descripcion").val()
         }
         $.post('actualizar_proyecto.php',datos,function(response){
@@ -21,7 +22,7 @@ $(document).ready(function(){
 
 }); 
 
-document.querySelector('#btn_create_p').addEventListener('click', (e) => {
+$('#btn_create_p').click((e) => {
     e.preventDefault(); 
      
     const datos= {
@@ -45,3 +46,4 @@ document.querySelector('#btn_create_p').addEventListener('click', (e) => {
     }
     
 })
+

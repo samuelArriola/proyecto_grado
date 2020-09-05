@@ -38,14 +38,14 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
        <div class="row">
          <div class="input-field col s12">
            <input placeholder="Ingrese nombre del proyecto" name="nombre_proye" id="nombre_proye" type="text" class="validate"  required>
-           <label for="nombre_proye">*(este campo es requerido)</label>
+           <label for="nombre_proye">* Nombre</label>
          </div>                   
          <div class="input-field col s12">
           <textarea placeholder="Ingrese descripcion del proyecto" name="descripcion_proye" id="descripcion" class="materialize-textarea validate" required></textarea>
-          <label for="textarea1">Descripcion</label>
+          <label for="textarea1">* Descripcion </label>
         </div>
         <div class="col s12"> 
-         <label>Escoja la dependencia a la que pertenece el proyecto</label>
+         <label>* Escoja la dependencia a la que pertenece el proyecto</label>
              <select class="browser-default" name="dependencia" id="dependencia">
                 <option value="" disabled selected>Seleccione</option>
                   <option value="1">Investigacion</option>

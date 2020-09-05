@@ -42,16 +42,19 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
         <div class="row">
         <div class="input-field col s12">
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
-            <input placeholder="Ingrese el nombre de la actividad" name="nombre_act" id="nombre_act" type="text" class="validate">
+            <input placeholder="Ingrese el nombre de la actividad" name="nombre_act" id="nombre_act" type="text" class="validate" required>
+            <label for="duracion_act" >* Nombre da la Actividad</label>
         </div>
         <div class="input-field col s12">
-            <input placeholder="Ingrese la duracion en dias de la actividad" name="duracion_act" id="duracion_act" type="number" class="validate">
+            <input placeholder="Ingrese la duracion en dias de la actividad" name="duracion_act" id="duracion_act" type="number" class="validate" required>
+            <label for="nombre_act" >* Duración da la Actividad</label>
         </div>
         <div class="input-field col s12">
-            <input placeholder="Ingrese el valor de la actividad" name="valor" id="valor" type="number" class="validate">
+            <input placeholder="Ingrese el valor de la actividad" name="valor" id="valor" type="number" class="validate" required>
+            <label for="valor" >* Valor da la Actividad</label>
         </div>
         <div class="input-field col s12">
-            <button class="btn orange">Agregar</button>
+            <button class="btn orange" type="" id="actualizar_a">Agregar</button>
             <a href="editar_proyecto.php?id=<?php echo $item ?>" class="modal-close waves-effect waves-green btn">Atras</a>
         </div> 
         </div>
@@ -63,7 +66,9 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
-<script src="funciones.js"></script>
+<script src="funciones.js"></script> 
+<script src="validaciones.js"></script> 
+
 </html>
 <?php
 }else{
