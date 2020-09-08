@@ -14,6 +14,8 @@ while ($row = mysqli_fetch_array($rs)) {
     $duracion_a = $row['dias_acti'];
     $nombre_a = $row['nomb_acti'];
     $valor_a = $row['valo_acti'];
+    $fecha_ia= $row['fecha_ia'];
+    $fecha_fa= $row['fecha_fa'];
 
 }
 
@@ -58,12 +60,19 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
         <div class="input-field col s12">
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
             <input value = "<?php echo $nombre_a ?>" name="nombre_act" id="nombre_act" type="text" class="validate">
+            <label for="nombre_act" >* Nombre da la Actividad</label>
         </div>
-        <div class="input-field col s12">
-            <input value = "<?php echo $duracion_a ?>" name="duracion_act" id="duracion_act" type="number" class="validate">
+        <div class="input-field col s6">
+        <input value = "<?php echo $fecha_ia ?>" type="text" name="fecha_ia"  class="datepicker validate" id="datepicker3" required>
+          <label for="datepicker3">* Fecha Inicial </label>
+        </div>
+        <div class="input-field col s6">
+        <input value = "<?php echo $fecha_fa ?>" type="text" name="fecha_fa" class="datepicker validate" id="datepicker4" required>
+          <label for="datepicker4">* Fecha Final </label>
         </div>
         <div class="input-field col s12">
             <input value = "<?php echo $valor_a ?>" name="valor" id="valor" type="number" class="validate">
+            <label for="valor" >* Valor da la Actividad</label>
         </div>
         <div class="input-field col s12">
             <button class="btn orange">Actualizar</button>

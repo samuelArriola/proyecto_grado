@@ -8,11 +8,13 @@ $('#actualizar_a').click(function (a) {
         nombre_a:$('#nombre_act').val(),
         duracion_a:$('#duracion_act').val(),
         valor_a:$('#valor').val(),
-        id_pro2:$('#id_pro2').val()
+        id_pro2:$('#id_pro2').val(),
+        fecha_ia:$('#datepicker3').val(),
+        fecha_fa:$('#datepicker4').val()
     }
 
-    if (datos.nombre_a=="" || datos.duracion_a=="" || datos.valor_a=="") {
-        M.toast({html: 'Los campos son requeridos', classes: 'rounded'});
+    if (datos.nombre_a=="" || datos.duracion_a=="" || datos.valor_a=="" || datos.fecha_ia=="" || datos.fecha_fa=="") {
+        M.toast({html: 'Todos los campos son requeridos, por favor, complete los campos', classes: 'rounded'});
     } else {
         $.ajax({
             url:'insertar_actividad.php',

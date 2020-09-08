@@ -44,6 +44,14 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
           <textarea placeholder="Ingrese descripcion del proyecto" name="descripcion_proye" id="descripcion" class="materialize-textarea validate" required></textarea>
           <label for="textarea1">* Descripcion </label>
         </div>
+        <div class="input-field col s6">
+        <input type="text" class="datepicker validate" id="datepicker1" required>
+          <label for="datepicker1">* Fecha Inicial </label>
+        </div>
+        <div class="input-field col s6">
+        <input type="text" class="datepicker validate" id="datepicker2" required>
+          <label for="datepicker2">* Fecha Final </label>
+        </div>
         <div class="col s12"> 
          <label>* Escoja la dependencia a la que pertenece el proyecto</label>
              <select class="browser-default" name="dependencia" id="dependencia">
@@ -67,6 +75,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
     </div>  
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 

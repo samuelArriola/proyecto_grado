@@ -43,11 +43,15 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
         <div class="input-field col s12">
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
             <input placeholder="Ingrese el nombre de la actividad" name="nombre_act" id="nombre_act" type="text" class="validate" required>
-            <label for="duracion_act" >* Nombre da la Actividad</label>
+            <label for="nombre_act" >* Nombre da la Actividad</label>
         </div>
-        <div class="input-field col s12">
-            <input placeholder="Ingrese la duracion en dias de la actividad" name="duracion_act" id="duracion_act" type="number" class="validate" required>
-            <label for="nombre_act" >* Duración da la Actividad</label>
+        <div class="input-field col s6">
+        <input type="text" name="fecha_ia" class="datepicker validate" id="datepicker3" required>
+          <label for="datepicker3">* Fecha Inicial </label>
+        </div>
+        <div class="input-field col s6">
+        <input type="text" name="fecha_fa" class="datepicker validate" id="datepicker4" required>
+          <label for="datepicker4">* Fecha Final </label>
         </div>
         <div class="input-field col s12">
             <input placeholder="Ingrese el valor de la actividad" name="valor" id="valor" type="number" class="validate" required>

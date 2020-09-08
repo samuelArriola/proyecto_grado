@@ -1,7 +1,17 @@
+console.log('conectado a funciones.js');
+
+   
+
 $(document).ready(function(){
     $('select').formSelect();
     $('.tooltipped').tooltip();
     $('.modal').modal(); 
+    $('.datepicker').datepicker({
+        format:'yyyy/mm/dd'
+
+        }
+    );
+  
      
     //actualizar actividad
     $("#actualizar").click(function(e){
@@ -29,11 +39,13 @@ $('#btn_create_p').click((e) => {
         nombre_proyec:document.querySelector('#nombre_proye').value,
         descripcion:document.querySelector('#descripcion').value,
         dependencia:document.querySelector('#dependencia').value,
-        iden_lider:document.querySelector('#iden_lider').value
+        iden_lider:document.querySelector('#iden_lider').value,
+        fecha_ip:document.querySelector('#datepicker1').value,
+        fecha_fp:document.querySelector('#datepicker2').value
     }
 
-    if( datos.nombre_proyec==null || datos.nombre_proyec =='', datos.descripcion==null || datos.descripcion==''){
-        M.toast({html: 'Los campos son requeridos', classes: 'rounded'});
+    if( datos.nombre_proyec==null || datos.nombre_proyec =='', datos.descripcion==null || datos.descripcion=='' || datos.fecha_ip=='' || datos.fecha_fp=='' ){
+        M.toast({html: 'Todos los campos son requeridos, por favor, complete los campos', classes: 'rounded'});
     }else{
         $.ajax({
             url:'insertar_proyecto.php',

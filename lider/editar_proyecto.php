@@ -112,12 +112,13 @@
 	<div class="teal-text">INFORMACIÓN DEL ACTIVIDADES</div>
 	<div style="overflow-x: auto;"><table>
 	<tr>
-		<th>Duración</th>
 		<th>Actividad</th>
+		<th>Fecha Inicial</th>
+		<th>Fecha Final</th>
 		<th>Valor</th>
 		<th>Estado</th>
-		<th>Editar</th>
-		<th>Eliminar</th>
+		<th>Opciones</th>
+		
 	</tr>
 <?php
 	while ($row = mysqli_fetch_array($rs)) {
@@ -143,18 +144,23 @@
 ?>
 
     <tr>
-	    <td><?php echo $row['dias_acti'] ?></td>
 		<td><?php echo $row['nomb_acti'] ?></td>
+		<td><?php echo $row['fecha_ia'] ?></td>
+		<td><?php echo $row['fecha_fa'] ?></td>
 		<td><?php echo $row['valo_acti'] ?></td>
 		<td><?php echo $row['esta_acti'] ?></td>
 
 		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
-		 <td> <a class="waves-effect waves-light btn-small orange" disabled='disabled' href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">Editar</a></td>
-		 <td> <a class="waves-effect waves-light btn-small modal-trigger red" disabled='disabled' href="#modal1">Eliminar</a></td>
-		  <?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
-			<td> <a class="waves-effect waves-light btn-small orange" href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">Editar</a></td>
-		    <td> <a class="waves-effect waves-light btn-small modal-trigger red" href="#modal1">Eliminar</a></td> 
-		  <?php } ?> 
+		 <td> 
+			<li title="Editar" class='material-icons'><a class="hoverable orange-text" disabled='disabled' href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
+			<li title="Eliminar" class='material-icons'><a class="hoverable  modal-trigger red-text" disabled='disabled' href="#modal1">delete</a>
+		</td>
+		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
+		<td>
+			<li title="Editar" class='material-icons'><a class="hoverable  orange-text" href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
+			<li title="Eliminar" class='material-icons'><a class="hoverable  modal-trigger red-text" href="#modal1">delete</a>
+		</td> 
+		<?php } ?> 
 		
 	</tr> 
          

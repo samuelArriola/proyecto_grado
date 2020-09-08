@@ -4,10 +4,12 @@
     $id_p=$_GET['id_p'];
     $id_a=$_GET['id_a'];
     $nombre_act=$_POST['nombre_act'];
-    $duracion_act=$_POST['duracion_act'];
     $valor=$_POST['valor'];
+    $fecha_ia=$_POST['fecha_ia'];
+    $fecha_fa=$_POST['fecha_fa'];
 
-    $query="UPDATE inex_actividades SET nomb_acti = '$nombre_act', dias_acti = '$duracion_act', valo_acti = '$valor' WHERE item_acti = '$id_a'";
+    
+    $query="UPDATE inex_actividades SET nomb_acti = '$nombre_act',  valo_acti = '$valor', fecha_ia = '$fecha_ia', fecha_fa= '$fecha_fa' WHERE item_acti = '$id_a'";
 
     $resul=mysqli_query($con,$query); 
     if(!$resul){
@@ -16,5 +18,7 @@
       header('location:editar_proyecto.php?id='.$id_p);
     }
 
+     // cerra conexion 
+    mysqli_close($con);
 
 ?>
