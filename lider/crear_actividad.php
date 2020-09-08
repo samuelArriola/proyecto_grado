@@ -45,6 +45,10 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
             <input placeholder="Ingrese el nombre de la actividad" name="nombre_act" id="nombre_act" type="text" class="validate" required>
             <label for="nombre_act" >* Nombre da la Actividad</label>
         </div>
+        <div class="input-field col s12">
+            <textarea  placeholder="Describa la actividad" name="descripcion_a" id="descripcion_a" type="text" class="validate materialize-textarea" required></textarea>
+            <label for="valor" >Descripción</label>
+        </div>
         <div class="input-field col s6">
         <input type="text" name="fecha_ia" class="datepicker validate" id="datepicker3" required>
           <label for="datepicker3">* Fecha Inicial </label>

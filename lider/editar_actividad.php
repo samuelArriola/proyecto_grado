@@ -11,12 +11,11 @@ $rs = mysqli_query($con, $sql);
 
 while ($row = mysqli_fetch_array($rs)) {
 
-    $duracion_a = $row['dias_acti'];
     $nombre_a = $row['nomb_acti'];
+    $descripcion_a = $row['descripcion_a'];
     $valor_a = $row['valo_acti'];
     $fecha_ia= $row['fecha_ia'];
     $fecha_fa= $row['fecha_fa'];
-
 }
 
 session_start(); 
@@ -61,6 +60,10 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
             <input value = "<?php echo $nombre_a ?>" name="nombre_act" id="nombre_act" type="text" class="validate">
             <label for="nombre_act" >* Nombre da la Actividad</label>
+        </div>
+        <div class="input-field col s12">
+            <textarea  placeholder="Describa la actividad" name="descripcion_a" id="descripcion_a" type="text" class="validate materialize-textarea" required> <?php echo $descripcion_a ?></textarea>
+            <label for="valor" >Descripción</label>
         </div>
         <div class="input-field col s6">
         <input value = "<?php echo $fecha_ia ?>" type="text" name="fecha_ia"  class="datepicker validate" id="datepicker3" required>

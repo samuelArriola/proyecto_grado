@@ -38,8 +38,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
 <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
-
 </head>
+
 <body>
 <?php include("menu.php"); ?>
 <div class="hide-on-med-and-down" style="margin-top: 90px;"></div>
@@ -92,7 +92,10 @@
         <?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
 		  <button class="btn orange" id="actualizar" disabled='disabled' >Actualizar</button> 
 		  <?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
-			   <button class="btn orange" id="actualizar" >Actualizar</button> 
+			   <button class="btn orange" id="actualizar" >Actualizar</button>
+			   <?php if($estado_proyecto==0){ ?>	
+				 <a class="btn red" id="eliminar_p" href="eliminar_proyecto.php?id_p=<?php echo $item ?>">eliminar</a> 
+				<?php } ?> 
 		  <?php } ?> 
 	</div>
     </div>
@@ -113,6 +116,7 @@
 	<div style="overflow-x: auto;"><table>
 	<tr>
 		<th>Actividad</th>
+		<th>Descripción</th>
 		<th>Fecha Inicial</th>
 		<th>Fecha Final</th>
 		<th>Valor</th>
@@ -124,41 +128,29 @@
 	while ($row = mysqli_fetch_array($rs)) {
 
 		$id_acti = $row['item_acti'];
-
-		$dura = ''; 
-		if($row["dias_acti"] <= 1){
-			$dura = $row["dias_acti"] . ' Día';
-		}else{
-			if($row["dias_acti"] < 7){
-				$dura = $row["dias_acti"] . ' Días';	
-			}else{
-				if($row["dias_acti"] % 7 == 0){
-					if($row["dias_acti"]/7 > 1) $dura = $row["dias_acti"]/7 . ' Semanas';
-					else $dura = $row["dias_acti"]/7 . ' Semana';
-				}else{
-					$dura = $row["dias_acti"] . ' Días'; 
-				}
-			}
-		}
 		if($row["valo_acti"]=='') $row["valo_acti"] = 0; 
 ?>
 
     <tr>
 		<td><?php echo $row['nomb_acti'] ?></td>
+		<td><?php echo $row['descripcion_a'] ?></td>
 		<td><?php echo $row['fecha_ia'] ?></td>
 		<td><?php echo $row['fecha_fa'] ?></td>
 		<td><?php echo $row['valo_acti'] ?></td>
 		<td><?php echo $row['esta_acti'] ?></td>
 
 		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
-		 <td> 
-			<li title="Editar" class='material-icons'><a class="hoverable orange-text" disabled='disabled' href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
-			<li title="Eliminar" class='material-icons'><a class="hoverable  modal-trigger red-text" disabled='disabled' href="#modal1">delete</a>
+		 <td >  
+		   <?php if($estado_proyecto==2){ ?>	
+	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text"  href="#modal2">content_paste</a>
+			<?php } ?>
+			<li  title="Editar" class='material-icons ' style="pointer-events:none; color:0.6;" ><a  class="hoverable orange-text " href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
+			<li  title="Eliminar" class='material-icons' style="pointer-events:none; opacity:0.6;" ><a  class="hoverable  modal-trigger red-text "  href="#modal1">delete</a></li>
 		</td>
 		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
 		<td>
 			<li title="Editar" class='material-icons'><a class="hoverable  orange-text" href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
-			<li title="Eliminar" class='material-icons'><a class="hoverable  modal-trigger red-text" href="#modal1">delete</a>
+			<li title="Eliminar" class='material-icons'><a class="hoverable  modal-trigger red-text" href="#modal1">delete</a></li>
 		</td> 
 		<?php } ?> 
 		
@@ -167,6 +159,15 @@
 <?php } ?> 
 
 	</table></div></div>
+	</div>
+
+	 <!-- botton enviar proyectos -->
+	<div class="center">
+		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
+			<a class="btn disabled" id="eliminar_p" href="">Enviar Proyecto</a> 
+		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
+				<a class="btn orange" id="eliminar_p" href="">Enviar Proyecto</a> 
+		<?php } ?> 		
 	</div>
 
 	
@@ -187,7 +188,27 @@
 	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
 	 </div> 
 	</div>
-  </div>
+    </div>
+
+	<!-- Modal para agregar arcivos -->
+	<div id="modal2" class="modal ">
+		<div class="modal-content" >
+		 <div class="center"><h4 class="">Subir evidencias</h4></div>
+		<form action="#">
+			<div class="file-field input-field">
+			<div class="btn">
+				<span>File</span>
+				<input type="file">
+			</div>
+			<div class="file-path-wrapper">
+				<input class="file-path validate" type="text">
+			</div>
+			</div>
+			  <div class="center"><button class="btn orange">Subir </button></div>
+		</form>
+		</div>
+    </div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="../js/materialize.min.js"></script>
