@@ -38,11 +38,11 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
     <div class="teal-text" style="margin-left:10px">AGREGAR ACTIVIDADES</div> 
     
     <div class="row">
-        <form class="col s12" action="insertar_actividad.php" method="POST" id="form2">
+        <form class="col s12" action="dataBase/insertar_actividad.php" method="POST" id="form2">
         <div class="row">
         <div class="input-field col s12">
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
-            <input placeholder="Ingrese el nombre de la actividad" name="nombre_act" id="nombre_act" type="text" class="validate" required>
+            <input placeholder="Ingrese el nombre de la actividad" name="nombre_act" id="nombre_act"   maxlength="15" autofocus type="text" class="validate" required >
             <label for="nombre_act" >* Nombre da la Actividad</label>
         </div>
         <div class="input-field col s12">
@@ -74,8 +74,8 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
-<script src="funciones.js"></script> 
-<script src="validaciones.js"></script> 
+<script src="js/funciones.js"></script> 
+<script src="js/validaciones.js"></script> 
 
 </html>
 <?php

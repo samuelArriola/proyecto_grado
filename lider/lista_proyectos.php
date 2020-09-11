@@ -65,11 +65,12 @@
   
 </div>
 
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
-<script src="funciones.js"></script> 
-<script src="buscar.js"></script> 
+<script src="js/funciones.js"></script> 
+<script src="js/buscar.js"></script> 
  
 </body>
 

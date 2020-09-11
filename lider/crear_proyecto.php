@@ -4,7 +4,8 @@ session_start();
 $_SESSION["IDEN"] = '1002491546';
 $_SESSION["NOMB"] = 'OISMER SEHUANES GUZMAN';
 $_SESSION["ROLE"] = 'J';
-
+  
+  
 if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 ?>
 <!-- <!DOCTYPE html> -->
@@ -34,10 +35,10 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
  
     <div class="teal-text" style="margin-left:10px">CREAR PROYECTOS</div> 
     <div class="row">
-      <form class="col s12 " action="insertar_proyecto.php" method="POST" style="margin-top:30px">
+      <form class="col s12 " action="dataDase/insertar_proyecto.php" method="POST" style="margin-top:30px">
        <div class="row">
          <div class="input-field col s12">
-           <input placeholder="Ingrese nombre del proyecto" name="nombre_proye" id="nombre_proye" type="text" class="validate"  required>
+           <input placeholder="Ingrese nombre del proyecto"   name="nombre_proye" id="nombre_proye" type="text" class="validate"  required>
            <label for="nombre_proye">* Nombre</label>
          </div>                   
          <div class="input-field col s12">
@@ -45,11 +46,11 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
           <label for="textarea1">* Descripcion </label>
         </div>
         <div class="input-field col s6">
-        <input type="text" class="datepicker validate" id="datepicker1" required>
+        <input type="text" class="datepicker validate" id="datepicker1" required >
           <label for="datepicker1">* Fecha Inicial </label>
         </div>
         <div class="input-field col s6">
-        <input type="text" class="datepicker validate" id="datepicker2" required>
+        <input type="text" class="datepicker2 validate" id="datepicker2" required>
           <label for="datepicker2">* Fecha Final </label>
         </div>
         <div class="col s12"> 
@@ -75,11 +76,11 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
     </div>  
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
-<script src="funciones.js"></script>
+<script src="js/funciones.js"></script>
 
 </html>
 <?php

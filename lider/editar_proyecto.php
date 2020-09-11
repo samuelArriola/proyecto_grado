@@ -1,6 +1,7 @@
 <?php
-
-    $item = $_GET['id'];
+	
+	
+	$item = $_GET['id'];
 
 	$icon_estado = array('0' => '<i class="material-icons">edit</i>',
 	'1' => '<i class="material-icons">send</i>',
@@ -22,7 +23,36 @@
 	 from inex_proyectos as a where a.item_proy = '".$item."'";
 	$rs = mysqli_query($con, $sql); 
 
+	//muestra las evidencias en una tabla 
+	$mostrar_e ="SELECT * FROM inex_evidencia";
+	$resul_e =mysqli_query($con,$mostrar_e);
 	
+
+
+
+
+
+	//Guaedar evidencias 
+	if ($_POST) {
+		
+		$nombre_a = $_POST['nombre_a']; 
+		$item_acty= $_POST['item_acty'];
+		$fecha_e = date('Y-m-d',strtotime("-1 days"));
+		
+        $peso=$_FILES['archivo_a']['size'];
+        $extension=$_FILES['archivo_a']['type'];
+		$nombre =$_FILES['archivo_a']['name']; //nombre del archivo
+        
+        $nombre =$_FILES['archivo_a']['name'];
+        $ruta="evidencias/".$nombre;
+        $subir=move_uploaded_file($_FILES['archivo_a']['tmp_name'], $ruta);
+
+		$evidencia_a="INSERT INTO inex_evidencia(item_acti, nombre_e, ruta_e, fecha_e) VALUES('$item_acty','$nombre_a','$ruta','$fecha_e')";
+		$resul_e=mysqli_query($con,$evidencia_a);
+
+	
+
+	}
 	
 
 	
@@ -52,7 +82,7 @@
 	<div style="overflow-x: auto;"><div>
 
 	<?php if ($row = mysqli_fetch_array($rs)) 
-	{  $estado_proyecto = $row["esta_proy"]?> 
+	{  $estado_proyecto = $row["esta_proy"]; 	?> 
 	
     <form >
 	
@@ -94,7 +124,8 @@
 		  <?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
 			   <button class="btn orange" id="actualizar" >Actualizar</button>
 			   <?php if($estado_proyecto==0){ ?>	
-				 <a class="btn red" id="eliminar_p" href="eliminar_proyecto.php?id_p=<?php echo $item ?>">eliminar</a> 
+				 <a class="btn red modal-trigger " id="eliminar_p" href="#modal3">eliminar</a> 
+
 				<?php } ?> 
 		  <?php } ?> 
 	</div>
@@ -164,9 +195,9 @@
 	 <!-- botton enviar proyectos -->
 	<div class="center">
 		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
-			<a class="btn disabled" id="eliminar_p" href="">Enviar Proyecto</a> 
+			<a class="btn disabled" id="" href="">Enviar Proyecto</a> 
 		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
-				<a class="btn orange" id="eliminar_p" href="">Enviar Proyecto</a> 
+				<a class="btn orange" id="" href="">Enviar Proyecto</a> 
 		<?php } ?> 		
 	</div>
 
@@ -184,7 +215,18 @@
     <div class="modal-content">
        <h5 class="center" >¿Estás seguro de eliminar esta actividad?</h5>
 	 <div class="center">
-	   <a href="eliminar_actividad.php?id=<?php echo $id_acti ?>&id_proy=<?php echo $item ?>"class="btn-small red">Si</a>
+	   <a href="dataBase/eliminar_actividad.php?id=<?php echo $id_acti ?>&id_proy=<?php echo $item ?>"class="btn-small red">Si</a>
+	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+	 </div> 
+	</div>
+    </div>
+
+	<!-- Modal Structure -->
+	<div id="modal3" class="modal">
+    <div class="modal-content">
+       <h5 class="center" >¿Estás seguro de eliminar esta actividad?</h5>
+	 <div class="center">
+	   <a href="dataBase/eliminar_proyecto.php?id_p=<?php echo $item ?>" class="btn-small red">Si</a>
 	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
 	 </div> 
 	</div>
@@ -193,27 +235,65 @@
 	<!-- Modal para agregar arcivos -->
 	<div id="modal2" class="modal ">
 		<div class="modal-content" >
-		 <div class="center"><h4 class="">Subir evidencias</h4></div>
-		<form action="#">
-			<div class="file-field input-field">
-			<div class="btn">
-				<span>File</span>
-				<input type="file">
+		 <div class="center"><h4 class="">Subir evidencias</h4></div> <br>
+		<form action="" method="POST" enctype="multipart/form-data">
+			<div class="row">
+				<div class="input-field col s6">
+					<input placeholder="Ingrese el nombre de la evidencia" name="nombre_a" id="first_name_e" type="text" class="validate" required>
+					<label for="first_name_e">Nombre</label>
+				</div>
+				<div class="col s6">
+					<div class="file-field input-field">
+					<div class="btn">
+						<span>File</span>
+						<input type="file" name="archivo_a" class="validate" required>
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text">
+					</div>
+					</div>
+					<input value="<?php echo $id_acti ?>" name="item_acty" type="hidden" class="validate" type="text" required>
+				</div>
 			</div>
-			<div class="file-path-wrapper">
-				<input class="file-path validate" type="text">
-			</div>
-			</div>
-			  <div class="center"><button class="btn orange">Subir </button></div>
+			  <div class="center"><button class="btn orange" type="submit">Subir </button></div>
 		</form>
-		</div>
+		</div> <br><br>
+
+		<div class="center"><h4 class="">Descargar evidencias</h4></div>
+
+		<div class="container section">
+		<table class="responsive-table">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Archivo</th>
+					<th>Lista  de Opciones</th>			
+				</tr>
+		   </thead>
+		   <tbody>
+			<?php while ($row_e= mysqli_fetch_array($resul_e)) 
+			{ ?>
+
+				<tr>
+					<td><?php echo $row_e['nombre_e'];?></td>
+					<td><?php echo $row_e['ruta_e'];?></td>
+					<td>
+					 <li title="Descargar" class='material-icons'><a href="<?php echo $row_e['ruta_e'];?>" download="<?php echo $row_e['ruta_e'];?>">file_download</a></li>
+				     <li title="Editar" class='material-icons'><a class="hoverable  orange-text" href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
+					 <li title="Eliminar" class='material-icons'><a class="hoverable  red-text" href="dataBase/eliminar_evidencia.php?id_e=<?php echo $row_e['id_e']?>&ruta_e=<?php echo  $row_e['ruta_e'] ?>" >delete</a></li>
+					</td>
+				</tr>
+			<?php }?>
+			</tbody>
+		</table>	 
+		</div> <br> <br>
     </div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
-<script src="funciones.js"></script> 
+<script src="js/funciones.js"></script> 
  
 </body>
 

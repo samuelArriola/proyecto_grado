@@ -54,7 +54,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
     <div class="teal-text" style="margin-left:10px">EDITAR ACTIVIDADES</div> 
     
     <div class="row">
-        <form class="col s12" action="actualizar_actividad.php?id_a=<?php echo $item_a?>&id_p=<?php echo $item_p?>" method="POST" id="form2">
+        <form class="col s12" action="dataBase/actualizar_actividad.php?id_a=<?php echo $item_a?>&id_p=<?php echo $item_p?>" method="POST" id="form2">
         <div class="row">
         <div class="input-field col s12">
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
@@ -90,7 +90,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
-<script src="funciones.js"></script>
+<script src="js/funciones.js"></script>
 </html>
 <?php
 }else{
