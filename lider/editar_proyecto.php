@@ -25,16 +25,14 @@
 
 	//muestra las evidencias en una tabla 
 	$mostrar_e ="SELECT * FROM inex_evidencia";
-	$resul_e =mysqli_query($con,$mostrar_e);
+	$ver_e =mysqli_query($con,$mostrar_e);
 	
+	//muestra las independencias
+	$mostrar_i = "SELECT * FROM inex_dependencias";
+	$resul_mi = mysqli_query($con,$mostrar_i);
 
-
-
-
-
-	//Guaedar evidencias 
-	if ($_POST) {
-		
+	//Guardar evidencias 
+	if ($_POST) {	
 		$nombre_a = $_POST['nombre_a']; 
 		$item_acty= $_POST['item_acty'];
 		$fecha_e = date('Y-m-d',strtotime("-1 days"));
@@ -50,13 +48,16 @@
 		$evidencia_a="INSERT INTO inex_evidencia(item_acti, nombre_e, ruta_e, fecha_e) VALUES('$item_acty','$nombre_a','$ruta','$fecha_e')";
 		$resul_e=mysqli_query($con,$evidencia_a);
 
-	
-
+		if ($resul_e) {
+			echo '<script>
+					alert("Evidencia subida correctamente");
+    			  </script> ';	
+		} else {
+			echo '<script>
+				  alert("hay problemas en el lugar donde se estan almacenado los archivos, por favor concatate a su ingeniero de software")
+				  </script>';
+		}
 	}
-	
-
-	
-
 ?>
 
 <html> 
@@ -76,37 +77,45 @@
 
 <div class="container">
 
-<div class="teal-text">INFORMACION DEL PROYECTO</div>
-
+<div class="teal-text">INFORMACION DEL PROYECTO</div> <br>
 <div class="row">
 	<div style="overflow-x: auto;"><div>
 
 	<?php if ($row = mysqli_fetch_array($rs)) 
 	{  $estado_proyecto = $row["esta_proy"]; 	?> 
 	
-    <form >
-	
+    <form id="">
+	<span style="opacity: 0.5;" >Los campos señalados con "*" son campos obligatorios</span> 
 	<div class="input-field col s12">
 	<b>Nombre del proyecto:</b> 
 	   <input  type="hidden" value="<?php echo $item ?>" id="id_pro">
-	   <input value = "<?php echo $row["nomb_proy"] ?>" name="nombre_proye" id="nombre_proye" type="text" class="validate">
+	   <input value = "<?php echo $row["nomb_proy"] ?>" name="nombre_proye" id="nombre_proye" type="text" class="validate caracteresEpesiales">
 	<div style="text-align: center; margin-top: -75px; margin-left: 93%;"><?php echo $icon_estado[$row["esta_proy"]] ?><div style="font-size: 0.7em; margin-top: 8px;"> <?php echo $desc_estado[$row["esta_proy"]] ?></div></div></div>
 	
 	<div class="input-field col s12">
 	<b>Descripción del proyecto:</b>
-	   <textarea name="descripcion_proye" id="descripcion" class="materialize-textarea"><?php echo $row["desc_proy"]?> </textarea>
+	   <textarea name="descripcion_proye" id="descripcion" class="materialize-textarea caracteresEpesiales"><?php echo $row["desc_proy"]?> </textarea>
 	</div>
+
+	<div class="input-field col s6">
+        <input type="text" value = "<?php echo $row['fecha_ip'] ?>" class="datepickerE1 validate" name="fecha_ip"  id="datepickerE1" required >
+          <label for="datepicker1">* Fecha Inicial </label>
+        </div>
+        <div class="input-field col s6">
+        <input type="text" value = "<?php echo $row['fecha_fp'] ?>" class="datepickerE2 validate" name="fecha_fp"  id="datepickerE2"  required>
+          <label for="datepicker2">* Fecha Final </label>
+        </div>
 
 	<div class="col s12"> 
          <b>Escoja la dependencia a la que pertenece el proyecto</b>
         <select class="browser-default" name="dependencia" id="dependencia">
-		 <?php if ( $row["item_dep"]==1) {		
-           echo' <option value="1" selected >Investigación</option>
-			<option value="2">Proyección Social</option>';
-		 }else if( $row["item_dep"]==2){ 
-			echo'<option value="1" >Investigación</option>
-			<option value="2"selected>Proyección Social</option>';
-		  }?>
+		<?php while ($row_mi=mysqli_fetch_array($resul_mi)) {?>
+			<option value="<?php echo $row_mi['item_dep']?>"><?php echo $row_mi['nombre_dep'] ?></option>
+			<?php if ($row["item_dep"]==$row_mi['item_dep']) { ?>
+				 <option value="<?php echo $row_mi['item_dep']?>"selected ><?php echo $row_mi['nombre_dep'] ?></option>
+			<?php }?>
+         <?php } ?>
+		
         </select>
 
 		
@@ -151,7 +160,6 @@
 		<th>Fecha Inicial</th>
 		<th>Fecha Final</th>
 		<th>Valor</th>
-		<th>Estado</th>
 		<th>Opciones</th>
 		
 	</tr>
@@ -168,15 +176,14 @@
 		<td><?php echo $row['fecha_ia'] ?></td>
 		<td><?php echo $row['fecha_fa'] ?></td>
 		<td><?php echo $row['valo_acti'] ?></td>
-		<td><?php echo $row['esta_acti'] ?></td>
 
 		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
 		 <td >  
 		   <?php if($estado_proyecto==2){ ?>	
-	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text"  href="#modal2">content_paste</a>
+	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text"  href="#modal2">attach_file</a>
 			<?php } ?>
-			<li  title="Editar" class='material-icons ' style="pointer-events:none; color:0.6;" ><a  class="hoverable orange-text " href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
-			<li  title="Eliminar" class='material-icons' style="pointer-events:none; opacity:0.6;" ><a  class="hoverable  modal-trigger red-text "  href="#modal1">delete</a></li>
+			<li  title="Editar" class='material-icons ' style="pointer-events:none; color:#999999; opacity:0.9;" ><a  class="hoverable grey-text " href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
+			<li  title="Eliminar" class='material-icons' style="pointer-events:none; opacity:0.6;" ><a  class="hoverable  modal-trigger grey-text "  href="#modal1">delete</a></li>
 		</td>
 		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
 		<td>
@@ -237,16 +244,17 @@
 		<div class="modal-content" >
 		 <div class="center"><h4 class="">Subir evidencias</h4></div> <br>
 		<form action="" method="POST" enctype="multipart/form-data">
-			<div class="row">
+			<div class="row">  
+			<span style="opacity: 0.5;" >Los campos señalados con "*" son campos obligatorios</span>  <br>
 				<div class="input-field col s6">
 					<input placeholder="Ingrese el nombre de la evidencia" name="nombre_a" id="first_name_e" type="text" class="validate" required>
-					<label for="first_name_e">Nombre</label>
+					<label for="first_name_e">* Nombre</label>
 				</div>
 				<div class="col s6">
 					<div class="file-field input-field">
 					<div class="btn">
 						<span>File</span>
-						<input type="file" name="archivo_a" class="validate" required>
+						<input type="file" name="archivo_a" class="validate caracteresEpesiales" required>
 					</div>
 					<div class="file-path-wrapper">
 						<input class="file-path validate" type="text">
@@ -271,7 +279,7 @@
 				</tr>
 		   </thead>
 		   <tbody>
-			<?php while ($row_e= mysqli_fetch_array($resul_e)) 
+			<?php while ($row_e= mysqli_fetch_array($ver_e)) 
 			{ ?>
 
 				<tr>
@@ -294,6 +302,7 @@
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
 <script src="js/funciones.js"></script> 
+<script src="js/validaciones.js"></script>
  
 </body>
 

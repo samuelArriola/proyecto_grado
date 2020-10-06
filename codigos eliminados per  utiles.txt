@@ -1,0 +1,35 @@
+//al abrir la fecha, colo el limite  de fecha minima 
+ onOpen: function () {
+      
+            var fecha_e = $("#datepickerE1").val();   //  e: editable
+            var fe = new Date(fecha_e);
+            var ye =fe.getFullYear();
+            var me =fe.getMonth();
+            var de= fe.getDate()+1;
+            console.log(fecha_e);
+            var instance = M.Datepicker.getInstance($('.datepickerE1'));
+            instance.options.minDate = new Date(ye,me,de);
+        },
+
+//seleciones el valor del imput obtenido en la base de datos
+ <?php if ( $row["item_dep"]==1) {		
+           echo' <option value="1" selected >Investigación</option>
+			<option value="2">Proyección Social</option>';
+		 }else if( $row["item_dep"]==2){ 
+			echo'<option value="1" >Investigación</option>
+			<option value="2"selected>Proyección Social</option>';
+		  }?>
+
+
+-corregi error de guardar imagen 
+- cambie el el icono de adjuntar
+-mesaje de aceptacion de evidencia
+- coloque el min del nombre de la actividad
+-coloque opcion en gris de botones sahabilitado
+- quete la validacion de laa fecha inical del proyecto
+--quite el campo exestado
+-coloque texto a cada imput para especificar el campo vacío
+- coloque texto de "los campos con * son requerido"
+-coloque las dependencias dinamicas (me toc corregir el editar, habia un prblema)
+-solucione el problema del editar
+-falta validar caracteres especiales con php

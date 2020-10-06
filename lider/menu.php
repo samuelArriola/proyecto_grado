@@ -40,7 +40,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 
 <ul id="dropdown1" class="dropdown-content dropdown-menu">
   <li><a href="#modalUsuario" class="modal-trigger" Onclick="">
-    <i class="material-icons black-text">account_circle</i><?php echo $_SESSION["NOMB"]; ?></a></li>
+    <i class="material-icons black-text " >account_circle</i><?php echo $_SESSION["NOMB"]; ?></a></li>
   <li class="divider"></li>
   <li><a href="../config/cerrar.php"><i class="material-icons black-text">lock</i>Cerrar Sesión</a></li>
 </ul>
@@ -51,9 +51,10 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
   <div style="color: white; font-size: 0.8em; font-weight: 500;">
   <?php echo $_SESSION["NOMB"]; ?>
   </div>
-<li><a href="javascript: $('.sidenav').sidenav('close');" style="padding-left: 16px;">
-	<i class="material-icons teal-text red">account_balance</i>Proyectos</a>
+<li><a href="javascript: $('.sidenav').sidenav('close');"  style="padding-left: 16px;">
+	<i class="material-icons teal-text ">account_balance</i>Proyectos</a>
 </li>
+
 <li class="divider"></li>
 <li><a href="../config/cerrar.php" style="padding-left: 16px;">
   <i class="material-icons teal-text">lock</i>Cerrar Sesión</a>

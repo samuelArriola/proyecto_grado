@@ -1,10 +1,14 @@
 <?php
+	include("../config/conexion.php");
 session_start(); 
 
 $_SESSION["IDEN"] = '1002491546';
 $_SESSION["NOMB"] = 'OISMER SEHUANES GUZMAN';
 $_SESSION["ROLE"] = 'J';
   
+//muestra las independencias
+$mostrar_i = "SELECT * FROM inex_dependencias";
+$resul_mi = mysqli_query($con,$mostrar_i);
   
 if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 ?>
@@ -32,33 +36,34 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 <div class="hide-on-med-and-down" style="margin-top: 90px;"></div>
 
 <div class="container section">
- 
-    <div class="teal-text" style="margin-left:10px">CREAR PROYECTOS</div> 
+    <div class="teal-text" style="margin-left:10px">CREAR PROYECTOS</div>
     <div class="row">
-      <form class="col s12 " action="dataDase/insertar_proyecto.php" method="POST" style="margin-top:30px">
+      <form class="col s12 " action="dataDase/insertar_proyecto.php" method="POST" style="margin-top:30px" id="form1">
        <div class="row">
+       <span style="opacity: 0.5;" > &nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span>  
          <div class="input-field col s12">
-           <input placeholder="Ingrese nombre del proyecto"   name="nombre_proye" id="nombre_proye" type="text" class="validate"  required>
+           <input placeholder="Ingrese nombre del proyecto"   name="nombre_proye" id="nombre_proye" type="text" class="validate caracteresEpesiales"  required>
            <label for="nombre_proye">* Nombre</label>
          </div>                   
          <div class="input-field col s12">
-          <textarea placeholder="Ingrese descripcion del proyecto" name="descripcion_proye" id="descripcion" class="materialize-textarea validate" required></textarea>
-          <label for="textarea1">* Descripcion </label>
+          <textarea placeholder="Ingrese descripcion del proyecto" name="descripcion_proye" id="descripcion" class="caracteresEpesiales materialize-textarea validate caracteresEpesiales" required></textarea>
+          <label for="textarea1">* Descripción </label>
         </div>
         <div class="input-field col s6">
-        <input type="text" class="datepicker validate" id="datepicker1" required >
+        <input type="text" class="datepicker1 validate " id="datepicker1" required >
           <label for="datepicker1">* Fecha Inicial </label>
         </div>
         <div class="input-field col s6">
-        <input type="text" class="datepicker2 validate" id="datepicker2" required>
+        <input type="text" class="datepicker2 validate " id="datepicker2"  disabled required title="seleccione la fecha inicial para poder habilitar este opción">
           <label for="datepicker2">* Fecha Final </label>
         </div>
         <div class="col s12"> 
          <label>* Escoja la dependencia a la que pertenece el proyecto</label>
              <select class="browser-default" name="dependencia" id="dependencia">
                 <option value="" disabled selected>Seleccione</option>
-                  <option value="1">Investigacion</option>
-                  <option value="2">Proyeccion social</option>
+                <?php while ($row_mi=mysqli_fetch_array($resul_mi)) {?>
+                  <option value="<?php echo $row_mi['item_dep']?>"><?php echo $row_mi['nombre_dep'] ?></option>
+                <?php } ?>
               </select>
           </div>
          <div class="input-field col s12" >
@@ -81,7 +86,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
 <script src="js/funciones.js"></script>
-
+<script src="js/validaciones.js"></script>
 </html>
 <?php
 }else{

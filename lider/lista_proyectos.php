@@ -1,4 +1,6 @@
 <?php
+
+
     $icon_estado = array('0' => '<i class="material-icons">edit</i>',
 	'1' => '<i class="material-icons">send</i>',
 	'2' => '<i class="material-icons">check_circle</i>',
@@ -26,7 +28,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
 <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
-
 </head>
 <body>
 <?php include("menu.php"); ?>
