@@ -14,9 +14,11 @@ $(document).ready(function(){
 
     $('.datepicker').datepicker({
         format:'yyyy/mm/dd',
-        }
+        }  
     );
 
+  
+    
     // crear proyecto
     $('.datepicker1').datepicker({
         format:'yyyy/mm/dd',
@@ -210,15 +212,15 @@ $('#btn_create_p').click((e) => {
     }
 
     if( datos.nombre_proyec==null || datos.nombre_proyec =='' ){
-         M.toast({html: 'Nombre del Proyecto Vacío, por favor, complete el campo', classes: 'rounded'});
+        return  M.toast({html: 'Nombre del Proyecto Vacío, por favor, complete el campo', classes: 'rounded'});
     }else if(datos.descripcion==null || datos.descripcion=='' ) {
-          M.toast({html: 'Descripcion de Proyecto  Vacío, por favor, complete el campo', classes: 'rounded'});
+        return M.toast({html: 'Descripcion de Proyecto  Vacío, por favor, complete el campo', classes: 'rounded'});
     }else if (datos.fecha_ip=='' || datos.fecha_ip==null ) {
-         M.toast({html: 'Fecha Inicial de Proyecto Vacía, por favor, complete el campo', classes: 'rounded'});
+        return M.toast({html: 'Fecha Inicial de Proyecto Vacía, por favor, complete el campo', classes: 'rounded'});
     }else if (datos.fecha_fp=='' || datos.fecha_fp==null ) {
-        M.toast({html: 'Fecha Final de Proyecto  Vacía, por favor, complete el campo', classes: 'rounded'});
+        return M.toast({html: 'Fecha Final de Proyecto  Vacía, por favor, complete el campo', classes: 'rounded'});
    }else if (datos.dependencia =="" || datos.dependencia ==null) {
-        M.toast({html: 'Por favor, Seleccione la dependencia', classes: 'rounded'});
+        return M.toast({html: 'Por favor, Seleccione la dependencia', classes: 'rounded'});
     } else{
         $.ajax({
             url:'dataBase/insertar_proyecto.php',
@@ -231,4 +233,32 @@ $('#btn_create_p').click((e) => {
     }
     
 })
+
+
+
+
+function cambiaEstado (estado) {
+    // e.preventDefault();
+    if (confirm('¿Desea continuar este proceso?')) {    
+        const datos_u={
+            id_proy:$('#id_pro').val(),
+            estado_p: estado,
+        
+        }
+        // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
+        
+        if (datos_u.nombre_u=="" || datos_u.apellido_u=="" || datos_u.cedula_u=="" || datos_u.telefono_u=="" ||datos_u.pass_u=="" || datos_u.direccion_u=="" || datos_u.correo_u=="" ) {
+            M.toast({html: 'Datos Incompletos, por favor Complete todos los campos'})
+        } else {
+            $.ajax({
+                type:"POST",
+                url:"dataBase/p_aprobar.php",
+                data:datos_u,
+                success: function (response) {
+                    console.log(response);
+                }
+            });   
+        }
+    }
+} 
 

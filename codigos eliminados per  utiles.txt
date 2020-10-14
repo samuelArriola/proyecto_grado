@@ -12,7 +12,7 @@
         },
 
 //seleciones el valor del imput obtenido en la base de datos
- <?php if ( $row["item_dep"]==1) {		
+ 	<?php if ( $row["item_dep"]==1) {		
            echo' <option value="1" selected >Investigación</option>
 			<option value="2">Proyección Social</option>';
 		 }else if( $row["item_dep"]==2){ 
@@ -20,6 +20,33 @@
 			<option value="2"selected>Proyección Social</option>';
 		  }?>
 
+//Guardar evidencias con php
+	// if ($_POST) {	
+	// 	$nombre_a = $_POST['nombre_a']; 
+	// 	$item_acty= $_POST['item_acty'];
+	// 	$fecha_e = date('Y-m-d',strtotime("-1 days"));
+		
+    //     $peso=$_FILES['archivo_a']['size'];
+    //     $extension=$_FILES['archivo_a']['type'];
+	// 	$nombre =$_FILES['archivo_a']['name']; //nombre del archivo
+        
+    //     $nombre =$_FILES['archivo_a']['name'];
+    //     $ruta="evidencias/".$nombre;
+    //     $subir=move_uploaded_file($_FILES['archivo_a']['tmp_name'], $ruta);
+
+	// 	$evidencia_a="INSERT INTO inex_evidencia(item_acti, nombre_e, ruta_e, fecha_e) VALUES('$item_acty','$nombre_a','$ruta','$fecha_e')";
+	// 	$resul_e=mysqli_query($con,$evidencia_a);
+
+	// 	if ($resul_e) {
+	// 		echo '<script>
+	// 				alert("Evidencia subida correctamente");
+	// 			  </script> ';
+	// 	} else {
+	// 		echo '<script>
+	// 			  alert("hay problemas en el lugar donde se estan almacenado los archivos, por favor concatate a su ingeniero de software")
+	// 			  </script>';
+	// 	}
+	// }
 
 -corregi error de guardar imagen 
 - cambie el el icono de adjuntar
@@ -27,9 +54,9 @@
 - coloque el min del nombre de la actividad
 -coloque opcion en gris de botones sahabilitado
 - quete la validacion de laa fecha inical del proyecto
---quite el campo exestado
+--quite el campo de estado
 -coloque texto a cada imput para especificar el campo vacío
 - coloque texto de "los campos con * son requerido"
 -coloque las dependencias dinamicas (me toc corregir el editar, habia un prblema)
 -solucione el problema del editar
--falta validar caracteres especiales con php
+-validar caracteres especiales con php
