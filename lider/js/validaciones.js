@@ -55,37 +55,4 @@ $('#actualizar_a').click(function (a) {
         });
     }
 
-    //SUBIR EVIDENCIA CON AJAX
-    function subirEvidenciaA(e) {
-        let datoE = new FormData($('#subirEvidencia')[0]); 
-        $.ajax({
-            url:'dataBase/subirEvidenciaA.php',
-            type:'POST',
-            data:datoE,
-            contentType:false,
-            processData: false,
-            success:(response) => {
-                M.toast({html: response, classes: 'rounded'});
-                 $('#subirEvidencia')[0].reset(); //limpia las casjas de texto
-                 mostrarEvidenciaA();
-            }
-        })
-    }
-
-//MOSTRAR EVIDENCIA CON AJAX
-mostrarEvidenciaA();
-    function mostrarEvidenciaA() {
-       let id_actividad = document.getElementById('id_actividadA').value;
-       console.log(id_actividad);
-        $.ajax({
-            url:'dataBase/mostrarEvidenciaA.php',
-            type:'POST',
-            data:{id_actividad},
-            success:(response) => {
-                document.getElementById('mostrarEvidenciaA').innerHTML =response ;
-                
-            }
-        })
-        
-    } 
   

@@ -263,3 +263,37 @@ function cambiaEstado (estado) {
     }
 } 
 
+
+    //SUBIR EVIDENCIA CON AJAX
+    function subirEvidenciaA(e) {
+        let datoE = new FormData($('#subirEvidencia')[0]); 
+        $.ajax({
+            url:'dataBase/subirEvidenciaA.php',
+            type:'POST',
+            data:datoE,
+            contentType:false,
+            processData: false,
+            success:(response) => {
+                M.toast({html: response, classes: 'rounded'});
+                 $('#subirEvidencia')[0].reset(); //limpia las casjas de texto
+                 mostrarEvidenciaA();
+            }
+        })
+    }
+
+//MOSTRAR EVIDENCIA CON AJAX
+    function mostrarEvidenciaA() {
+       let id_actividad =$('#id_actividadA').val();
+       console.log(id_actividad);
+        $.ajax({
+            url:'dataBase/mostrarEvidenciaA.php',
+            type:'POST',
+            data:{id_actividad},
+            success:(response) => {
+             let evidencia_proy= document.getElementById('mostrarEvidenciaA');
+             evidencia_proy.innerHTML  = response ;
+                
+            }
+        })
+        
+    } 

@@ -175,7 +175,7 @@
 		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
 		 <td >  
 		   <?php if($estado_proyecto==2){ ?>	
-	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text"  href="#modal2">attach_file</a>
+	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text" onclick="mostrarEvidenciaA();" href="#modal2">attach_file</a>
 			<?php } ?>
 			<li  title="Editar" class='material-icons ' style="pointer-events:none; color:#999999; opacity:0.9;" ><a  class="hoverable grey-text " href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
 			<li  title="Eliminar" class='material-icons' style="pointer-events:none; opacity:0.6;" ><a  class="hoverable  modal-trigger grey-text "  href="#modal1">delete</a></li>
