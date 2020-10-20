@@ -153,13 +153,33 @@
 	 <div class="center">
 	   	<?php if($estado_proyecto==2){ ?>	 
 			<button disabled class="btn green" type="button" onclick="cambiaEstado(2)"  id="aprobar_proy" href="">Aprobar Proyecto</button> 
-	 		<button disabled class="btn red" id="" onclick="cambiaEstado(3)"  >Corregir Proyecto</button> 
+	 		<a disabled class="btn red hoverable modal-trigger" id="" href="#corregirProyecto"  >Corregir Proyecto</a> 
 		<?php }else{ ?>
 			<button class="btn green" type="button" onclick="cambiaEstado(2)"  id="aprobar_proy" href="">Aprobar Proyecto</button> 
-	 		<button class="btn red" id="" onclick="cambiaEstado(3)"  >Corregir Proyecto</button> 
+	 		<a class="btn red hoverable modal-trigger" id="" href="#corregirProyecto"  >Corregir Proyecto</a> 
 		<?php } ?>
 		</div>
 	
+
+	<!-- Modal enviar cometarios  -->
+	<div id="corregirProyecto" class="modal">
+		<br><br><div class="center"><h4 class="">COMENTARIOS</h4></div>
+    <div class="modal-content">
+		<div class="row">
+		<form class="col s12" id="formCorregir">
+		<div class="row">
+			<div class="input-field col s12">
+			<textarea  required id="comentarioProyecto" class="materialize-textarea caracteresEpesiales validate" maxlength="1100"></textarea>
+			<label for="comentarioProyecto">ingresar comentarios * </label>
+			</div>
+		</div>
+		</form>
+	</div>
+	 <div class="center">
+	 <button class="btn red" id="" onclick="corregirProyecto(3)"  >Corregir Proyecto</button> 
+	 </div> 
+	</div>
+    </div>
 
 	<!-- Modal Structure -->
 	<div id="modal1" class="modal">

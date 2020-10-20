@@ -18,7 +18,8 @@
        include("../../config/conexion.php");
        $salida="";
        $q=4;
-        
+      
+
        $sql = "SELECT * FROM inex_proyectos  ORDER BY item_proy DESC "; 
 
        if(isset($_POST['dato'])){

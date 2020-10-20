@@ -256,6 +256,7 @@ function cambiaEstado (estado) {
                 data:datos_u,
                 success: function (response) {
                     console.log(response);
+                    M.toast({html: response, classes: 'rounded'});
                 }
             });   
         }

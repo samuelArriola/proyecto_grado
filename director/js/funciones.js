@@ -196,10 +196,7 @@ $(document).ready(function(){
         })
     }
 
-    //CAMBIAR ESTADO        
-    
-  //  $('#aprobar_proy').click()}
-        
+    //CAMBIAR ESTADO            
     function cambiaEstado (estado) {
         // e.preventDefault();
         if (confirm('¿Desea continuar este proceso?')) {    
@@ -208,8 +205,7 @@ $(document).ready(function(){
                 estado_p: estado,
             
             }
-            // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
-            
+            // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u); 
             if (datos_u.nombre_u=="" || datos_u.apellido_u=="" || datos_u.cedula_u=="" || datos_u.telefono_u=="" ||datos_u.pass_u=="" || datos_u.direccion_u=="" || datos_u.correo_u=="" ) {
                 M.toast({html: 'Datos Incompletos, por favor Complete todos los campos'})
             } else {
@@ -219,7 +215,7 @@ $(document).ready(function(){
                     data:datos_u,
                     success: function (response) {
                         console.log(response);
-                    M.toast({html: 'Cambios guardados correctamente'});
+                    M.toast({html: response});
                     // $('#editar_u')[0].reset(); //limpia las casjas de texto
                     }
                 });   
@@ -227,6 +223,49 @@ $(document).ready(function(){
         }
     }
 
+    //INGRESA COMETARIO MANDA A CORRECION LOS PROYECTOS
+    function corregirProyecto(estado) {
+        // e.preventDefault();
+        if (confirm('¿Desea corregir este Poyecto?')) {    
+            const datos_c={
+                id_proy:$('#id_pro').val(),
+                estado_p: estado,
+                comentario_p:$('#comentarioProyecto').val()
+            }
+           
+            if ( datos_c.comentario_p=="" ) {
+                M.toast({html: 'Comentarios Vacío, por favor Complete el campos'})
+            } else {
+                $.ajax({
+                    type:"POST",
+                    url:"dataBase/corregir_p.php",
+                    data:datos_c,
+                    success: function (response) {
+                        console.log(response);
+                    M.toast({html: response});
+                      $('#formCorregir')[0].reset(); 
+                    }
+                });   
+            }
+        }
+    }
+
+    //FUNSION VISTO
+    function visto(id_p, uno) {
+        $.ajax({
+            type:"POST",
+            url:"dataBase/estado_v.php",
+            data:{
+                id_p,
+                uno
+            },
+            success: function (response) {
+                console.log(response);
+            M.toast({html: response});
+            // $('#editar_u')[0].reset(); //limpia las casjas de texto
+            }
+        });   
+    }
 //caracteres vacíos 
     function isEmpty(str) {
         return (!str || 0 === str.length);

@@ -42,6 +42,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
 <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
+
 </head>
 
 <body>
@@ -56,15 +57,35 @@
 
 	<?php if ($row = mysqli_fetch_array($rs)) 
 	{  $estado_proyecto = $row["esta_proy"]; 	?> 
+
+	<!-- Modal cometarios  -->
+	<div id="cometariosP" class="modal"> <br><br>
+		<div class="center"><i class="large material-icons red-text">email</i></div>
+		<br><div class="center"><h4 class="">COMENTARIOS</h4></div>
+    <div class="modal-content">
+		<div class="row">
+			<div class="input-field col s12">
+			<textarea  class="materialize-textarea caracteresEpesiales validate" maxlength="1100"><?php echo $row['comentarios_p'] ?></textarea>
+			<label for="comentarioProyecto">Comentarios</label>
+			</div> <br> <br><br>
+		</div>
+	</div>
+    </div>
 	
     <form id="">
 	<span style="opacity: 0.5;" >Los campos señalados con "*" son campos obligatorios</span> 
 	<div class="input-field col s12">
 	<b>Nombre del proyecto:</b> 
 	   <input  type="hidden" value="<?php echo $item ?>" id="id_pro">
-	   <input value = "<?php echo $row["nomb_proy"] ?>" name="nombre_proye" id="nombre_proye" type="text" class="validate caracteresEpesiales">
-	<div style="text-align: center; margin-top: -75px; margin-left: 93%;"><?php echo $icon_estado[$row["esta_proy"]] ?><div style="font-size: 0.7em; margin-top: 8px;"> <?php echo $desc_estado[$row["esta_proy"]] ?></div></div></div>
-	
+	   <input value = "<?php echo $row["nomb_proy"] ?>" name="nombre_proye" id="nombre_proye" type="text" class="validate caracteresEpesiales"> 
+		<div style="text-align: center; margin-top: -75px; margin-left: 93%;"><?php echo $icon_estado[$row["esta_proy"]] ?><div style="font-size: 0.7em; margin-top: 8px;"> <?php echo $desc_estado[$row["esta_proy"]] ?></div></div>
+		<?php if($estado_proyecto==3){ ?>	
+			<div style="text-align: center; margin-top: -49px; margin-left: 75%;">
+			 <li title="COMETARIOS" class='material-icons'><a class="hoverable  modal-trigger red-text" href="#cometariosP">comment</a></li>
+			<div style="font-size: 0.7em; margin-top: 10px;"> Comentarios</div></div>			
+		<?php } ?>
+	</div>
+
 	<div class="input-field col s12">
 	<b>Descripción del proyecto:</b>
 	   <textarea name="descripcion_proye" id="descripcion" class="materialize-textarea caracteresEpesiales"><?php echo $row["desc_proy"]?> </textarea>
@@ -190,6 +211,9 @@
 			<div class="fixed-action-btn" > 
 	<a  class="btn-floating btn-large waves-effect waves-light orange  tooltipped  modal-trigger" href="crear_actividad.php?id=<?php echo $item ?>"  data-position="left"  data-tooltip="AGREGAR ACTIVIDAD"  id="flotante2" ><i class="material-icons">add</i></a>
 		  <?php } ?> 
+		  
+
+ 
 
 	<!-- Modal Structure -->
 	<div id="modal1" class="modal">

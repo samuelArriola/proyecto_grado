@@ -23,7 +23,6 @@ function mostrar_tabla() {
             $('#tablaProyA').html(response);
         }
     });
-
 }
 
 $("#buscar").change(function(){

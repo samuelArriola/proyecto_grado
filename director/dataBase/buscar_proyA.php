@@ -36,7 +36,7 @@
        if($resul){
             while($row=mysqli_fetch_array($resul)){
                 $salida.="<tr>
-                   <td>".$row['item_proy']. '.'. $row['nomb_proy']. "</td>
+                   <td>".$row['item_proy']. '.'. $row['nomb_proy']. " </td>
                    <td style='text-align: center;'>
                    <a class='btn-floating waves-effect waves-light' ".$color_estado[$row['esta_proy']]."  href='editar_proyecto.php?id=".$row['item_proy']."'>
                    ".$icon_estado[$row['esta_proy']]."</a> 

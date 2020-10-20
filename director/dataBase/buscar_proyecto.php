@@ -18,9 +18,10 @@
        include("../../config/conexion.php");
        $salida="";
        $q=4;
+       $cero = 0;
        $uno = 1;
        $tres = 3;  
-       $sql = "SELECT * FROM inex_proyectos WHERE esta_proy ='$uno' or esta_proy ='$tres' ORDER BY item_proy DESC "; 
+       $sql = "SELECT * FROM inex_proyectos WHERE esta_proy ='$uno' or esta_proy ='$tres'  ORDER BY item_proy DESC "; 
 
       //  if(isset($_POST['dato'])){
       //     $q=$_POST['dato'];
@@ -34,14 +35,28 @@
        //$fila=mysqli_fetch_row($resul);
        
        if($resul){
-            while($row=mysqli_fetch_array($resul)){
-                $salida.="<tr>
-                   <td>".$row['item_proy']. '.'. $row['nomb_proy']. "</td>
-                   <td style='text-align: center;'>
-                   <a class='btn-floating waves-effect waves-light' ".$color_estado[$row['esta_proy']]."  href='editar_proyecto.php?id=".$row['item_proy']."'>
-                   ".$icon_estado[$row['esta_proy']]."</a> 
-                   <div style='font-size: 0.8em;'>".$desc_estado[$row['esta_proy']]."</div></td>
-                </tr>";
+          
+            while ($row=mysqli_fetch_array($resul)){
+               $visto = $row['visto'];
+               if ($visto == $cero) {
+                     $salida.="<tr>
+                     <td>".$row['item_proy']. '.'. $row['nomb_proy']. " <span class='new badge'></span></td>
+                     <td style='text-align: center;'>
+                     <a  onclick='visto(".$row['item_proy'].",".$uno.")'class='btn-floating waves-effect waves-light' type='button' ".$color_estado[$row['esta_proy']]." href='editar_proyecto.php?id=".$row['item_proy']."' >
+                     ".$icon_estado[$row['esta_proy']]."</a> 
+                     <div style='font-size: 0.8em;'>".$desc_estado[$row['esta_proy']]."</div></td>
+                  </tr>";
+               } else if($visto == $uno) {
+                  $salida.="<tr>
+                  <td>".$row['item_proy']. '.'. $row['nomb_proy']. "</td>
+                  <td style='text-align: center;'>
+                  <a class='btn-floating waves-effect waves-light' ".$color_estado[$row['esta_proy']]."  href='editar_proyecto.php?id=".$row['item_proy']."'>
+                  ".$icon_estado[$row['esta_proy']]."</a> 
+                  <div style='font-size: 0.8em;'>".$desc_estado[$row['esta_proy']]."</div></td>
+               </tr>";
+               }
+               
+               
             }
        }
        else{
@@ -53,3 +68,5 @@
       mysqli_close($con);
 ?>
  
+
+ <!-- <a onclick='visto()'class='btn-floating waves-effect waves-light' ".$color_estado[$row['esta_proy']]."  href='editar_proyecto.php?id=".$row['item_proy']."'> -->

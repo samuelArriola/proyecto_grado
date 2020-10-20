@@ -17,7 +17,7 @@
 
 
   if(!$resul){
-      echo 'Numero de identificación ya existente';
+      echo 'Error:Numero de identificación ya existente, vuelva a intentar';
   }else{
       echo('Usuario guardado exitosamente');
   }
