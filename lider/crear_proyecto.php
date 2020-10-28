@@ -37,10 +37,11 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 
 <div class="container section">
     <div class="teal-text" style="margin-left:10px">CREAR PROYECTOS</div>
+    <span style="opacity: 0.5; position:relative; top: 12px" > &nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span>  
+
     <div class="row">
       <form class="col s12 " action="dataDase/insertar_proyecto.php" method="POST" style="margin-top:30px" id="form1">
        <div class="row">
-       <span style="opacity: 0.5;" > &nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span>  
          <div class="input-field col s12">
            <input placeholder="Ingrese nombre del proyecto"   name="nombre_proye" id="nombre_proye" type="text" class="validate caracteresEpesiales"  required>
            <label for="nombre_proye">* Nombre</label>
@@ -65,8 +66,8 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
                   <option value="<?php echo $row_mi['item_dep']?>"><?php echo $row_mi['nombre_dep'] ?></option>
                 <?php } ?>
               </select>
-          </div>
-         <div class="input-field col s12" >
+          </div> 
+         <div class="input-field col s12" style="position:relative; top:15px" >
            <input disabled value="<?php echo $_SESSION["NOMB"] ?>" name="lider_proye" id="nombre" type="text" class="validate">
            <input value="<?php echo $_SESSION["IDEN"] ?>" name="iden_lider" id="iden_lider" type="hidden" class="validate">
            <label for="nombre">Nombre</label>

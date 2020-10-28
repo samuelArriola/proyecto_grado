@@ -51,7 +51,7 @@
 
 <div class="container">
 
-<div class="teal-text">INFORMACION DEL PROYECTO</div> <br>
+<div class="teal-text">&nbsp;&nbsp;&nbsp;INFORMACION DEL PROYECTO</div> <br>
 <div class="row">
 	<div style="overflow-x: auto;"><div>
 
@@ -73,7 +73,7 @@
     </div>
 	
     <form id="">
-	<span style="opacity: 0.5;" >Los campos señalados con "*" son campos obligatorios</span> 
+	<span style="opacity: 0.5;" >&nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span> 
 	<div class="input-field col s12">
 	<b>Nombre del proyecto:</b> 
 	   <input  type="hidden" value="<?php echo $item ?>" id="id_pro">

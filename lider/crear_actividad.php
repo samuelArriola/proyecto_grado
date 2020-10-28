@@ -47,8 +47,8 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 
 <div class="container section">
  
-    <div class="teal-text" style="margin-left:10px">AGREGAR ACTIVIDADES</div> <br>
-    <span style="opacity: 0.5;" > &nbsp;&nbsp;&nbsp; Los campos señalados con "*" son campos obligatorios</span>  <br>
+    <div class="teal-text" style="margin-left:10px">&nbsp;&nbsp;AGREGAR ACTIVIDADES</div> 
+    <span style="opacity: 0.5;" style="position:relative; top: -15px;"> &nbsp;&nbsp;&nbsp; Los campos señalados con "*" son campos obligatorios</span>  <br><br>
     <div class="row">
         <form class="col s12" action="dataBase/insertar_actividad.php" method="POST" id="form2">
         <div class="row">

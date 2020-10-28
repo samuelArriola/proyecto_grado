@@ -35,12 +35,12 @@
 
 <div class="container">
 
-<div class="teal-text">REGISTROS DE PROYECTOS</div>
+<div class="teal-text">REGISTROS DE PROYECTOS</div> <br>
 
  <div class="row">
- <label>MOSTRAR:</label>
+ <label>MOSTRAR:</label> 
  <div class="input-field col s12">
-  <select class="browser-default" id="buscar">
+  <select class="browser-default" id="buscar" style="position: relative; left :-15px">
     <option value="TODOS" selected>TODOS</option>
     <option value="APROBADOS">APROBADOS</option>
     <option value="CONSTRUCCION">CONSTRUCCION</option>
@@ -50,12 +50,11 @@
 </div>
  </div> 
 
-<div class="row"> 
+<div class="row" style="position: relative; top: -40px"> 
 <div style="overflow-x: auto;">
 
-<table id="tabla">
-              
-</table>
+	<table id="tabla">		
+	</table>
 
 </div>
 </div>

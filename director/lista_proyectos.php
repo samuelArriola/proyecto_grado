@@ -114,7 +114,7 @@
   <!-- RECIBIDOS -->
   <div id="menuRecibido" class="col s12">  <br> 
 	<div class="container">
-		<div class="teal-text">LISTA DE PROYECTOS</div>
+		<div class="teal-text" style="position: relative; right:10px">LISTA DE PROYECTOS</div>
 		<div class="row">
 		  <label>MOSTRAR:</label>
 			<div class="input-field col s12">
