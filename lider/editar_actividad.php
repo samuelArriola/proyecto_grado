@@ -6,17 +6,16 @@ $item_a = $_GET['id_a'];
 
 include("../config/conexion.php");
 
-$sql = "select *
+$sql = "select item_acti, nomb_acti, descripcion_a, valo_acti, esta_acti,  DATE_FORMAT(fecha_ia, '%Y/%m/%d') as fecha_ia ,DATE_FORMAT(fecha_fa, '%Y/%m/%d') as fecha_fa
 from inex_actividades as a where a.item_acti = '".$item_a."'";
 $rs = mysqli_query($con, $sql);
 
 //esxtrae la fecha del proyeco 
-$query = "SELECT * FROM inex_proyectos WHERE item_proy='$item_p'";
+$query = "SELECT item_proy, nomb_proy, desc_proy, jefe_proy, esta_proy, visto, item_dep,DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip,DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, comentarios_p  FROM inex_proyectos WHERE item_proy='$item_p'";
 $resultado = mysqli_query($con,$query);
 $rw = mysqli_fetch_array($resultado);
 $fecha_ip= $rw['fecha_ip'];
 $fecha_fp=$rw['fecha_fp'];
-
 
 while ($row = mysqli_fetch_array($rs)) {
 
@@ -29,11 +28,11 @@ while ($row = mysqli_fetch_array($rs)) {
 
 session_start(); 
 
-$_SESSION["IDEN"] = '1002491546';
-$_SESSION["NOMB"] = 'OISMER SEHUANES GUZMAN';
-$_SESSION["ROLE"] = 'J';
+$_SESSION["IDEN"];
+$_SESSION["NOMB"];
+$_SESSION["ROLE"];
 
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
 ?>
 <!-- <!DOCTYPE html> -->
   <html> 
@@ -63,10 +62,12 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
     <div class="teal-text" style="margin-left:10px">EDITAR ACTIVIDADES</div> 
     
     <div class="row">
-        <form class="col s12" action="dataBase/actualizar_actividad.php?id_a=<?php echo $item_a?>&id_p=<?php echo $item_p?>" method="POST" id="form2">
+        <!-- <form class="col s12" action="dataBase/actualizar_actividad.php?id_a=<?php echo $item_a?>&id_p=<?php echo $item_p?>" method="POST" id="form2"> -->
+        <form class="col s12" action="" method="" id="form2">
         <div class="row">
         <div class="input-field col s12">
-            <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
+            <input type="hidden" value=" <?php echo $item_p ?>" name="id_pro2" id="id_pro2">
+            <input type="hidden" value=" <?php echo $item_a?>" name="" id="id_a2">
             <input value = "<?php echo $nombre_a ?>" maxlength="240" name="nombre_act" id="nombre_act" type="text" class="caracteresEpesiales validate" >
             <label for="nombre_act" >* Nombre da la Actividad</label>
         </div>
@@ -89,7 +90,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
             <label for="valor" >* Valor da la Actividad</label>
         </div>
         <div class="input-field col s12">
-            <button class="btn orange">Actualizar</button>
+            <button class="btn orange" type="button" id="editar_acti">Actualizar</button>
             <a href="editar_proyecto.php?id=<?php echo $item_p ?>" class="modal-close waves-effect waves-green btn">Atras</a>
         </div> 
         </div>

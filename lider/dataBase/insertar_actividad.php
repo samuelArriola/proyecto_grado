@@ -18,7 +18,9 @@
   $query="INSERT INTO inex_actividades(nomb_acti,descripcion_a,valo_acti,item_proy,fecha_ia,fecha_fa)VALUES('$nombre_act','$descripcion_a','$valor','$id_pro2','$fecha_ia','$fecha_fa')";
   $resul=mysqli_query($con,$query); 
   if(!$resul){
-    echo 'actividad no registrada';
+    echo 'Actividad no registrada';
+  }else {
+    echo 'Actividad agregada exitosamente';
   }
 
   // cerra conexion 

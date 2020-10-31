@@ -1,14 +1,18 @@
 console.log('conectago a buscar.js');
 (obtenerDAt());
-
 function obtenerDAt(datos){
+   let a = $('#loar');
+   a.removeClass('hide');
+   
     $.ajax({
         url:'dataBase/buscar_proyecto.php',
         type:'POST',
         dataType:'html',
         data:{dato:datos},
        })
-    .done(function(resultado){
+      
+    .done(function(resultado){ 
+       a.addClass('hide');
         $("#tabla").html(resultado)
     })    
     

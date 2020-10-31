@@ -5,7 +5,15 @@
 
     $query ="SELECT * FROM inex_usuarios WHERE iden_usua ='$id_usuario'";
     $resultado = mysqli_query($con,$query);
-    $datos =mysqli_fetch_array($resultado); 
+	$datos =mysqli_fetch_array($resultado); 
+	
+	session_start(); 
+
+	$_SESSION["IDEN"];
+	$_SESSION["NOMB"];
+	$_SESSION["ROLE"];
+
+	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
 
 ?>
 
@@ -72,3 +80,12 @@
 	<script src="js/validaciones.js"></script> 
 </body>
 </html>
+
+<?php 
+}else{
+	session_destroy();
+	header('location: ../');
+}
+
+mysqli_close($con); 
+?>

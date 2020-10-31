@@ -13,11 +13,23 @@ function obtenerDAt(datos){
     })    
 }
 
+//BUSCAR PROYECTOS
+$('#buscar_p').keyup(function() {
+    var buscar = $('#buscar_p').val();
+    if (buscar != "") {
+        obtenerDAt(buscar);
+    }else{
+        obtenerDAt();
+    }
+    
+});
+
 mostrar_tabla();
-function mostrar_tabla() {
+function mostrar_tabla(datos) {
     $.ajax({
-        type:"GET",
+        type:"POST",
         url:"dataBase/buscar_proyA.php",
+        data:{dato:datos},
 
         success: function (response) {
             $('#tablaProyA').html(response);
@@ -25,45 +37,13 @@ function mostrar_tabla() {
     });
 }
 
-$("#buscar").change(function(){
-    var valorBusqueda;
-    if($('select[id=buscar]').val()=='APROBADOS'){
-         valorBusqueda = 2;    
-    }else if($('select[id=buscar]').val()=='CONSTRUCCION'){
-         valorBusqueda = 0;   
-    }else if($('select[id=buscar]').val()=='CORREGIR'){
-          valorBusqueda = 3;
-    }else if($('select[id=buscar]').val()=='ENVIADOS'){
-         valorBusqueda = 1;
-    }else if($('select[id=buscar]').val()=='TODOS'){
-         valorBusqueda = 4;
-    }
-
-    obtenerDAt(valorBusqueda);
-    //alert($('select[id=buscar]').val());
-});
-
-/*$(document).on('keyup','#buscar',function(){
-    var valorBusqueda=$(this).val();
-    if(valorBusqueda!=""){
-        obtenerDAt(valorBusqueda);   
+//BUSCAR PROYECTOS APROBADOS
+$('#buscar_pA').keyup(function() {
+    var buscarA = $('#buscar_pA').val();
+    if (buscarA != "") {
+        mostrar_tabla(buscarA);
     }else{
-         obtenerDAt();
+        mostrar_tabla();
     }
-})*/
-
-/*$("#buscar").keyup(function(){
-    if($("#buscar").val()){
-     var valorBusqueda=$("#buscar").val();
-     $.ajax({
-       url:'buscar_proyecto.php',
-       type:'POST',
-       dataType:'html',
-       data:{busca:valorBusqueda},
-       success:function(response){
-        $("#tabla").html(response)
-       }
-     })
-   
-  }
-});*/
+    
+});

@@ -1,5 +1,6 @@
 <?php
 
+	include("../config/conexion.php");
 
     $icon_estado = array('0' => '<i class="material-icons">edit</i>',
 	'1' => '<i class="material-icons">send</i>',
@@ -15,7 +16,13 @@
 	'2' => 'Aprobado',
 	'3' => 'Corregir');
 
-	    
+	session_start(); 
+
+	$_SESSION["IDEN"];
+	$_SESSION["NOMB"];
+	$_SESSION["ROLE"];
+
+	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){    
 
 ?>
 
@@ -50,10 +57,28 @@
 </div>
  </div> 
 
+	
+
+
 <div class="row" style="position: relative; top: -40px"> 
 <div style="overflow-x: auto;">
 
-	<table id="tabla">		
+	<table id="tabla">	
+		<!-- PRELOAD -->
+		<div class="center hide" id="loar" type="" style="margin-top: 50px">
+			<div class="preloader-wrapper small active">
+				<div class="spinner-layer spinner-green-only">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+			</div>
+		</div> 
+
 	</table>
 
 </div>
@@ -76,4 +101,13 @@
 
 </html>
 
-<?php   ?>
+<?php   
+
+}else{
+	session_destroy();
+	header('location: ../');
+}
+
+mysqli_close($con); 
+
+?>

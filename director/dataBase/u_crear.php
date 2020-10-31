@@ -5,21 +5,18 @@
  $apellido = $_POST['apellido_u'];
  $cedula = $_POST['cedula_u'];
  $correo = $_POST['correo_u'];
+ $dep_u = $_POST['dep_u'];
  
-    // echo $nombre;
-    // echo $apellido;
-    // echo $cedula;
-    // echo $correo;
   
-  $query="INSERT INTO inex_usuarios(iden_usua, nomb_usua, apel_usua, correo) 
-  VALUES ('$cedula','$nombre','$apellido','$correo')";
+  $query="INSERT INTO inex_usuarios(iden_usua, nomb_usua, apel_usua, correo, item_dep ) 
+  VALUES ('$cedula','$nombre','$apellido','$correo','$dep_u')";
   $resul=mysqli_query($con,$query); 
 
 
   if(!$resul){
-      echo 'Error:Numero de identificación ya existente, vuelva a intentar';
+      echo 'Error: Numero de identificación ya existente, vuelva a intentar';
   }else{
-      echo('Usuario guardado exitosamente');
+      echo('Usuario registrado exitosamente');
   }
 
 

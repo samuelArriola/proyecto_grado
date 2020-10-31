@@ -1,11 +1,13 @@
 <?php
+include("../config/conexion.php");
+
 session_start(); 
 
-$_SESSION["IDEN"] = '1002491546';
-$_SESSION["NOMB"] = 'OISMER SEHUANES GUZMAN';
-$_SESSION["ROLE"] = 'J';
+$_SESSION["IDEN"];
+$_SESSION["NOMB"];
+$_SESSION["ROLE"]; 
 
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
 ?>
 <!-- <!DOCTYPE html> -->
   <html> 
@@ -38,4 +40,6 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 	session_destroy();
 	header('location: ../');
 }
+
+
 ?>

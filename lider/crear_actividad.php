@@ -3,7 +3,7 @@
 include("../config/conexion.php");
 
 $item = $_GET['id'];
-    $query = "SELECT fecha_fp, fecha_ip FROM inex_proyectos WHERE item_proy ='$item'";
+    $query = "SELECT DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip FROM inex_proyectos WHERE item_proy ='$item'";
     $result = mysqli_query($con,$query); 
 
 
@@ -15,11 +15,11 @@ $item = $_GET['id'];
 
 session_start(); 
 
-$_SESSION["IDEN"] = '1002491546';
-$_SESSION["NOMB"] = 'OISMER SEHUANES GUZMAN';
-$_SESSION["ROLE"] = 'J';
+$_SESSION["IDEN"];
+$_SESSION["NOMB"];
+$_SESSION["ROLE"];
 
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
 ?>
 
 <!-- <!DOCTYPE html> -->
@@ -48,9 +48,9 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 <div class="container section">
  
     <div class="teal-text" style="margin-left:10px">&nbsp;&nbsp;AGREGAR ACTIVIDADES</div> 
-    <span style="opacity: 0.5;" style="position:relative; top: -15px;"> &nbsp;&nbsp;&nbsp; Los campos señalados con "*" son campos obligatorios</span>  <br><br>
+    <span style="opacity: 0.5;position:relative; top: 7px;" > &nbsp;&nbsp;&nbsp; Los campos señalados con "*" son campos obligatorios</span>  <br><br>
     <div class="row">
-        <form class="col s12" action="dataBase/insertar_actividad.php" method="POST" id="form2">
+        <form class="col s12" action="" method="" id="form2">
         <div class="row">
         <div class="input-field col s12">
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
@@ -69,19 +69,21 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
         <div class="input-field col s6">
         <input type="text" name="fecha_fa" class="datepicker3 validate" id="datepicker4" value="<?php echo $fecha_f ?>"disabled required title="seleccione la fecha inicial para poder habilitar este opción">
           <label for="datepicker4">* Fecha Final </label>
+          <input type="hidden" name="fecha_faa" class="datepicker3 validate" id="datepicker44" value="<?php echo $fecha_f ?>"disabled required >
+
         </div>
         <div class="input-field col s12">
             <input placeholder="Ingrese el valor de la actividad" name="valor" id="valor" type="number" class="validate caracteresEpesiales" required>
             <label for="valor" >* Valor da la Actividad</label>
         </div>
         <div class="input-field col s12">
-            <button class="btn orange" type="" id="actualizar_a">Agregar</button>
+            <button class="btn orange" type="" id="insertar_a">Agregar</button>
             <a href="editar_proyecto.php?id=<?php echo $item ?>" class="modal-close waves-effect waves-green btn">Atras</a>
         </div> 
         </div>
         </form>
     </div>
-
+  
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

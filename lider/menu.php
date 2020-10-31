@@ -1,11 +1,10 @@
 <?php
+
+  $_SESSION["IDEN"];
+  $_SESSION["NOMB"];
+  $_SESSION["ROLE"];
   
-
-$_SESSION["IDEN"] = '1002491546';
-$_SESSION["NOMB"] = 'OISMER SEHUANES GUZMAN';
-$_SESSION["ROLE"] = 'J';
-
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
+  if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
 ?>
 
 <div class="navbar-fixed">
@@ -51,7 +50,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
   <div style="color: white; font-size: 0.8em; font-weight: 500;">
   <?php echo $_SESSION["NOMB"]; ?>
   </div>
-<li><a href="javascript: $('.sidenav').sidenav('close');"  style="padding-left: 16px;">
+<li><a href="lista_proyectos.php"  style="padding-left: 16px;">
 	<i class="material-icons teal-text ">account_balance</i>Proyectos</a>
 </li>
 

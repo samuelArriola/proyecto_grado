@@ -1,5 +1,13 @@
 <?php
 
+    session_start(); 
+
+	$_SESSION["IDEN"];
+	$_SESSION["NOMB"];
+	$_SESSION["ROLE"];
+	$_SESSION["DEP"];
+
+	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
 ?>
 
 
@@ -46,6 +54,7 @@
 					<span class="card-title">Registrar Usuario </span> 
 					<form action="" method="post" id="registra_u">
 					 <div class="row">
+					    <input type="hidden" id="dep_u" value="<?php echo $_SESSION["DEP"];?>">
 						<div class="input-field col m12 s12 ">
 							<input name="nombre" id="i1" type="text" class="validate caracteresEpesiales" >
 							<label for="i1">Nombre</label>
@@ -56,7 +65,7 @@
 						</div>
 						<div class="input-field col m12 s12">
 							<input name="cedula" id="i9" type="number" class="validate caracteresEpesiales" min="" max="" required>
-							<label for="i9">Cedula o T.I</label>
+							<label for="i9">Cedula</label>
 						</div>
 						<div class="input-field col m12 s12">
 							<input name="correo" id="i7" type="email" class="validate " required>
@@ -65,7 +74,7 @@
 					 </div>
 						
 						<div class="center section">
-							<button  class=" btn  waves-effect waves-light" type="button" id="guardar_usuario">Guardar</button> 
+							<button  class=" btn  waves-effect waves-light" type="button" id="guardar_usuario">Registrar</button> 
 						</div>    
 					</form>
 				</div>
@@ -95,14 +104,14 @@
         </div>
     </div>
 
-		<div class="contenedor_tabla">
+		<div class="contenedor_tabla responsive-table">
 		<table class="" style="" >
 			<thead>
 			<tr class="card-panel teal lighten-2">
 				<th>Cedula</th>		
 				<th>Nombre</th>
 				<th>Apellido</th>		
-				<th>Corrreo</th>
+				<th>Correo</th>
 				<th>Opciones</th>
 			</tr>
 			</thead>
@@ -162,6 +171,17 @@
 
     </div>
 
+	<!--  confirmacion eliminar usuario -->
+	<div id="eliminaU" class="modal">
+		<div class="modal-content">
+		<input  id="obtieneID" type="hidden">
+		<h5 class="center" >¿Estás seguro de eliminar este usuario?</h5>
+			<div class="center">
+			<button   id="eliminarUsuarios" type="button" class="btn-small red modal-close">Si</button>
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+			</div> 
+		</div>
+	</div>
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -173,5 +193,15 @@
 	<script src="js/buscar.js"></script> 
 	</body>
 </html>
+
+<?php 
+
+}else{
+	session_destroy();
+	header('location: ../');
+}
+
+
+?>
 
 

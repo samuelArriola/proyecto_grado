@@ -2,8 +2,9 @@
 	
 	
 	$item = $_GET['id'];
-
-
+	$visto=0;
+	$vistoL=0;
+	
 	$icon_estado = array('0' => '<i class="material-icons">edit</i>',
 	'1' => '<i class="material-icons">send</i>',
 	'2' => '<i class="material-icons">check_circle</i>',
@@ -19,18 +20,23 @@
 	'3' => 'Corregir');
 
 	include("../config/conexion.php");
-	$sql = "select *
+	$sql = "select item_proy, nomb_proy, desc_proy, jefe_proy, esta_proy, visto, item_dep, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip , DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, comentarios_p
 	,(select concat(nomb_usua,' ',apel_usua) from inex_usuarios where iden_usua = a.jefe_proy) AS responsable, a.esta_proy
-	 from inex_proyectos as a where a.item_proy = '".$item."'";
+	from inex_proyectos as a where a.item_proy = '".$item."'";
 	$rs = mysqli_query($con, $sql); 
 
-	
-	
 	//muestra las independencias
 	$mostrar_i = "SELECT * FROM inex_dependencias";
 	$resul_mi = mysqli_query($con,$mostrar_i);
 
-	
+	session_start(); 
+
+	$_SESSION["IDEN"];
+	$_SESSION["NOMB"];
+	$_SESSION["ROLE"];
+
+	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
+
 ?>
 
 <html> 
@@ -65,8 +71,7 @@
     <div class="modal-content">
 		<div class="row">
 			<div class="input-field col s12">
-			<textarea  class="materialize-textarea caracteresEpesiales validate" maxlength="1100"><?php echo $row['comentarios_p'] ?></textarea>
-			<label for="comentarioProyecto">Comentarios</label>
+			<span class="container" maxlength="1100"><?php echo $row['comentarios_p'] ?></span>
 			</div> <br> <br><br>
 		</div>
 	</div>
@@ -93,26 +98,27 @@
 
 	<div class="input-field col s6">
         <input type="text" value = "<?php echo $row['fecha_ip'] ?>" class="datepickerE1 validate" name="fecha_ip"  id="datepickerE1" required >
-          <label for="datepicker1">* Fecha Inicial </label>
+          <label for="datepicker1"><b style = "color: black">* Fecha Inicial </b></label>
         </div>
         <div class="input-field col s6">
         <input type="text" value = "<?php echo $row['fecha_fp'] ?>" class="datepickerE2 validate" name="fecha_fp"  id="datepickerE2"  required>
-          <label for="datepicker2">* Fecha Final </label>
+          <label for="datepicker2"><b style = "color: black">* Fecha Final</b></label>
         </div>
 
 	<div class="col s12"> 
          <b>Escoja la dependencia a la que pertenece el proyecto</b>
         <select class="browser-default" name="dependencia" id="dependencia">
-		<?php while ($row_mi=mysqli_fetch_array($resul_mi)) {?>
-			<option value="<?php echo $row_mi['item_dep']?>"><?php echo $row_mi['nombre_dep'] ?></option>
-			<?php if ($row["item_dep"]==$row_mi['item_dep']) { ?>
-				 <option value="<?php echo $row_mi['item_dep']?>"selected ><?php echo $row_mi['nombre_dep'] ?></option>
-			<?php }?>
-         <?php } ?>
-		
-        </select>
+		<?php 
+		while ($row_mi=mysqli_fetch_array($resul_mi)) {
+			$resultado="<option value='".$row_mi['item_dep']."' > ".$row_mi['nombre_dep']."</option>";
 
-		
+			if ($row["item_dep"]==$row_mi['item_dep']) { 
+			$resultado="<option value='".$row_mi['item_dep']."' selected > ".$row_mi['nombre_dep']."</option>";
+			}
+			echo $resultado;
+		}
+		?>
+        </select>
     </div>
 	
 	<div class="input-field col s12">
@@ -197,9 +203,9 @@
 	 <!-- botton enviar proyectos -->
 	<div class="center">
 		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
-			<button class="btn disabled" id=""  onclick="cambiaEstado(1)" >Enviar Proyecto</button> 
+			<a class="btn disabled modal-trigger" href="#confirmP"   >Enviar Proyecto</a> 
 		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
-				<button class="btn orange" id="" onclick="cambiaEstado(1)" >Enviar Proyecto</button> 
+				<a class="btn orange modal-trigger" href="#confirmP"  >Enviar Proyecto</a> 
 		<?php } ?> 		
 	</div>
 
@@ -226,10 +232,22 @@
 	</div>
     </div>
 
+	<!--  confirmacion enviar proyecto -->
+	<div id="confirmP" class="modal">
+    <div class="modal-content">
+       <h5 class="center" >¿Estás seguro de enviar este proyecto?</h5>
+	 <div class="center">
+	   <a onclick="visto(<?php echo $item?>, <?php echo $visto?>, <?php echo $vistoL?> ); cambiaEstado(1)" class="btn-small red">Si</a>
+	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+	 </div> 
+	</div>
+    </div>
+
+
 	<!-- Modal Structure -->
 	<div id="modal3" class="modal">
     <div class="modal-content">
-       <h5 class="center" >¿Estás seguro de eliminar esta actividad?</h5>
+       <h5 class="center" >¿Estás seguro de eliminar este proyecto?</h5>
 	 <div class="center">
 	   <a href="dataBase/eliminar_proyecto.php?id_p=<?php echo $item ?>" class="btn-small red">Si</a>
 	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
@@ -294,4 +312,11 @@
 
 </html>
 
-<?php mysqli_close($con); ?>
+<?php 
+
+}else{
+	session_destroy();
+	header('location: ../');
+}
+
+mysqli_close($con); ?>

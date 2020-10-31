@@ -8,9 +8,9 @@
   $query="UPDATE inex_proyectos SET esta_proy='$aprobado' WHERE item_proy='$id_proy'";
   $resul=mysqli_query($con,$query);
   if(!$resul){
-     echo 'error al actualizar';
+     echo 'Error al aprobar proyecto';
   }else{
-   echo 'Cambios guardados correctamente';
+   echo 'Proyecto aprobado exitosamente';
   }
 
   mysqli_close($con);

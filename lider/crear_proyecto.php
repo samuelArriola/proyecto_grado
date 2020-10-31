@@ -2,15 +2,16 @@
 	include("../config/conexion.php");
 session_start(); 
 
-$_SESSION["IDEN"] = '1002491546';
-$_SESSION["NOMB"] = 'OISMER SEHUANES GUZMAN';
-$_SESSION["ROLE"] = 'J';
+$_SESSION["IDEN"];
+$_SESSION["NOMB"];
+$_SESSION["ROLE"];
+
   
 //muestra las independencias
 $mostrar_i = "SELECT * FROM inex_dependencias";
 $resul_mi = mysqli_query($con,$mostrar_i);
   
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
 ?>
 <!-- <!DOCTYPE html> -->
   <html> 
@@ -56,7 +57,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
         </div>
         <div class="input-field col s6">
         <input type="text" class="datepicker2 validate " id="datepicker2"  disabled required title="seleccione la fecha inicial para poder habilitar este opción">
-          <label for="datepicker2">* Fecha Final </label>
+          <label for="datepicker2">* Fecha Final</label>
         </div>
         <div class="col s12"> 
          <label>* Escoja la dependencia a la que pertenece el proyecto</label>
@@ -74,7 +75,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
          </div>
          <div class="input-field col s12">
           <div class="center"> 
-             <button id="btn_create_p" class="btn orange">Continuar</button>
+             <button id="btn_create_p" class="btn orange">Registrar proyecto</button>
           </div>
         </div>
        </div>
@@ -89,6 +90,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "J"){
 <script src="js/funciones.js"></script>
 <script src="js/validaciones.js"></script>
 </html>
+
 <?php
 }else{
 	session_destroy();

@@ -27,28 +27,6 @@ $(document).ready(function(){
         },
     });
 
-
-
-
-   
-    //actualizar actividad
-    $("#actualizar").click(function(e){
-        const datos={
-            id:$("#id_pro").val(),
-            nombre_proyec:$("#nombre_proye").val(),
-            dependencia:$("#dependencia").val(),
-            descripcion:$("#descripcion").val(),
-            fecha_ipro:$("#datepickerE1").val(),
-            fecha_fpro:$("#datepickerE2").val(),
-
-        }
-        $.post('database/actualizar_proyecto.php',datos,function(response){
-             if(response){
-                M.toast({html: 'Proyecto actualizado', classes: 'rounded'});
-             }
-        });
-        e.preventDefault();
-    }); 
     
     //GUARDAR USUARIO CON AJAX
     $('#guardar_usuario').click(function (e) {
@@ -58,7 +36,8 @@ $(document).ready(function(){
             nombre_u:$('#i1').val(),
             apellido_u:$('#i2').val(),
             cedula_u:$('#i9').val(),
-            correo_u:$('#i7').val()
+            correo_u:$('#i7').val(),
+            dep_u:$('#dep_u').val()
         }
         //  console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
         
@@ -77,9 +56,11 @@ $(document).ready(function(){
                 data:datos_u,
                 success: function (response) {
                     console.log(response);
+                    
                   M.toast({html: response});
                 $('#registra_u')[0].reset(); //limpia las casjas de texto
                 $(mostrarU());
+
                 }
             });   
         }
@@ -110,45 +91,23 @@ $(document).ready(function(){
                     console.log(response_e);
                 M.toast({html: response_e });
                 // $('#editar_u')[0].reset(); //limpia las casjas de texto
+
+                setTimeout(tiempo,1000);
+
+                function tiempo(){
+                    window.location.href='coordinadores.php#mostrarUsuario';
+                }
+                
                 }
             });   
         }
     
     });
 
-    //APROBAR PROYECTOS CON AJAX 
-    // $('#aprobar_proy').click(function (e) {
-    //     e.preventDefault();
-    //     if (confirm('Desea aprobar este proyecto?')) {    
-    //         const datos_u={
-    //             id_proy:$('#id_pro').val(),
-            
-    //         }
-    //         // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
-            
-    //         if (datos_u.nombre_u=="" || datos_u.apellido_u=="" || datos_u.cedula_u=="" || datos_u.telefono_u=="" ||datos_u.pass_u=="" || datos_u.direccion_u=="" || datos_u.correo_u=="" ) {
-    //             M.toast({html: 'Datos Incompletos, por favor Complete todos los campos'})
-    //         } else {
-    //             $.ajax({
-    //                 type:"POST",
-    //                 url:"dataBase/p_aprobar.php",
-    //                 data:datos_u,
-    //                 success: function (response) {
-    //                     console.log(response);
-    //                 M.toast({html: 'PROYECTO APROBADO EXITOSAMENTE'});
-    //                 // $('#editar_u')[0].reset(); //limpia las casjas de texto
-    //                 }
-    //             });   
-    //         }
-    //     }
-    // });
-
-
     //LLAMO MOSTRAR USUARIOS CON AJAX
     $(mostrarU());
-  
 
-
+//BUSCAR USUARIOS
     $('#buscar_u').keyup(function() {
         var buscar = $('#buscar_u').val();
         console.log(buscar);
@@ -157,28 +116,29 @@ $(document).ready(function(){
         }else{
             mostrarU();
         }
-        
     });
-
-
 }); 
-
+  
     //borrar datos con ajax
-    function borrarAjax(id_u) {
-        if (confirm('¿desea borrarlo?')) {
+    $('#eliminarUsuarios').click(function () {
+       let id_u = $('#obtieneID').val();
             $.ajax({
                 type: "POST",
                 url: "dataBase/u_borrarA.php",
-                    data:{id_u} ,
+                data:{id_u} ,
                 dataType: "html",
                 success: function (response) {
                     mostrarU();
                     M.toast({html: response});
-                    console.log(response);  
-                
+                    console.log(response); 
                 }
             })
-        }
+    })
+
+    //trae id para camdarlo a la ventana confirm eliminar usuario
+    function recibeID(id_u) {
+        $('#obtieneID').val(id_u);          
+              
     }
 
     //MOSTRAR USUARIOS CON AJAX
@@ -194,74 +154,104 @@ $(document).ready(function(){
         .done(function (respuesta) {  //done: si el ajax es verdadero, hazme esto es para recibir ... o susses 
             $('#mostrar_usu').html(respuesta);
         })
-    }
+    } 
 
     //CAMBIAR ESTADO            
     function cambiaEstado (estado) {
-        // e.preventDefault();
-        if (confirm('¿Desea continuar este proceso?')) {    
-            const datos_u={
-                id_proy:$('#id_pro').val(),
-                estado_p: estado,
-            
-            }
-            // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u); 
-            if (datos_u.nombre_u=="" || datos_u.apellido_u=="" || datos_u.cedula_u=="" || datos_u.telefono_u=="" ||datos_u.pass_u=="" || datos_u.direccion_u=="" || datos_u.correo_u=="" ) {
-                M.toast({html: 'Datos Incompletos, por favor Complete todos los campos'})
-            } else {
-                $.ajax({
-                    type:"POST",
-                    url:"dataBase/p_aprobar.php",
-                    data:datos_u,
-                    success: function (response) {
-                        console.log(response);
+        // e.preventDefault();  
+        const datos_u={
+            id_proy:$('#id_pro').val(),
+            estado_p: estado,
+          
+        }
+        // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u); 
+        if (datos_u.nombre_u=="" || datos_u.apellido_u=="" || datos_u.cedula_u=="" || datos_u.telefono_u=="" ||datos_u.pass_u=="" || datos_u.direccion_u=="" || datos_u.correo_u=="" ) {
+            M.toast({html: 'Datos Incompletos, por favor Complete todos los campos'})
+        } else {
+            $.ajax({
+                type:"POST",
+                url:"dataBase/p_aprobar.php",
+                data:datos_u,
+                success: function (response) {
+                    console.log(response);
                     M.toast({html: response});
-                    // $('#editar_u')[0].reset(); //limpia las casjas de texto
+
+                    setTimeout(tiempo, 1000);
+                    function tiempo(){
+                        console.log("esta entrando");
+                        window.location.href='lista_proyectos.php';
                     }
-                });   
-            }
+                }
+            });   
         }
     }
 
-    //INGRESA COMETARIO MANDA A CORRECION LOS PROYECTOS
+//actualizar PROYECTO
+
+$("#actualizar").click(function(e){
+    const datos={
+        id:$("#id_pro").val(),
+        fecha_ipro:$("#datepickerE1").val(),
+        fecha_fpro:$("#datepickerE2").val(),
+    }
+    
+    if (datos.fecha_ipro>datos.fecha_fpro) { 
+        M.toast({html: 'Corregir fecha inicial:La fecha inicial no puede ser mayor a la fecha final', classes: 'rounded'});
+        console.log(datos.fecha_ipro+"  "+datos.fecha_fpro);
+    }else{
+
+        $.post('database/actualizar_proyecto.php',datos,function(response){
+            if(response){
+                M.toast({html: response, classes: 'rounded'});
+            }
+        });
+    }
+    e.preventDefault();
+}); 
+
+    //INGRESA COMENTARIOS MANDA A CORRECION LOS PROYECTOS
     function corregirProyecto(estado) {
         // e.preventDefault();
-        if (confirm('¿Desea corregir este Poyecto?')) {    
-            const datos_c={
-                id_proy:$('#id_pro').val(),
-                estado_p: estado,
-                comentario_p:$('#comentarioProyecto').val()
-            }
-           
-            if ( datos_c.comentario_p=="" ) {
-                M.toast({html: 'Comentarios Vacío, por favor Complete el campos'})
-            } else {
-                $.ajax({
-                    type:"POST",
-                    url:"dataBase/corregir_p.php",
-                    data:datos_c,
-                    success: function (response) {
-                        console.log(response);
-                    M.toast({html: response});
-                      $('#formCorregir')[0].reset(); 
+        const datos_c={
+            id_proy:$('#id_pro').val(),
+            estado_p: estado,
+            comentario_p:$('#comentarioProyecto').val()
+        }
+        
+        if ( datos_c.comentario_p=="" ) {
+            M.toast({html: 'Comentarios Vacío, por favor Complete el campos'})
+        } else {
+            $.ajax({
+                type:"POST",
+                url:"dataBase/corregir_p.php",
+                data:datos_c,
+                success: function (response) {
+                   M.toast({html: response});
+                   // $('#formCorregir')[0].reset(); 
+                   setTimeout(tiempo, 1000);
+                    function tiempo(){
+                        window.location.href='lista_proyectos.php';
                     }
-                });   
-            }
+
+                    
+                }
+            });   
         }
     }
 
-    //FUNSION VISTO
-    function visto(id_p, uno) {
+    //FUNCION VISTO
+    function visto(id_p, estado) {
+       
         $.ajax({
             type:"POST",
             url:"dataBase/estado_v.php",
             data:{
                 id_p,
-                uno
+                estado
             },
             success: function (response) {
                 console.log(response);
-            M.toast({html: response});
+            // M.toast({html: response});
             // $('#editar_u')[0].reset(); //limpia las casjas de texto
             }
         });   
