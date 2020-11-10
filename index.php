@@ -1,48 +1,95 @@
+ 
+ 
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<title>Login</title>
+	<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/login/materialize-login.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="css/login/login.css?">
+    <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <body>
-			<form>
-						<label for="nameuser">Identificacion de usuario</label>
-						<input type="text" name="iden" id="iden">
-						<a href="javascript: iniciar_sesion()">Ingresar</a>
-						<br>
-						<div id="capa_resultados"></div>
-			</form>
-			
+	<div class="cont-login z-depth-1">
+		<div class="cont-progress" id="loarU">
+			<div class="progress grey lighten-2 ">
+			    <div class="indeterminate orange darken-1"></div>
+			</div>
+		</div>
+		
+		<div id="form1" class="row cont-form">
+			<div class="col s12">
+				<div class="logo center">
+					<img src="img/logo.png">
+				</div>
+			</div>
+			<div class="col s12 center">
+				<h1 class="text-subtitle">
+					<content>Acceder</content>
+				</h1>
+				<div id="name_app" class="text-normal">
+					<content>Ir a </content>
+				</div>
+			</div>
+			<div class="col s12 form">
+				<div class="row">
+					<div id="divnameuser">
+						<div class="col s12 input-field" >
+							<input type="text" name="nameuser" id="nameuser" class="validate" required>
+							<label for="nameuser">Nombre de usuario</label>
+						</div>
+						<div id="msgError1" class="col error s12 red-text">
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="col s12 " style="position: relative; top: -18px">
+				<div class="center">
+					<button id="btnUID"  class="btn-flat btn-text btn-radius orange darken-2 white-text ">Siguiente</button>
+				</div>
+			</div>
+		</div>
+		<div id="form2" class="row cont-form">
+			<div class="col s12">
+				<div class="logo center">
+					<img src="img/logo.png">
+				</div>
+			</div>
+			<div class="col s12 center">
+				<h1 class="text-subtitle">
+					<content>Acceder</content>
+				</h1>
+				<div id="name_app" class="text-normal">
+					<content>Ir a </content>
+				</div>
+			</div>
+			<div class="col s12 form">
+				<div class="row">	
+					<div id="divpassU">
+						<div class="col s12 input-field " >
+							<input type="password" name="nameuser" id="passU">
+							<label for="passU">Contraseña</label>
+						</div>
+						<div id="msgErrorpss" class="col error s12 red-text">
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="col s12 " style="position: relative; top: -18px">
+				<div class="center">
+					<button id="btnPass"  class="btn-flat btn-text btn-radius orange darken-2 white-text ">Siguiente</button>
+				</div>
+			</div>
+		</div>
+	
+	</div>
 	<!--JavaScript at end of body for optimized loading-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-	//O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O
-function iniciar_sesion(){
-	var id = $("#iden").val();
- $('#capa_resultados').html("Espere un momento");
- $.ajax({
-        url: './config/crear_sessiones.php',
-        dataType: "json",
-        type: 'get',
-        data: {iden:id},//Aqui se especifica el parametro a enviar
-        success: function(response){
-          //Aqui muestra los resultados
-          if(response.error == true)
-              {
-            	$('#capa_resultados').html(response.msg);
-            	}
-            else{
-            	$('#capa_resultados').html('Nombre:'+response.nomb + ', Role:' + response.role);
-            	if(response.role == 'D'){
-            		location.href = 'director/index.php';
-            	}else if (response.role == 'L') {
-					location.href = 'lider/index.php';
-				}
-            }
-        }
-    });
-}
-</script>
-</body>
+    <script type="text/javascript" src="js/login/materialize-login.min.js"></script>
+  <script src="js/login/app.js"></script>
+</body> 
 </html>

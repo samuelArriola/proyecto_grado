@@ -167,7 +167,6 @@
 	while ($row = mysqli_fetch_array($rs)) {
 
 		$id_acti = $row['item_acti'];
-
 		if($row["valo_acti"]=='') $row["valo_acti"] = 0; 
 ?>
 	 <input  type="hidden" value="<?php echo $id_acti ?>" id="id_actividadA">  <!--id del la consulta de acticidades -->
@@ -181,7 +180,7 @@
 		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
 		 <td >  
 		   <?php if($estado_proyecto==2){ ?>	
-	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text" onclick="mostrarEvidenciaA();" href="#modal2">attach_file</a>
+	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text" onclick="mostrarEvidenciaA(<?php echo $id_acti ?>);" href="#modal2">attach_file</a>
 			<?php } ?>
 			<li  title="Editar" class='material-icons ' style="pointer-events:none; color:#999999; opacity:0.9;" ><a  class="hoverable grey-text " href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
 			<li  title="Eliminar" class='material-icons' style="pointer-events:none; opacity:0.6;" ><a  class="hoverable  modal-trigger grey-text "  href="#modal1">delete</a></li>
@@ -255,6 +254,19 @@
 	</div>
     </div>
 
+   <!-- Modal Structure elimina Evidencia  -->
+	<div id="eliminarEvidencia" class="modal">
+    <div class="modal-content">
+	<input  id="IdEvi" type="hidden">
+	<input  id="IdRuta" type="hidden">
+       <h5 class="center" >¿Estás seguro de eliminar esta Evidencia?</h5>
+	 <div class="center">
+	   <button   id="eliminarEvidenciasA" type="button" class="btn-small red modal-close">Si</button>
+	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+	 </div> 
+	</div>
+    </div>
+
 	<!-- Modal para agregar arcivos -->
 	<div id="modal2" class="modal ">
 		<div class="modal-content" >
@@ -276,7 +288,7 @@
 						<input class="file-path validate" type="text">
 					</div>
 					</div>
-					<input value="<?php echo $id_acti ?>" name="item_acty" type="hidden" class="validate" type="text" required>
+					<input value="" id="idActiEvidencia" name="item_acty" type="hidden" class="validate" type="text" required>
 				</div>
 			</div>
 			  <div class="center"><button class="btn orange"  type="button" onclick="subirEvidenciaA()">Subir </button></div>
@@ -285,8 +297,8 @@
 
 		<div class="center"><h4 class="">Descargar evidencias</h4></div>
 
-		<div class="container section">
-		<table class="responsive-table">
+		<div class=" section">
+		<table class="container responsive-table">
 			<thead>
 				<tr>
 					<th>Nombre</th>

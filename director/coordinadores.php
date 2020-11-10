@@ -183,7 +183,7 @@
 		</div>
 	</div>
 
-
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="../js/materialize.min.js"></script>
 	<script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 

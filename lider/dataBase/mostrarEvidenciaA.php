@@ -13,7 +13,7 @@
                <td>".$row['ruta_e']."</td>
                <td>
                <li title='Descargar' class='material-icons'><a href='dataBase/".$row['ruta_e']."' download='".$row['ruta_e']."'>file_download</a></li>
-               <li title='Eliminar' class='material-icons'><a class='hoverable  red-text' href='dataBase/eliminar_evidencia.php?id_e=".$row['id_e']."&ruta_e=".$row['ruta_e']."'>delete</a></li>
+               <li title='Eliminar' class='material-icons'><a class='hoverable  modal-trigger  red-text' href='#eliminarEvidencia' onclick=\"recibeIdEvi('".$row['id_e']."','".$row['ruta_e']."')\" >delete</a></li>
                </td>
           </tr> 
           ";

@@ -105,12 +105,18 @@
 	<div class="input-field col s12">
 	<b>Lider a Cargo:</b> 
 	   <h6><?php echo $row["responsable"] ?></h6>
-	 
 	</div>
-	<div class="input-field col s12">
-	   <div class="center"><button class="btn orange"  id="actualizar" >Actualizar fechas</button></div>
-	</div>
-	
+
+		<?php if($estado_proyecto==2){ ?>
+		<div class="input-field col s12">
+	    	<div class="center"><button class="btn orange"  id="actualizar" >Actualizar fechas</button></div>
+		</div>
+		<?php }else{ ?>
+		<div class="input-field col s12">
+    		<div class="center" ><button disabled class="btn orange red"  id="actualizar" >Actualizar fechas </button></div>
+		</div>
+		<?php } ?>
+
 	</form>
   <?php	} ?>
 </div>

@@ -1,10 +1,6 @@
 <?php
 session_start(); 
-
-$_SESSION["IDEN"];
-$_SESSION["NOMB"];
-$_SESSION["ROLE"];
-
+include("../config/conexion.php");
 if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
 ?>
 <!-- <!DOCTYPE html> -->
@@ -29,9 +25,9 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
 <?php include("menu.php"); ?>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="../js/materialize.min.js"></script>
+ <script type="text/javascript" src="../js/materialize.min.js"></script>
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
-<script src="../js/app.js"></script>
+<!-- <script src="../js/app.js"></script>  -->
 </html>
 <?php
 }else{

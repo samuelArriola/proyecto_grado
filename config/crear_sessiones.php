@@ -1,9 +1,12 @@
 <?php
-extract($_GET);
-include("conexion.php");
-//$sql = "SELECT * FROM inex_usuarios WHERE iden_usua = '".$iden."'";
-$sql ="SELECT * FROM inex_usuarios u, inex_dependencias d WHERE u.item_dep = d.item_dep AND iden_usua = '".$iden."' ";
+
+include_once("conexion.php");
+$iden = $_POST['iden'];
+
+// $sql = "SELECT * FROM inex_usuarios WHERE iden_usua = '$iden' ";
+$sql ="SELECT * FROM inex_usuarios u, inex_dependencias d WHERE u.item_dep = d.item_dep AND iden_usua = '$iden' ";
 $rs = mysqli_query($con,$sql);
+
 if($fila = mysqli_fetch_array($rs))
 	{
 	session_start();

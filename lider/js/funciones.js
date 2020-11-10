@@ -310,6 +310,7 @@ function cambiaEstado (estado) {
     //SUBIR EVIDENCIA CON AJAX
     function subirEvidenciaA(e) {
         let datoE = new FormData($('#subirEvidencia')[0]); 
+    
         $.ajax({
             url:'dataBase/subirEvidenciaA.php',
             type:'POST',
@@ -319,14 +320,16 @@ function cambiaEstado (estado) {
             success:(response) => {
                 M.toast({html: response, classes: 'rounded'});
                  $('#subirEvidencia')[0].reset(); //limpia las casjas de texto
-                 mostrarEvidenciaA();
+                 mostrarEvidenciaA(datoE.get("item_acty"));
             }
         })
     }
 
 //MOSTRAR EVIDENCIA CON AJAX
-    function mostrarEvidenciaA() {
-       let id_actividad =$('#id_actividadA').val();
+    function mostrarEvidenciaA(id_acti) {
+        
+       let id_actividad =id_acti;
+       $('#idActiEvidencia').val(id_actividad);
        console.log(id_actividad);
         $.ajax({
             url:'dataBase/mostrarEvidenciaA.php',
@@ -338,5 +341,30 @@ function cambiaEstado (estado) {
                 
             }
         })
-        
     } 
+
+    //borrar las evidencias con ajax con ajax
+    $('#eliminarEvidenciasA').click(function () {
+        let datoE2 = new FormData($('#subirEvidencia')[0]); 
+       let IdEvi = $('#IdEvi').val();   
+        let IdRuta= $('#IdRuta').val();   
+            $.ajax({
+                type: "POST",
+                url: "dataBase/eliminar_evidencia.php",
+                data:{id_e:IdEvi,
+                    ruta_e:IdRuta} ,
+                dataType: "html",
+                success: function (response) {
+                    mostrarEvidenciaA(datoE2.get("item_acty"));
+                    M.toast({html: response});
+                    console.log(response); 
+                }
+            })
+    })
+
+     //trae id y laruta para camdarlo a la ventana confirm eliminar usuario
+     function recibeIdEvi(id_e,id_ruta) {
+        $('#IdEvi').val(id_e);   
+        $('#IdRuta').val(id_ruta);            
+              
+    }
