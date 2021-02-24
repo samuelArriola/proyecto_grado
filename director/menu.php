@@ -16,7 +16,7 @@ $dep_u = $_SESSION["NOM_D"]
         DIRECTOR
         <i class="material-icons right">arrow_drop_down</i>
         </a> 
-    </li>
+    </li> 
     </ul>
   </div> 
 

@@ -1,12 +1,6 @@
 <?php
-	include("../config/conexion.php");
 session_start(); 
-
-$_SESSION["IDEN"];
-$_SESSION["NOMB"];
-$_SESSION["ROLE"];
-
-  
+include("../config/conexion.php");
 //muestra las independencias
 $mostrar_i = "SELECT * FROM inex_dependencias";
 $resul_mi = mysqli_query($con,$mostrar_i);
@@ -48,7 +42,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
            <label for="nombre_proye">* Nombre</label>
          </div>                   
          <div class="input-field col s12">
-          <textarea placeholder="Ingrese descripcion del proyecto" name="descripcion_proye" id="descripcion" class="caracteresEpesiales materialize-textarea validate caracteresEpesiales" required></textarea>
+          <textarea placeholder="Ingrese descripción del proyecto" name="descripcion_proye" id="descripcion" class="caracteresEpesiales materialize-textarea validate caracteresEpesiales" required></textarea>
           <label for="textarea1">* Descripción </label>
         </div>
         <div class="input-field col s6">

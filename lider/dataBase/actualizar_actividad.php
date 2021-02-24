@@ -15,7 +15,7 @@
     if(!$resul){
       echo 'Actividad no actualizada';
     }else{
-      echo'Actividad Actualizada';
+      echo'Actividad actualizada';
     }
 
      // cerra conexion 

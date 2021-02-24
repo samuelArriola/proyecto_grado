@@ -1,17 +1,8 @@
-
-<?php 
+<?php
+session_start();  
 include("../config/conexion.php");
-session_start(); 
-
-$_SESSION["IDEN"];
-$_SESSION["NOMB"];
-$_SESSION["ROLE"]; 
-
 if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +45,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
             <div class="input-field col m7 offset-m8">
             <i class="material-icons prefix">search</i> 
             <input name="buscador" id="buscar_p" type="text" class="validate" placeholder="Nombre del proyecto" >
-            <label for="buscar_p">Buscar</label>
+            <label for="buscar_p">Buscar proyecto</label>
             </div>
         </div>
         </form> 
@@ -87,8 +78,8 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
         <div class="col m6">
             <div class="input-field col m7 offset-m8">
             <i class="material-icons prefix">search</i> 
-            <input name="buscador" id="buscar_pA" type="text" class="validate" placeholder="nombre del Proyecto" >
-            <label for="buscar_pA">Buscar Proyecto</label>
+            <input name="buscador" id="buscar_pA" type="text" class="validate" placeholder="Nombre del proyecto" >
+            <label for="buscar_pA">Buscar proyecto</label>
             </div>
         </div>
         </form> 

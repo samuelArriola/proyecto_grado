@@ -13,22 +13,19 @@
           if ($estado_e == 1) {
                $res = "<li title='visto' class='material-icons green-text '>done_all</li>";
           }
-
           $tabla.="
            <tr>
                <td>".$row['nombre_e']."</td>
-               <td>".$row['ruta_e']."</td>
+               <td>".$row['ruta_e']."</td>                                                                                                                                       
                <td>
-               <li title='Descargar' class='material-icons'><a href='dataBase/".$row['ruta_e']."' download='".$row['ruta_e']."'>file_download</a></li>
-               <li title='Eliminar' class='material-icons'><a class='hoverable  modal-trigger  red-text' href='#eliminarEvidencia' onclick=\"recibeIdEvi('".$row['id_e']."','".$row['ruta_e']."')\" >delete</a></li>
-               ".$res."
+                    <li title='Descargar' class='material-icons'><a href='../lider/dataBase/".$row['ruta_e']."' download='".$row['ruta_e']."'  onclick='estado_evi(".$row['id_e'].",".$id_acti.")'>file_download</a></li>
+                    ".$res."
                </td>
           </tr> 
           ";
      }; 
 
      echo $tabla;
-
 
    
     

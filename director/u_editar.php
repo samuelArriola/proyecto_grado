@@ -41,20 +41,22 @@
 				</div>
 
 				<div class="card-content" id="form" >
-					<span class="card-title">Editar Usuario </span> 
+					<span class="card-title" style=" position:relative; top: -30px">Editar Usuario </span> 
+					<span style="opacity: 0.5; position:relative; top: -15px" class="left">Los campos señalados con "*" son campos obligatorios</span>  
+
 					<form action="" method="post" id="editar_u">
 					 <div class="row">
 						<div class="input-field col m12 s12 ">
 							<input name="nombre" value="<?php echo $datos['nomb_usua'] ?>" id="e1" type="text" class="validate caracteresEpesiales" >
-							<label for="e1">Nombre</label>
+							<label for="e1">*Nombre</label>
 						</div>
 						<div class="input-field col m12 s12">
 							<input name="apellido" value="<?php echo $datos['apel_usua'] ?>" id="e2" type="text" class="validate caracteresEpesiales" required>
-							<label for="e2">Apellido</label>
+							<label for="e2">*Apellido</label>
 						</div>
 						<div class="input-field col m12 s12">
 							<input name="correo" value="<?php echo $datos['correo'] ?>" id="e7" type="email" class="validate caracteresEpesiales" required>
-							<label for="e7">Correo</label>
+							<label for="e7">*Correo</label>
 						</div>
 						<input name="cedula" value="<?php echo $datos['iden_usua'] ?>" id="e9" type="hidden" class="validate caracteresEpesiales" required>
 

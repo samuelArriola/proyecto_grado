@@ -34,7 +34,7 @@
     <div class="nav-content white">
       <ul class="tabs tabs-transparent" >
         <li class="tab hoverA"><a href="#creaUsuario" class="teal-text hoverable  ">Crear usuario</a></li>
-        <li class="tab hoverA"><a href="#mostrarUsuario" class="teal-text hoverable ">Mostrar usuario</a></li>
+        <li class="tab hoverA"><a href="#mostrarUsuario" class="teal-text hoverable ">Mostrar usuarios</a></li>
       </ul>
     </div>
 
@@ -49,27 +49,27 @@
 				<div class="section card-image">
 				<i class="teal-text lighten-2 large material-icons">person_add</i>
 				</div>
-
 				<div class="card-content" id="form" >
-					<span class="card-title">Registrar Usuario </span> 
-					<form action="" method="post" id="registra_u">
+					<span class="card-title" style="position:relative; top: -18px">Registrar Usuario </span> 
+					<form action="" method="post" id="registra_u"> <br>
+					<span style="opacity: 0.5; position:relative; top: -13px" class="left">Los campos señalados con "*" son campos obligatorios</span>  
 					 <div class="row">
 					    <input type="hidden" id="dep_u" value="<?php echo $_SESSION["DEP"];?>">
 						<div class="input-field col m12 s12 ">
 							<input name="nombre" id="i1" type="text" class="validate caracteresEpesiales" >
-							<label for="i1">Nombre</label>
+							<label for="i1">*Nombre</label>
 						</div>
 						<div class="input-field col m12 s12">
 							<input name="apellido" id="i2" type="text" class="validate caracteresEpesiales" required>
-							<label for="i2">Apellido</label>
+							<label for="i2">*Apellido</label>
 						</div>
 						<div class="input-field col m12 s12">
 							<input name="cedula" id="i9" type="number" class="validate caracteresEpesiales" min="" max="" required>
-							<label for="i9">Cedula</label>
+							<label for="i9">*Cedula</label>
 						</div>
 						<div class="input-field col m12 s12">
 							<input name="correo" id="i7" type="email" class="validate " required>
-							<label for="i7">Correo</label>
+							<label for="i7">*Correo</label>
 						</div>
 					 </div>
 						

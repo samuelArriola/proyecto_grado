@@ -1,24 +1,13 @@
 <?php
-
+session_start(); 
 include("../config/conexion.php");
-
 $item = $_GET['id'];
     $query = "SELECT DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip FROM inex_proyectos WHERE item_proy ='$item'";
     $result = mysqli_query($con,$query); 
-
-
     while ($row = mysqli_fetch_array($result)) {
         $fecha_i= $row['fecha_ip'];
         $fecha_f= $row['fecha_fp'];
     }
-    
-
-session_start(); 
-
-$_SESSION["IDEN"];
-$_SESSION["NOMB"];
-$_SESSION["ROLE"];
-
 if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
 ?>
 
@@ -55,7 +44,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
         <div class="input-field col s12">
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
             <input placeholder="Ingrese el nombre de la actividad" name="nombre_act" id="nombre_act"   maxlength="240" autofocus type="text" class="validate caracteresEpesiales" required >
-            <label for="nombre_act" >* Nombre da la Actividad</label>
+            <label for="nombre_act" >* Nombre de la Actividad</label>
         </div>
         <div class="input-field col s12">
             <textarea  placeholder="Describa la actividad" name="descripcion_a" id="descripcion_a" type="text" class="caracteresEpesiales validate materialize-textarea" required></textarea>
@@ -74,7 +63,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
         </div>
         <div class="input-field col s12">
             <input placeholder="Ingrese el valor de la actividad" name="valor" id="valor" type="number" class="validate caracteresEpesiales" required>
-            <label for="valor" >* Valor da la Actividad</label>
+            <label for="valor" >* Valor de la Actividad</label>
         </div>
         <div class="input-field col s12">
             <button class="btn orange" type="" id="insertar_a">Agregar</button>

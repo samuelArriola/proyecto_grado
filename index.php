@@ -1,6 +1,4 @@
- 
- 
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -32,14 +30,14 @@
 					<content>Acceder</content>
 				</h1>
 				<div id="name_app" class="text-normal">
-					<content>Ir a </content>
+					<content>INEX</content>
 				</div>
 			</div>
 			<div class="col s12 form">
 				<div class="row">
 					<div id="divnameuser">
 						<div class="col s12 input-field" >
-							<input type="text" name="nameuser" id="nameuser" class="validate" required>
+							<input type="text" name="nameuser" id="nameuser" class="validate" autofocus required>
 							<label for="nameuser">Nombre de usuario</label>
 						</div>
 						<div id="msgError1" class="col error s12 red-text">
@@ -64,14 +62,14 @@
 					<content>Acceder</content>
 				</h1>
 				<div id="name_app" class="text-normal">
-					<content>Ir a </content>
+					<content>INEX </content>
 				</div>
 			</div>
 			<div class="col s12 form">
 				<div class="row">	
 					<div id="divpassU">
 						<div class="col s12 input-field " >
-							<input type="password" name="nameuser" id="passU">
+							<input type="password" name="nameuser" id="passU" >
 							<label for="passU">Contraseña</label>
 						</div>
 						<div id="msgErrorpss" class="col error s12 red-text">
