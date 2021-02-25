@@ -8,13 +8,13 @@
 
      while($row=mysqli_fetch_array($resul)){
           $estado_e = $row['estado_e'];
-          $res = "<li title='' class='material-icons '>done</li>";e; color:#999999; opacity:0.9;' >delete</li>";
-
-          }
+          $res = "<li title='' class='material-icons '>done</li>";
           $res2="<li title='Eliminar' class='material-icons'><a class='hoverable  modal-trigger  red-text' href='#eliminarEvidencia' onclick=\"recibeIdEvi('".$row['id_e']."','".$row['ruta_e']."')\" >delete</a></li>";
           if ($estado_e == 1) {
                $res = "<li title='visto' class='material-icons green-text '>done_all</li>";
-               $res2="<li title='Eliminar'  class='material-icons' style='pointer-events:non
+               $res2="<li title='Eliminar'  class='material-icons' style='pointer-events:none; color:#999999; opacity:0.9;' >delete</li>";
+
+          }
 
           $tabla.="
            <tr>
