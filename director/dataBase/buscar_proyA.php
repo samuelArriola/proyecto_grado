@@ -1,4 +1,7 @@
-<?php    
+<?php  
+      session_start(); 
+
+       $dep_u = $_SESSION["DEP"];  
        $icon_estado = array('0' => '<i class="material-icons">edit</i>',
        '1' => '<i class="material-icons">send</i>',
        '2' => '<i class="material-icons">check_circle</i>',
@@ -20,11 +23,11 @@
     //    $q=4;
        $dos = 2;
     
-       $sql = "SELECT * FROM inex_proyectos WHERE esta_proy ='$dos'  ORDER BY item_proy DESC "; 
+       $sql = "SELECT * FROM inex_proyectos WHERE esta_proy ='$dos' AND (item_dep = '$dep_u' OR item_dep = '3')  ORDER BY item_proy DESC "; 
 
        if(isset($_POST['dato'])){
           $bucador=$_POST['dato'];
-         $sql = "SELECT * FROM inex_proyectos WHERE  esta_proy ='$dos' AND	nomb_proy LIKE '%$bucador%' ORDER BY item_proy DESC "; 
+         $sql = "SELECT * FROM inex_proyectos WHERE  esta_proy ='$dos' AND	nomb_proy LIKE '%$bucador%' AND (item_dep = '$dep_u' OR item_dep = '3') ORDER BY item_proy DESC "; 
        }
        $resul=mysqli_query($con,$sql);
 

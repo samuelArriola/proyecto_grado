@@ -218,7 +218,7 @@ function corregirProyecto(estado) {
         comentario_p: $('#comentarioProyecto').val()
     }
 
-    if (datos_c.comentario_p == "") {
+    if (isEmpty(datos_c.comentario_p)) {
         M.toast({ html: 'Comentarios Vacío, por favor Complete el campos' })
     } else {
         $.ajax({
