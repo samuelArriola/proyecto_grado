@@ -21,7 +21,7 @@
 	
 
 	include("../config/conexion.php");
-	$sql = "select item_proy, nomb_proy, desc_proy, jefe_proy, esta_proy, visto, item_dep, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip , DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, comentarios_p
+	$sql = "select item_proy, nomb_proy, desc_proy, jefe_proy, esta_proy, visto, item_dep, liderAcargo, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip , DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, comentarios_p
 	,(select concat(nomb_usua,' ',apel_usua) from inex_usuarios where iden_usua = a.jefe_proy) AS responsable, a.esta_proy
 	from inex_proyectos as a where a.item_proy = '".$item."'";
 	$rs = mysqli_query($con, $sql); 
@@ -103,8 +103,12 @@
     </div>
 	
 	<div class="input-field col s12">
-	<b>Lider a cargo:</b> 
+	<b>Coordinador a cargo:</b> 
 	   <h6><?php echo $row["responsable"] ?></h6>
+	</div>
+	<div class="input-field col s12">
+	<b>Lider a cargo:</b> 
+	   <h6><?php echo $row["liderAcargo"] ?></h6>
 	</div>
 
 		<?php if($estado_proyecto==2){ ?>

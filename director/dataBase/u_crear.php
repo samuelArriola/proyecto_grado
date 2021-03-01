@@ -3,13 +3,14 @@
 
  $nombre = $_POST['nombre_u'];
  $apellido = $_POST['apellido_u'];
- $cedula = $_POST['cedula_u'];
+ $type_usersc = $_POST['type_users'];  
+ $cedula = $_POST['cedula_u']; 
  $correo = $_POST['correo_u'];
  $dep_u = $_POST['dep_u'];
  
   
-  $query="INSERT INTO inex_usuarios(iden_usua, nomb_usua, apel_usua, correo, item_dep ) 
-  VALUES ('$cedula','$nombre','$apellido','$correo','$dep_u')";
+  $query="INSERT INTO inex_usuarios(iden_usua, nomb_usua, apel_usua, correo, role_usua, item_dep ) 
+  VALUES ('$cedula','$nombre','$apellido','$correo','$type_usersc','$dep_u')";
   $resul=mysqli_query($con,$query); 
 
 

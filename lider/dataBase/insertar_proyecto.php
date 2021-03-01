@@ -4,6 +4,7 @@
  $descripcion=$_POST['descripcion'];
  $iden_lider=$_POST['iden_lider'];
  $dependencia=$_POST['dependencia'];
+ $liderAcargo=$_POST['liderAcargo']; 
  $fecha_ip=$_POST['fecha_ip'];
  $fecha_fp=$_POST['fecha_fp'];
  $cero= 0;
@@ -12,8 +13,8 @@
 
 include '../../config/conexion.php'; 
 
-    $query="INSERT INTO inex_proyectos(nomb_proy,desc_proy,jefe_proy,visto,vistoL,item_dep,fecha_ip,fecha_fp,comentarios_p)
-    VALUES('$nombre_proyec','$descripcion','$iden_lider','$cero','$uno','$dependencia','$fecha_ip','$fecha_fp','$comentario_p')"; 
+    $query="INSERT INTO inex_proyectos(nomb_proy, desc_proy, jefe_proy, visto,vistoL, item_dep,liderAcargo, fecha_ip,fecha_fp,comentarios_p)
+    VALUES('$nombre_proyec','$descripcion','$iden_lider','$cero','$uno','$dependencia','$liderAcargo','$fecha_ip','$fecha_fp','$comentario_p')"; 
 
     $resul=mysqli_query($con,$query);
 

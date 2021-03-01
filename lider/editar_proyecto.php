@@ -1,6 +1,4 @@
 <?php
-	
-	
 	$item = $_GET['id'];
 	$visto=0;
 	$vistoL=0;
@@ -20,14 +18,17 @@
 	'3' => 'Corregir');
 
 	include("../config/conexion.php");
-	$sql = "select item_proy, nomb_proy, desc_proy, jefe_proy, esta_proy, visto, item_dep, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip , DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, comentarios_p
+	$sql = "select item_proy, nomb_proy, desc_proy, jefe_proy, esta_proy, visto, item_dep, liderAcargo, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip , DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, comentarios_p
 	,(select concat(nomb_usua,' ',apel_usua) from inex_usuarios where iden_usua = a.jefe_proy) AS responsable, a.esta_proy
 	from inex_proyectos as a where a.item_proy = '".$item."'";
 	$rs = mysqli_query($con, $sql); 
 
 	//muestra las independencias
 	$mostrar_i = "SELECT * FROM inex_dependencias";
-	$resul_mi = mysqli_query($con,$mostrar_i);
+	$resul_mi = mysqli_query($con,$mostrar_i); 
+
+	$query = "SELECT  * FROM inex_usuarios WHERE role_usua = 'L' ";
+    $resul_correo = mysqli_query($con,$query);  
 
 	session_start(); 
 
@@ -35,8 +36,17 @@
 	$_SESSION["NOMB"];
 	$_SESSION["ROLE"];
 
-	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
+	//botones modificables 
+	$eviarProyecto = "<a class='btn orange modal-trigger' href='#confirmP' >Enviar Proyecto</a>";
+	$editarProyecto = "<button class='btn orange' id='actualizar' >Actualizar</button>";
+	$eliminarProyecto = "<a class='btn red modal-trigger ' id='eliminar_p' href='#modal3'>eliminar</a>";
 
+	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C" || $_SESSION["ROLE"] == "L"){ 
+		if ($_SESSION["ROLE"] == "L") {
+			$eviarProyecto = "";
+			$editarProyecto = "";
+			$eliminarProyecto = "";
+		}
 ?>
 
 <html> 
@@ -105,21 +115,36 @@
           <label for="datepicker2"><b style = "color: black">* Fecha Final</b></label>
         </div>
 
-	<div class="col s12"> 
+	  <div class="col s12"> 
          <b>Escoja la dependencia a la que pertenece el proyecto</b>
         <select class="browser-default" name="dependencia" id="dependencia">
 		<?php 
 		while ($row_mi=mysqli_fetch_array($resul_mi)) {
 			$resultado="<option value='".$row_mi['item_dep']."' > ".$row_mi['nombre_dep']."</option>";
-
+            
 			if ($row["item_dep"]==$row_mi['item_dep']) { 
-			$resultado="<option value='".$row_mi['item_dep']."' selected > ".$row_mi['nombre_dep']."</option>";
+			 $resultado="<option value='".$row_mi['item_dep']."' selected > ".$row_mi['nombre_dep']."</option>";
 			}
 			echo $resultado;
 		}
 		?>
         </select>
-    </div>
+    </div> 
+
+	<div class="col s12"> 
+         <label>* Lider a carga</label>
+             <select class="browser-default"  name="" id="liderAcargoA">
+               <?php 
+                  while($row_co=mysqli_fetch_array($resul_correo)){
+					$resultado="<option value='".$row_co['iden_usua']."' > ".$row_co['correo']."</option>";
+					if($row['liderAcargo'] == $row_co['iden_usua']){
+					  $resultado="<option value='".$row_co['iden_usua']."' selected > ".$row_co['correo']."</option>";
+					}
+					echo $resultado;
+				  }    
+               ?>
+              </select>
+     </div>
 	
 	<div class="input-field col s12">
 	<b>Lider a cargo:</b> 
@@ -130,12 +155,13 @@
 	<div class="center">
         <?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
 		  <button class="btn orange" id="actualizar" disabled='disabled' >Actualizar</button> 
-		  <?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
-			   <button class="btn orange" id="actualizar" >Actualizar</button>
-			   <?php if($estado_proyecto==0){ ?>	
-				 <a class="btn red modal-trigger " id="eliminar_p" href="#modal3">eliminar</a> 
-				<?php } ?> 
-		  <?php } ?> 
+		  <?php } else if($estado_proyecto==0 || $estado_proyecto==3){ 
+			  	  echo $editarProyecto ;
+			  ?>  
+			   <?php if($estado_proyecto==0){	
+				  echo $eliminarProyecto;
+				} ?> 
+			  <?php } ?> 
 		  <?php if($estado_proyecto==3){ ?>	
 			<a class="hoverable  modal-trigger red btn hide-on-med-and-up" href="#cometariosP">COMENTARIO</a>			
 		<?php } ?>
@@ -205,9 +231,9 @@
 	<div class="center">
 		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
 			<a class="btn disabled modal-trigger" href="#confirmP"   >Enviar Proyecto</a> 
-		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
-				<a class="btn orange modal-trigger" href="#confirmP"  >Enviar Proyecto</a> 
-		<?php } ?> 		
+		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ 
+			 echo $eviarProyecto ;
+		} ?> 		
 	</div>
 
 	

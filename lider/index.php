@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 include("../config/conexion.php");
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C"  || $_SESSION["ROLE"] == "L"){
 ?>
 <!-- <!DOCTYPE html> -->
   <html> 

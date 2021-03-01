@@ -96,8 +96,10 @@ $(document).ready(function() {
                                 if (response.role == 'D') {
                                     console.log('director');
                                     location.href = 'director/index.php';
-                                } else if (response.role == 'L') {
+                                } else if (response.role == 'C') {
                                     console.log('lider');
+                                    location.href = 'lider/index.php';
+                                } else if (response.role == 'L') {
                                     location.href = 'lider/index.php';
                                 }
                             }

@@ -37,16 +37,20 @@ $(document).ready(function() {
                 apellido_u: $('#i2').val(),
                 cedula_u: $('#i9').val(),
                 correo_u: $('#i7').val(),
-                dep_u: $('#dep_u').val()
+                dep_u: $('#dep_u').val(),
+                type_users: $('#type_users').val()
             }
             //  console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
+
 
         if (isEmpty(datos_u.nombre_u)) {
             return M.toast({ html: 'Nombre de usuario vacío, por favor complete todos los campos' });
         } else if (isEmpty(datos_u.apellido_u)) {
             return M.toast({ html: 'Apellido de usuario vacío, por favor complete el campo', classes: 'rounded' });
+        } else if (isEmpty(datos_u.type_users)) {
+            return M.toast({ html: 'Tipo de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else if (isEmpty(datos_u.cedula_u)) {
-            return M.toast({ html: 'Identificación de usuario vacío, por favor complete el campo', classes: 'rounded' });
+            return M.toast({ html: 'Cedula de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else if (isEmpty(datos_u.correo_u)) {
             return M.toast({ html: 'Correo de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else {

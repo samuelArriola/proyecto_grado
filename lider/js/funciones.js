@@ -192,6 +192,7 @@ $(document).ready(function() {
             descripcion: $("#descripcion").val(),
             fecha_ipro: $("#datepickerE1").val(),
             fecha_fpro: $("#datepickerE2").val(),
+            liderAcargo: $("#liderAcargoA").val()
 
         }
 
@@ -218,9 +219,10 @@ $('#btn_create_p').click((e) => {
         nombre_proyec: document.querySelector('#nombre_proye').value,
         descripcion: document.querySelector('#descripcion').value,
         dependencia: document.querySelector('#dependencia').value,
+        liderAcargo: document.querySelector('#liderAcargo').value,
         iden_lider: document.querySelector('#iden_lider').value,
         fecha_ip: document.querySelector('#datepicker1').value,
-        fecha_fp: document.querySelector('#datepicker2').value
+        fecha_fp: document.querySelector('#datepicker2').value,
     }
 
     if (datos.nombre_proyec == null || datos.nombre_proyec == '') {
@@ -232,6 +234,8 @@ $('#btn_create_p').click((e) => {
     } else if (datos.fecha_fp == '' || datos.fecha_fp == null) {
         return M.toast({ html: 'Fecha final de proyecto vacia, por favor seleccione una', classes: 'rounded' });
     } else if (datos.dependencia == "" || datos.dependencia == null) {
+        return M.toast({ html: 'No se ha seleccionado dependencia, por favor seleccione una', classes: 'rounded' });
+    } else if (datos.liderAcargo == "" || datos.liderAcargo == null) {
         return M.toast({ html: 'No se ha seleccionado dependencia, por favor seleccione una', classes: 'rounded' });
     } else if (datos.fecha_ip > datos.fecha_fp) {
         return M.toast({ html: 'Corregir fecha inicial: La fecha inicial no puede ser mayor a la fecha final', classes: 'rounded' });

@@ -63,12 +63,21 @@
 							<input name="apellido" id="i2" type="text" class="validate caracteresEpesiales" required>
 							<label for="i2">*Apellido</label>
 						</div>
+					
+						<div class="input-field col s12"  >
+							<select id="type_users" class="validate" required>
+							<option value="" disabled selected>Selecione una opción</option>
+							<option value="C">Coordinador</option>
+							<option value="L">Lider</option>
+							</select>
+							<label>Tipo de usuario</label>
+						</div>
 						<div class="input-field col m12 s12">
 							<input name="cedula" id="i9" type="number" class="validate caracteresEpesiales" min="" max="" required>
 							<label for="i9">*Cedula</label>
 						</div>
 						<div class="input-field col m12 s12">
-							<input name="correo" id="i7" type="email" class="validate " required>
+							<input name="correo" id="i7" type="email" class="validate caracteresEpesiales" required>
 							<label for="i7">*Correo</label>
 						</div>
 					 </div>

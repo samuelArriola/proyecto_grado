@@ -8,7 +8,7 @@ $item = $_GET['id'];
         $fecha_i= $row['fecha_ip'];
         $fecha_f= $row['fecha_fp'];
     }
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C" ||  $_SESSION["ROLE"] == "L"){
 ?>
 
 <!-- <!DOCTYPE html> -->

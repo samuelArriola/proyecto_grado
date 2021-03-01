@@ -14,7 +14,14 @@
 	'1' => 'Enviado',
 	'2' => 'Aprobado',
 	'3' => 'Corregir');
-	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){    
+
+	$creaP = "<a  class='btn-floating btn-large waves-effect waves-light orange  tooltipped' 
+	 href='crear_proyecto.php' data-position='left'  data-tooltip='CREAR PROYECTO' 
+	  id='flotante' ><i class='material-icons'>add</i></a>";
+	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C" ||  $_SESSION["ROLE"] == "L" ){  
+		 if($_SESSION["ROLE"] == "L") { 
+			$creaP ="";
+		    }   
 ?>
 
 <html> 
@@ -35,18 +42,18 @@
 
 <div class="teal-text">REGISTROS DE PROYECTOS</div> <br>
 
- <div class="row">
- <label>MOSTRAR:</label> 
- <div class="input-field col s12">
-  <select class="browser-default" id="buscar" style="position: relative; left :-15px">
-    <option value="TODOS" selected>TODOS</option>
-    <option value="APROBADOS">APROBADOS</option>
-    <option value="CONSTRUCCION">CONSTRUCCIÓN</option>
-    <option value="CORREGIR">CORREGIR</option>
-	<option value="ENVIADOS">ENVIADOS</option>
-  </select>
-</div>
- </div> 
+	<div class="row">
+	<label>MOSTRAR:</label> 
+		<div class="input-field col s12">
+		<select class="browser-default" id="buscar" style="position: relative; left :-15px">
+			<option value="TODOS" selected>TODOS</option>
+			<option value="APROBADOS">APROBADOS</option>
+			 <option value="CONSTRUCCION">CONSTRUCCIÓN</option>
+			<option value="CORREGIR">CORREGIR</option>
+			<option value="ENVIADOS">ENVIADOS</option>
+		</select>
+		</div>
+	</div> 
 
 	
 
@@ -75,10 +82,14 @@
 </div>
 </div>
 
-<div class="fixed-action-btn" > 
-<a  class="btn-floating btn-large waves-effect waves-light orange  tooltipped"  href="crear_proyecto.php" data-position="left"  data-tooltip="CREAR PROYECTO"  id="flotante" ><i class="material-icons">add</i></a>
-</div>
+
+ <div class="fixed-action-btn" > 
+ 	<?php echo $creaP ?>
+ </div> 
+
   
+
+
 </div>
 
 

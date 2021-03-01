@@ -4,7 +4,13 @@
   $_SESSION["NOMB"];
   $_SESSION["ROLE"];
   
-  if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
+  if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C" || $_SESSION["ROLE"] == "L" ){
+    if ($_SESSION["ROLE"] == "C") {
+      $type_user = 'COORDINADOR' ; 
+    } else if($_SESSION["ROLE"] == "L") {
+      $type_user = 'LIDER';
+    }
+    
 ?>
 
 <div class="navbar-fixed">
@@ -15,7 +21,7 @@
     <a href="" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
     <li><a class="dropdown-trigger" href="" data-target="dropdown1">
-        LIDER
+        <?php  echo $type_user; ?>
         <i class="material-icons right">arrow_drop_down</i>
         </a> 
     </li>
@@ -39,7 +45,7 @@
 
 <ul id="dropdown1" class="dropdown-content dropdown-menu">
   <li><a href="#modalUsuario" class="modal-trigger" Onclick="">
-    <i class="material-icons black-text " >account_circle</i><?php echo $_SESSION["NOMB"]; ?></a></li>
+    <i class="material-icons black-text " >account_circle</i><?php echo $_SESSION["NOMB"];?></a></li>
   <li class="divider"></li>
   <li><a href="../config/cerrar.php"><i class="material-icons black-text">lock</i>Cerrar Sesión</a></li>
 </ul>
@@ -48,7 +54,7 @@
 <ul  id="mobile-demo" class="sidenav">
 <li style="padding-left: 10px; background-color: #757575;">
   <div style="color: white; font-size: 0.8em; font-weight: 500;">
-  <?php echo $_SESSION["NOMB"]; ?>
+  <?php echo $_SESSION["NOMB"]; ?>-  <?php  echo $type_user; ?>
   </div>
 <li><a href="lista_proyectos.php"  style="padding-left: 16px;">
 	<i class="material-icons teal-text ">account_balance</i>Proyectos</a>
