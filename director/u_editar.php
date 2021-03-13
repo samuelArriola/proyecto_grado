@@ -54,6 +54,13 @@
 							<input name="apellido" value="<?php echo $datos['apel_usua'] ?>" id="e2" type="text" class="validate caracteresEpesiales" required>
 							<label for="e2">*Apellido</label>
 						</div>
+						<div class="input-field col s12"  >
+							<select id="type_users" class="validate" required>
+							<option value="C">Coordinador</option>
+							<option value="L">Lider</option>
+							</select>
+							<label>Tipo de usuario</label>
+						</div>
 						<div class="input-field col m12 s12">
 							<input name="correo" value="<?php echo $datos['correo'] ?>" id="e7" type="email" class="validate caracteresEpesiales" required>
 							<label for="e7">*Correo</label>

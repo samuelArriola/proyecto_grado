@@ -1,3 +1,4 @@
+
  <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,6 +43,14 @@
 						</div>
 						<div id="msgError1" class="col error s12 red-text">
 						</div>
+						<div class="col m7 s8 offset-m3 offset-s3 ">
+							<select class="browser-default" id="Tdependencia" style="position: relative; left :-15px">
+								<option value="D" selected>Director</option>
+								<option value="C">Coordinador</option>
+								<option value="L">Lider</option>
+							</select>
+						</div>
+
 					</div>	
 				</div>
 			</div>
@@ -78,8 +87,9 @@
 				</div>
 			</div>
 			<div class="col s12 " style="position: relative; top: -18px">
-				<div class="center">
+				<div class="center" >
 					<button id="btnPass"  class="btn-flat btn-text btn-radius orange darken-2 white-text ">Siguiente</button>
+					<span id = "confirPass"></span>
 				</div>
 			</div>
 		</div>
@@ -89,5 +99,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/login/materialize-login.min.js"></script>
   <script src="js/login/app.js"></script>
+  <script>
+
+  </script>
 </body> 
 </html>

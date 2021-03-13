@@ -27,8 +27,14 @@
 	$mostrar_i = "SELECT * FROM inex_dependencias";
 	$resul_mi = mysqli_query($con,$mostrar_i); 
 
-	$query = "SELECT  * FROM inex_usuarios WHERE role_usua = 'L' ";
-    $resul_correo = mysqli_query($con,$query);  
+	//Muestras todos los lideres
+	$queryLider = "SELECT u.iden_usua, u.nomb_usua, u.apel_usua, d.item_rol, d.item_dep, u.correo ,(SELECT nombre_dep FROM inex_dependencias WHERE item_dep = d.item_dep) as nombre_dep
+	FROM inex_usuarios u, inex_usuarios_roles d WHERE u.iden_usua = d.iden_usua AND d.item_rol ='L'";
+	$resul_lider = mysqli_query($con,$queryLider);
+
+	// $query = "SELECT  * FROM inex_usuarios as a, inex_proyectos_usuarios as b WHERE a.iden_usua = b.iden_usua AND b.item_proy = '".$item."'";
+  	 $query= "SELECT u.iden_usua, u.nomb_usua, u.apel_usua, d.item_rol, u.correo FROM inex_usuarios u, inex_proyectos_usuarios d WHERE u.iden_usua = d.iden_usua AND d.item_rol ='L' AND d.item_proy ='$item' ";
+	$resul_correo = mysqli_query($con,$query);  
 
 	session_start(); 
 
@@ -132,9 +138,12 @@
     </div> 
 
 	<div class="col s12"> 
-         <label>* Lider a carga</label>
-             <select class="browser-default"  name="" id="liderAcargoA">
-               <?php 
+        <br> <b>* Lider a carga</b> <BR></BR>
+		 <div class="center">
+			 <a class='btn orange modal-trigger' href='#aggLider' onclick = "mostrarLiderP(<?php echo $item ?>)" >AGG LIDER</a>
+		 </div>
+            <select class="browser-default"  name="" id="liderAcargoA">
+               	<?php 
                   while($row_co=mysqli_fetch_array($resul_correo)){
 					$resultado="<option value='".$row_co['iden_usua']."' > ".$row_co['correo']."</option>";
 					if($row['liderAcargo'] == $row_co['iden_usua']){
@@ -143,11 +152,11 @@
 					echo $resultado;
 				  }    
                ?>
-              </select>
+            </select>
      </div>
 	
 	<div class="input-field col s12">
-	<b>Lider a cargo:</b> 
+	<b>Coordinador a cargo:</b> 
 	   <input disabled value = "<?php echo $row["responsable"] ?>" name="lider_proye" id="lider_proye" type="text" class="validate">
 	</div>
 	
@@ -281,7 +290,7 @@
 	 </div> 
 	</div>
     </div>
-
+	
    <!-- Modal Structure elimina Evidencia  -->
 	<div id="eliminarEvidencia" class="modal">
     <div class="modal-content">
@@ -294,7 +303,20 @@
 	 </div> 
 	</div>
     </div>
-
+	
+	<!-- Modal Structure elimina Evidencia  -->
+	<div id="eliminarLiderP" class="modal">
+		<div class="modal-content">
+		<input  id="IdEvi" type="hidden">
+		<input  id="IdRuta" type="hidden">
+		<h5 class="center" >¿Estás seguro de eliminar este lider?</h5>
+			<div class="center">
+			<button   id="eliminarEvidenciasA" type="button" class="btn-small red modal-close">Si</button>
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+			</div> 
+		</div>
+	</div>
+		
 	<!-- Modal para agregar arcivos -->
 	<div id="modal2" class="modal ">
 		<div class="modal-content" >
@@ -343,6 +365,52 @@
 		  </tbody>
 		</table>	 
 		</div> <br> <br>
+    </div>
+
+	<!-- Agregar los lideres  -->
+	<div id="aggLider" class="modal ">
+		<div class="modal-content" >
+		<div class="center"><i class="large material-icons teal-text">add</i></div>
+		 <div class="center"><h4 class="">AGREGAR LIDERES</h4></div> <br> 
+		<form action="" method="" enctype="multipart/form-data" id="" >
+			<div class="row">  
+			<span class="center-align" style="opacity: 0.5; position:relative; top: -15px" >&nbsp;&nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span> <br>
+				<div class="input-field col s6 offset-s3">
+				<select class="browser-default"  name="" id="lideProyecto">
+					<option value="" disabled selected>Seleccione</option>
+					<?php while ($row_li=mysqli_fetch_array($resul_lider)) {?>
+					<option value="<?php echo $row_li['iden_usua']?>"><?php echo $row_li['correo'] ?></option>
+					<?php } ?>    
+				</select>
+				</div>
+			</div>
+			  <div class="center">
+			  	  <button class="btn orange" id="aggLiderP"  type="button" onclick="">Agregar</button>
+				  <a href="#!" onclick="" class=" modal-close waves-effect waves-green btn-flat white-text red ">Atras</a>
+			  </div>
+		</form>
+		</div> <br><br> 
+
+
+		<div class="center"><h4 class="">LIDERES A CARGO</h4></div>
+
+		<div class=" section">
+		<table class="container responsive-table">
+			<thead>
+				<tr>
+					<th>Cedula</th>
+					<th>Nombre</th>
+					<th>Correo</th>
+					<th>Lista  de Opciones</th>			
+				</tr>
+		   </thead>
+		   <tbody id="mostrarLiderP">
+			
+		  </tbody>
+		</table>	 
+		</div> <br> <br>
+
+	 
     </div>
 
 

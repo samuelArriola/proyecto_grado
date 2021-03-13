@@ -5,7 +5,8 @@ include("../config/conexion.php");
 $mostrar_i = "SELECT * FROM inex_dependencias";
 $resul_mi = mysqli_query($con,$mostrar_i);
 
-$query = "SELECT  * FROM inex_usuarios WHERE role_usua = 'L' ";
+$query = "SELECT u.iden_usua, u.nomb_usua, u.apel_usua, d.item_rol, d.item_dep, u.correo ,(SELECT nombre_dep FROM inex_dependencias WHERE item_dep = d.item_dep) as nombre_dep
+FROM inex_usuarios u, inex_usuarios_roles d WHERE u.iden_usua = d.iden_usua AND d.item_rol ='L'";
 $resul_correo = mysqli_query($con,$query);
   
 if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C"){

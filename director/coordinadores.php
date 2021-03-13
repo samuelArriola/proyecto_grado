@@ -66,7 +66,6 @@
 					
 						<div class="input-field col s12"  >
 							<select id="type_users" class="validate" required>
-							<option value="" disabled selected>Selecione una opción</option>
 							<option value="C">Coordinador</option>
 							<option value="L">Lider</option>
 							</select>

@@ -3,6 +3,7 @@ $('#loarU').hide();
 
 
 $(document).ready(function() {
+    let rol;
     let nombre;
     let id;
     let dominio;
@@ -36,6 +37,7 @@ $(document).ready(function() {
                     $('#form2').show();
                     id = obj.data.entidad['EmployeeNumber'];
                     $("#passU").focus();
+
                 }
 
             })
@@ -54,6 +56,7 @@ $(document).ready(function() {
         $('#loarU').show();
         let usuPass = nombre[0];
         let pass = $('#passU').val();
+        rol = $('#Tdependencia').val();
 
 
         if (isEmpty(pass)) {
@@ -80,19 +83,23 @@ $(document).ready(function() {
                     $('#msgErrorpss').html('Contraseña Incorrecta');
                 } else if (nombreO2 == "OK") {
                     //validació de base de datos nativa 
-                    $('#capa_resultados').html("Espere un momento");
                     $.ajax({
                         url: 'config/crear_sessiones.php',
                         dataType: "json",
                         type: 'POST',
-                        data: { iden: id }, //Aqui se especifica el parametro a enviar
+                        data: {
+                            iden: id,
+                            role: rol
+                        }, //Aqui se especifica el parametro a enviar
                         success: function(response) {
                             console.log(response);
+
                             // Aqui muestra los resultados
                             if (response.error === true) {
-                                $('#capa_resultados').html(response.msg);
+                                let btnBack = `<button onclick=" $('#form1').show(); $('#form2').hide(); $('#msgErrorpss').html('');"  class="btn-flat btn-text btn-radius orange darken-2 white-text">Atras</button>`;
+                                $('#msgErrorpss').html(response.msg);
+                                $('#confirPass').html(btnBack);
                             } else {
-                                $('#capa_resultados').html('Nombre:' + response.nomb + ', Role:' + response.role);
                                 if (response.role == 'D') {
                                     console.log('director');
                                     location.href = 'director/index.php';

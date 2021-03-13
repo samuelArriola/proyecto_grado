@@ -5,7 +5,6 @@
      $id_p=$_GET['id_proy'];
 
      $query="DELETE FROM inex_actividades WHERE item_acti='$id'";
-
      $resul=mysqli_query($con,$query);
 
      if(!$resul){

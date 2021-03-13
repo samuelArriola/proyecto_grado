@@ -210,6 +210,31 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    //AGREGAR LIDER
+    $("#aggLiderP").click(function(e) {
+        let lideProyecto = $("#lideProyecto").val();
+        let id_proy = $("#id_pro").val()
+
+        if (lideProyecto == "" || lideProyecto == null) {
+            M.toast({ html: 'Lider a cargo vacio, por favor selecione un' });
+        } else {
+
+            $.ajax({
+                type: "POST",
+                url: "dataBase/insertarLider.php",
+                data: {
+                    lideProyecto,
+                    id_proy
+                },
+                success: function(response) {
+                    M.toast({ html: response })
+                    mostrarLiderP(id_proy);
+                }
+            });
+        }
+        e.preventDefault();
+    })
+
 });
 
 $('#btn_create_p').click((e) => {
@@ -258,6 +283,23 @@ $('#btn_create_p').click((e) => {
     }
 
 })
+
+
+function mostrarLiderP(id_proy) {
+    console.log('mostrar lider');
+    let id_proye = id_proy;
+    $.ajax({
+        url: 'dataBase/mostrarLiderP.php',
+        type: 'POST',
+        data: { id_proye },
+        success: (response) => {
+            let mostrarLiderP = document.getElementById('mostrarLiderP');
+            mostrarLiderP.innerHTML = response;
+
+        }
+    })
+
+}
 
 //FUNCION VISTO PROYECTOS EN CONSTRUCCIÓN 
 function visto(id_p, estado, estadoL) {
