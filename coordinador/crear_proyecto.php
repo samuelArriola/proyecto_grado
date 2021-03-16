@@ -6,7 +6,7 @@ $mostrar_i = "SELECT * FROM inex_dependencias";
 $resul_mi = mysqli_query($con,$mostrar_i);
 
   
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C"){
 ?>
 <!-- <!DOCTYPE html> -->
   <html> 

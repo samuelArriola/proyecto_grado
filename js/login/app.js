@@ -105,7 +105,7 @@ $(document).ready(function() {
                                     location.href = 'director/index.php';
                                 } else if (response.role == 'C') {
                                     console.log('lider');
-                                    location.href = 'lider/index.php';
+                                    location.href = 'coordinador/index.php';
                                 } else if (response.role == 'L') {
                                     location.href = 'lider/index.php';
                                 }

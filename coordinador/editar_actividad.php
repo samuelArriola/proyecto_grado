@@ -21,7 +21,7 @@ while ($row = mysqli_fetch_array($rs)) {
     $fecha_ia= $row['fecha_ia'];
     $fecha_fa= $row['fecha_fa'];
 } 
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C"){
 ?>
 <!-- <!DOCTYPE html> -->
   <html> 

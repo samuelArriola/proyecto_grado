@@ -17,7 +17,7 @@ function obtenerDAt(datos){
     })    
     
 }
-/* 
+
 $("#buscar").change(function(){
     var valorBusqueda;
     if($('select[id=buscar]').val()=='APROBADOS'){
@@ -34,7 +34,7 @@ $("#buscar").change(function(){
 
     obtenerDAt(valorBusqueda);
     //alert($('select[id=buscar]').val());
-}); */
+});
 
 /*$(document).on('keyup','#buscar',function(){
     var valorBusqueda=$(this).val();

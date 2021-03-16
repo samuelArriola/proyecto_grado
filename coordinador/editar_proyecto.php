@@ -32,10 +32,6 @@
 	FROM inex_usuarios u, inex_usuarios_roles d WHERE u.iden_usua = d.iden_usua AND d.item_rol ='L'";
 	$resul_lider = mysqli_query($con,$queryLider);
 
-	// $query = "SELECT  * FROM inex_usuarios as a, inex_proyectos_usuarios as b WHERE a.iden_usua = b.iden_usua AND b.item_proy = '".$item."'";
-  	 $query= "SELECT u.iden_usua, u.nomb_usua, u.apel_usua, d.item_rol, u.correo FROM inex_usuarios u, inex_proyectos_usuarios d WHERE u.iden_usua = d.iden_usua AND d.item_rol ='L' AND d.item_proy ='$item' ";
-	$resul_correo = mysqli_query($con,$query);  
-
 	session_start(); 
 
 	$_SESSION["IDEN"];
@@ -47,7 +43,7 @@
 	$editarProyecto = "<button class='btn orange' id='actualizar' >Actualizar</button>";
 	$eliminarProyecto = "<a class='btn red modal-trigger ' id='eliminar_p' href='#modal3'>eliminar</a>";
 
-	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){ 
+	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C"){ 
 
 ?>
 
@@ -89,7 +85,8 @@
 	</div>
     </div>
 	
-    <form id=""> 
+    <form id="">
+	<span style="opacity: 0.5;" >&nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span> 
 	<div class="input-field col s12">
 	<b>Nombre del proyecto:</b> 
 	   <input  type="hidden" value="<?php echo $item ?>" id="id_pro">
@@ -133,8 +130,32 @@
     </div> 
 
 	<div class="col s12"> 
-       <br><br>
-		<div class="teal-text">LIDERES A CARGO</div>
+        <br> <b>* Escoger lideres de apoyo</b> <BR></BR>
+
+		<form action="" method="" enctype="" id="" >
+			<div class="row">  
+				<div class="input-field col s8">
+				<select class="browser-default"  name="" id="lideProyecto">
+					<option value="" disabled selected>Seleccione</option>
+					<?php while ($row_li=mysqli_fetch_array($resul_lider)) {?>
+					<option value="<?php echo $row_li['iden_usua']?>"><?php echo $row_li['nomb_usua']." ".$row_li['apel_usua'] ?></option>
+					<?php } ?>    
+				</select>
+				</div>
+			 <div class="input-field col s4"> 
+			  	 
+			 <?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
+			  	<button class="btn orange" id="aggLiderP"  disabled='disabled' type="button" onclick="">Agregar</button>
+			<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
+			  <button class="btn orange" id="aggLiderP"  type="button" onclick="">Agregar</button>
+			 <?php }?>  
+				   
+			  
+			  </div>
+			</div>
+		</form>
+
+		<div class="teal-text">LIDERES DE APOYO</div>
 
 		<div class=" section">
 		<table class="container responsive-table">
@@ -142,14 +163,15 @@
 				<tr>
 					<th>Cedula</th>
 					<th>Nombre</th>
-					<th>Correo</th>		
+					<th>Correo</th>
+					<th>Lista  de Opciones</th>			
 				</tr>
 		   </thead>
 		   <tbody id="mostrarLiderP">
 			
 		  </tbody>
 		</table>	 
-		</div> <br> 
+		</div> <br> <br>
 		
      </div>
 	
@@ -158,7 +180,22 @@
 	   <input disabled value = "<?php echo $row["responsable"] ?>" name="lider_proye" id="lider_proye" type="text" class="validate">
 	</div>
 	
-	
+	<div class="input-field col s12">
+	<div class="center">
+        <?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
+		  <button class="btn orange" id="actualizar" disabled='disabled' >Actualizar</button> 
+		  <?php } else if($estado_proyecto==0 || $estado_proyecto==3){ 
+			  	  echo $editarProyecto ;
+			  ?>  
+			   <?php if($estado_proyecto==0){	
+				  echo $eliminarProyecto;
+				} ?> 
+			  <?php } ?> 
+		  <?php if($estado_proyecto==3){ ?>	
+			<a class="hoverable  modal-trigger red btn hide-on-med-and-up" href="#cometariosP">COMENTARIO</a>			
+		<?php } ?>
+	</div>
+    </div>
 	</form>
   <?php	} ?>
 </div>
@@ -219,6 +256,14 @@
 	</table></div></div>
 	</div>
 
+	 <!-- botton enviar proyectos -->
+	<div class="center">
+		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
+			<a class="btn disabled modal-trigger" href="#confirmP"   >Enviar Proyecto</a> 
+		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ 
+			 echo $eviarProyecto ;
+		} ?> 		
+	</div>
 
 	
     <?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
@@ -243,8 +288,28 @@
 	</div>
     </div>
 
-	
+	<!--  confirmacion enviar proyecto -->
+	<div id="confirmP" class="modal">
+    <div class="modal-content">
+       <h5 class="center" >¿Estás seguro de enviar este proyecto?</h5>
+	 <div class="center">
+	   <a onclick="visto(<?php echo $item?>, <?php echo $visto?>, <?php echo $vistoL?> ); cambiaEstado(1)" class="btn-small red">Si</a>
+	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+	 </div> 
+	</div>
+    </div>
 
+
+	<!-- Modal Structure -->
+	<div id="modal3" class="modal">
+    <div class="modal-content">
+       <h5 class="center" >¿Estás seguro de eliminar este proyecto?</h5>
+	 <div class="center">
+	   <a href="dataBase/eliminar_proyecto.php?id_p=<?php echo $item ?>" class="btn-small red">Si</a>
+	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+	 </div> 
+	</div>
+    </div>
 	
    <!-- Modal Structure elimina Evidencia  -->
 	<div id="eliminarEvidencia" class="modal">
@@ -259,6 +324,17 @@
 	</div>
     </div>
 	
+	<!-- Modal Structure elimina lider de proyectos  -->
+	<div id="eliminarLiderP" class="modal">
+	<input  id="obtieneIDL" type="hidden">
+		<div class="modal-content">
+		<h5 class="center" >¿Estás seguro de eliminar este lider?</h5>
+			<div class="center">
+			<button  onclick="eliminarLiderP()"  id="eliminarLiderPro" type="button" class="btn-small red modal-close">Si</button>
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+			</div> 
+		</div>
+	</div>
 		
 	<!-- Modal para agregar arcivos -->
 	<div id="modal2" class="modal ">

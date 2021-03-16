@@ -183,10 +183,103 @@ $(document).ready(function() {
         },
     });
 
+    //actualizar PROYECTO
+    $("#actualizar").click(function(e) {
+        const datos = {
+            id: $("#id_pro").val(),
+            nombre_proyec: $("#nombre_proye").val(),
+            dependencia: $("#dependencia").val(),
+            descripcion: $("#descripcion").val(),
+            fecha_ipro: $("#datepickerE1").val(),
+            fecha_fpro: $("#datepickerE2").val(),
+            liderAcargo: $("#liderAcargoA").val()
 
+        }
 
+        if (datos.fecha_ipro > datos.fecha_fpro) {
+            M.toast({ html: 'Corregir fecha inicial: La fecha inicial no puede ser mayor a la fecha final', classes: 'rounded' });
+            console.log(datos.fecha_ipro + "  " + datos.fecha_fpro);
+        } else {
+            $.post('dataBase/actualizar_proyecto.php', datos, function(response) {
+                if (response) {
+                    M.toast({ html: 'Proyecto actualizado', classes: 'rounded' });
+                }
+            });
+        }
+
+        e.preventDefault();
+    });
+
+    //AGREGAR LIDER
+    $("#aggLiderP").click(function(e) {
+        let lideProyecto = $("#lideProyecto").val();
+        let id_proy = $("#id_pro").val();
+
+        if (lideProyecto == "" || lideProyecto == null) {
+            M.toast({ html: 'Lider a cargo vacio, por favor selecione un' });
+        } else {
+
+            $.ajax({
+                type: "POST",
+                url: "dataBase/insertarLider.php",
+                data: {
+                    lideProyecto,
+                    id_proy
+                },
+                success: function(response) {
+                    M.toast({ html: response, classes: 'rounded' })
+                    mostrarLiderP(id_proy);
+                }
+            });
+        }
+        e.preventDefault();
+    })
 
 });
+
+$('#btn_create_p').click((e) => {
+    e.preventDefault();
+
+    const datos = {
+        nombre_proyec: document.querySelector('#nombre_proye').value,
+        descripcion: document.querySelector('#descripcion').value,
+        dependencia: document.querySelector('#dependencia').value,
+        iden_lider: document.querySelector('#iden_lider').value,
+        fecha_ip: document.querySelector('#datepicker1').value,
+        fecha_fp: document.querySelector('#datepicker2').value,
+    }
+
+    if (datos.nombre_proyec == null || datos.nombre_proyec == '') {
+        return M.toast({ html: 'Nombre del proyecto vacio, por favor complete el campo', classes: 'rounded' });
+    } else if (datos.descripcion == null || datos.descripcion == '') {
+        return M.toast({ html: 'Descripcion de proyecto  vacia, por favor complete el campo', classes: 'rounded' });
+    } else if (datos.fecha_ip == '' || datos.fecha_ip == null) {
+        return M.toast({ html: 'Fecha inicial de proyecto vacia, por favor seleccione una', classes: 'rounded' });
+    } else if (datos.fecha_fp == '' || datos.fecha_fp == null) {
+        return M.toast({ html: 'Fecha final de proyecto vacia, por favor seleccione una', classes: 'rounded' });
+    } else if (datos.dependencia == "" || datos.dependencia == null) {
+        return M.toast({ html: 'No se ha seleccionado dependencia, por favor seleccione una', classes: 'rounded' });
+    } else if (datos.fecha_ip > datos.fecha_fp) {
+        return M.toast({ html: 'Corregir fecha inicial: La fecha inicial no puede ser mayor a la fecha final', classes: 'rounded' });
+    } else {
+        $.ajax({
+            url: 'dataBase/insertar_proyecto.php',
+            method: 'POST',
+            data: datos,
+            success: (response) => {
+                M.toast({ html: response });
+
+                setTimeout(tiempo, 1000);
+
+                function tiempo() {
+                    window.location.href = 'lista_proyectos.php';
+                }
+
+            }
+        })
+    }
+
+})
 
 
 function mostrarLiderP(id_proy) {
@@ -203,9 +296,30 @@ function mostrarLiderP(id_proy) {
     })
 }
 
+function recibeIDLider(id_u) {
+    $('#obtieneIDL').val(id_u);
 
+}
 
+function eliminarLiderP() {
+    let id_lider = $('#obtieneIDL').val();
+    let id_proye = $("#id_pro").val()
 
+    $.ajax({
+        url: 'dataBase/eliminaLiderProy.php',
+        type: 'POST',
+        data: {
+            id_lider,
+            id_proye
+        },
+        success: (response) => {
+            M.toast({ html: response, classes: 'rounded' });
+            mostrarLiderP(id_proye);
+
+        }
+    })
+
+}
 
 //FUNCION VISTO PROYECTOS EN CONSTRUCCIÓN 
 function visto(id_p, estado, estadoL) {
@@ -223,6 +337,7 @@ function visto(id_p, estado, estadoL) {
         }
     });
 }
+
 
 function cambiaEstado(estado) {
     // e.preventDefault();  
@@ -253,25 +368,6 @@ function cambiaEstado(estado) {
         });
     }
 }
-
-//CAMBIAR EL ESTADO A VISTO DE LOS PROYECTOS ASIGNADO A LOS LIDERES 
-function estadoLPVvisto(id_pro, id_usua, estado) {
-    console.log(id_pro, id_usua, estado);
-    $.ajax({
-        type: "POST",
-        url: "dataBase/estadoLPVvisto.php",
-        data: {
-            id_pro,
-            id_usua,
-            estado
-        },
-        success: function(response) {
-            console.log(response);
-            // $('#editar_u')[0].reset(); //limpia las casjas de texto
-        }
-    });
-}
-
 
 //SUBIR EVIDENCIA CON AJAX
 function subirEvidenciaA(e) {

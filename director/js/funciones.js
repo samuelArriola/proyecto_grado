@@ -32,23 +32,27 @@ $(document).ready(function() {
     $('#guardar_usuario').click(function(e) {
         e.preventDefault();
 
+        var checked = [];
+        $("input[name='checkTip']:checked").each(function() {
+            checked.push(($(this).attr("value")));
+        });
+
+        console.log(checked);
+
         const datos_u = {
                 nombre_u: $('#i1').val(),
                 apellido_u: $('#i2').val(),
                 cedula_u: $('#i9').val(),
                 correo_u: $('#i7').val(),
                 dep_u: $('#dep_u').val(),
-                type_users: $('#type_users').val()
+                rol_u: checked
+
             }
             //  console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
-
-
         if (isEmpty(datos_u.nombre_u)) {
             return M.toast({ html: 'Nombre de usuario vacío, por favor complete todos los campos' });
         } else if (isEmpty(datos_u.apellido_u)) {
             return M.toast({ html: 'Apellido de usuario vacío, por favor complete el campo', classes: 'rounded' });
-        } else if (isEmpty(datos_u.type_users)) {
-            return M.toast({ html: 'Tipo de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else if (isEmpty(datos_u.cedula_u)) {
             return M.toast({ html: 'Cedula de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else if (isEmpty(datos_u.correo_u)) {
@@ -69,18 +73,24 @@ $(document).ready(function() {
             });
         }
 
+
     });
 
 
     //EDITAR USUARIO CON AJAX
     $('#editar_usuario').click(function(e) {
         e.preventDefault();
+        var checkedE = [];
+        $("input[name='checkTipE']:checked").each(function() {
+            checked.push(($(this).attr("value")));
+        });
 
         const datos_u = {
                 nombre_u: $('#e1').val(),
                 apellido_u: $('#e2').val(),
                 cedula_u: $('#e9').val(),
-                correo_u: $('#e7').val()
+                correo_u: $('#e7').val(),
+                rol_u: checkedE
             }
             // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
 

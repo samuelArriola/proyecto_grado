@@ -3,6 +3,12 @@
     include("../config/conexion.php");
     $id_usuario = $_GET['id_u'];  
 
+	//trae item_roll
+	$queryRol = "SELECT r.item_rol, r.iden_usua FROM inex_usuarios u, inex_usuarios_roles r WHERE u.iden_usua = r.iden_usua AND r.iden_usua = '$id_usuario' ";
+	$resultadoRol = mysqli_query($con, $queryRol);
+	$check= "";
+
+	//trae usuario
     $query ="SELECT * FROM inex_usuarios WHERE iden_usua ='$id_usuario'";
     $resultado = mysqli_query($con,$query);
 	$datos =mysqli_fetch_array($resultado); 
@@ -54,19 +60,33 @@
 							<input name="apellido" value="<?php echo $datos['apel_usua'] ?>" id="e2" type="text" class="validate caracteresEpesiales" required>
 							<label for="e2">*Apellido</label>
 						</div>
-						<div class="input-field col s12"  >
-							<select id="type_users" class="validate" required>
-							<option value="C">Coordinador</option>
-							<option value="L">Lider</option>
-							</select>
-							<label>Tipo de usuario</label>
-						</div>
 						<div class="input-field col m12 s12">
 							<input name="correo" value="<?php echo $datos['correo'] ?>" id="e7" type="email" class="validate caracteresEpesiales" required>
 							<label for="e7">*Correo</label>
 						</div>
 						<input name="cedula" value="<?php echo $datos['iden_usua'] ?>" id="e9" type="hidden" class="validate caracteresEpesiales" required>
-
+						<div class="input-field col s12"  >
+					 	 <span>*Tipo de usuario</span> <br><br>
+							<p>	
+							<?php 
+							$check1="<label>
+								<input value='C' name='checkTipE' type='checkbox' class='filled-in' />
+								<span>COORDINADO &nbsp &nbsp &nbsp</span>
+							</label>";
+							$check2 = "<label>
+								<input value='D' name='checkTipE' type='checkbox' class='filled-in' />
+								<span>LIDER</span>
+							</label>";
+							while($rowRol = mysqli_fetch_array($resultadoRol)) { 	
+							 $check.="<label>
+								<input value='".$rowRol['item_rol']."' name='checkTipE' type='checkbox' class='filled-in' checked='checked' />
+								<span> ".$rowRol['item_rol']." &nbsp &nbsp &nbsp</span>
+								</label>";	
+							}	
+							echo $check;
+							 ?>
+							</p>
+						</div>
 					 </div>
 						
 						<div class="center section">

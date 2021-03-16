@@ -5,8 +5,8 @@ $iden = $_POST['iden'];
 $role = $_POST['role']; 
 
 // $sql = "SELECT * FROM inex_usuarios WHERE iden_usua = '$iden' ";
-$sql ="SELECT u.iden_usua, u.nomb_usua, u.apel_usua, d.item_rol, d.item_dep
-,(SELECT nombre_dep FROM inex_dependencias WHERE item_dep = d.item_dep) as nombre_dep 
+$sql ="SELECT u.iden_usua, u.nomb_usua, u.apel_usua, d.item_rol, u.item_dep
+,(SELECT nombre_dep FROM inex_dependencias WHERE item_dep = u.item_dep) as nombre_dep 
 FROM inex_usuarios u, inex_usuarios_roles d WHERE u.iden_usua = d.iden_usua AND u.iden_usua = '$iden' AND d.item_rol ='$role' ";
 $rs = mysqli_query($con,$sql);
 

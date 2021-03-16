@@ -4,9 +4,9 @@
   $_SESSION["NOMB"];
   $_SESSION["ROLE"];
   
-  if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
-    if ($_SESSION["ROLE"] == "L") {
-      $type_user = 'LIDER' ; 
+  if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C"){
+    if ($_SESSION["ROLE"] == "C") {
+      $type_user = 'COORDINADOR' ; 
     } 
 ?>
 

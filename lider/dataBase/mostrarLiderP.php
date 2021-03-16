@@ -7,18 +7,13 @@
      $resul=mysqli_query($con,$sql);
 
      while($row=mysqli_fetch_array($resul)){
-         
-         
-          $res2="<li title='Eliminar' class='material-icons'><a class='hoverable  modal-trigger  red-text' href='#eliminarLiderP' >delete</a></li>";
 
           $tabla.="
            <tr>
                <td>".$row['iden_usua']."</td>
                <td>".$row['nomb_usua']."</td>
                <td>".$row['correo']."</td>
-               <td>
-               ".$res2."
-               </td>
+              
           </tr> 
           ";
      }; 

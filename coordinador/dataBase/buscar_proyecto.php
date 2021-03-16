@@ -27,10 +27,9 @@
        $iden = $_SESSION["IDEN"];
        $role = $_SESSION["ROLE"];
 
-       $sql = "SELECT * FROM inex_proyectos p, inex_proyectos_usuarios r WHERE p.item_proy = r.item_proy AND r.iden_usua = '$iden' AND p.esta_proy = '$cero' ORDER BY r.estadoLPV ASC , p.item_proy DESC  "; 
-       $resul=mysqli_query($con,$sql);
+       $sql = "SELECT * FROM inex_proyectos  WHERE jefe_proy = '$iden' ORDER BY vistoL ASC ,item_proy DESC "; 
        
-     /*   if(isset($_POST['dato'])){
+       if(isset($_POST['dato'])){
           $q=$_POST['dato'];
           $sql = "SELECT * FROM inex_proyectos WHERE esta_proy LIKE '%$q%' AND jefe_proy = '$iden' ORDER BY vistoL ASC ,item_proy DESC "; 
        };
@@ -39,25 +38,34 @@
        };
       if($role == "L"){
          $sql = "SELECT * FROM inex_proyectos  WHERE esta_proy ='$cero' AND liderAcargo ='$iden'  ORDER BY vistoL ASC ,item_proy DESC "; 
-      }; */
+      };
+       $resul=mysqli_query($con,$sql);
 
        //$fila=mysqli_fetch_row($resul);
        
        if($resul){
             while($row=mysqli_fetch_array($resul)){
                // $visto = $row['visto'];
-               $estadoLPV = $row['estadoLPV'];
+               $vistoL = $row['vistoL'];
                $estado = $row['esta_proy'];
 
-               if ($estadoLPV == $cero && $estado ==$cero ) {
+               if ($vistoL == $cero && $estado ==$tres ) {
                 $salida.="<tr>
-                <td>".$row['item_proy']. '.'. $row['nomb_proy']. " <span class='new badge red' data-badge-caption='Nuevo'></span></td>
+                <td>".$row['item_proy']. '.'. $row['nomb_proy']. " <span class='new badge red' data-badge-caption='Corregir'></span></td>
                    <td style='text-align: center;'>
-                   <a onclick='estadoLPVvisto(".$row['item_proy'].",".$row['iden_usua'].",".$uno.")' class='btn-floating waves-effect waves-light' ".$color_estado[$row['esta_proy']]."  href='editar_proyecto.php?id=".$row['item_proy']."'>
+                   <a onclick='visto(".$row['item_proy'].",".$uno.",".$uno.")' class='btn-floating waves-effect waves-light' ".$color_estado[$row['esta_proy']]."  href='editar_proyecto.php?id=".$row['item_proy']."'>
                    ".$icon_estado[$row['esta_proy']]."</a> 
                    <div style='font-size: 0.8em;'>".$desc_estado[$row['esta_proy']]."</div></td>
                   </tr>";
-               } 
+               } else if ($vistoL == $cero && $estado ==$dos ) {
+                  $salida.="<tr>
+                  <td>".$row['item_proy']. '.'. $row['nomb_proy']. " <span class='new badge red' data-badge-caption='Aprobado'></span></td>
+                     <td style='text-align: center;'>
+                     <a onclick='visto(".$row['item_proy'].",".$uno.",".$uno.")' class='btn-floating waves-effect waves-light' ".$color_estado[$row['esta_proy']]."  href='editar_proyecto.php?id=".$row['item_proy']."'>
+                     ".$icon_estado[$row['esta_proy']]."</a> 
+                     <div style='font-size: 0.8em;'>".$desc_estado[$row['esta_proy']]."</div></td>
+                    </tr>";
+                 }
                else {
                   $salida.="<tr>
                   <td>".$row['item_proy']. '.'. $row['nomb_proy']. "</td>
