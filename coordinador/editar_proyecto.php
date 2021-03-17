@@ -342,8 +342,8 @@
 		<div class="center"><i class="large material-icons teal-text">file_upload</i></div>
 		 <div class="center"><h4 class="">SUBIR EVIDENCIAS</h4></div> <br> 
 		<form action="" method="" enctype="multipart/form-data" id="subirEvidencia" >
-			<div class="row">  
-			<span class="center-align" style="opacity: 0.5; position:relative; top: -15px" >&nbsp;&nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span> <br>
+			<div class="row" id="edi_escondeForm">  
+			 <span class="center-align" style="opacity: 0.5; position:relative; top: -15px" >&nbsp;&nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span> <br>
 				<div class="input-field col s6">
 					<input placeholder="Ingrese el nombre de la evidencia" name="nombre_a" id="first_name_e" type="text" class="validate caracteresEpesiales" required>
 					<label for="first_name_e">* Nombre</label>
@@ -361,6 +361,11 @@
 					<input value="" id="idActiEvidencia" name="item_acty" type="hidden" class="validate" type="text" required>
 				</div>
 			</div>
+
+			<div class="center hide" id="edi_load" type="" style="margin-top: 50px">
+				<?php include("../include/preloader.php"); ?>
+			</div> 
+
 			  <div class="center">
 			  	  <button class="btn orange"  type="button" onclick="subirEvidenciaA()">Subir </button>
 				  <a href="#!" class=" modal-close waves-effect waves-green btn-flat white-text red ">Atras</a>

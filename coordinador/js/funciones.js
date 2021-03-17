@@ -372,6 +372,9 @@ function cambiaEstado(estado) {
 //SUBIR EVIDENCIA CON AJAX
 function subirEvidenciaA(e) {
     let datoE = new FormData($('#subirEvidencia')[0]);
+    $('#edi_escondeForm').hide();
+    let edi_load = $('#edi_load');
+    edi_load.removeClass('hide');
 
     $.ajax({
         url: 'dataBase/subirEvidenciaA.php',
@@ -383,8 +386,11 @@ function subirEvidenciaA(e) {
             M.toast({ html: response, classes: 'rounded' });
             $('#subirEvidencia')[0].reset(); //limpia las casjas de texto
             mostrarEvidenciaA(datoE.get("item_acty"));
+            edi_load.addClass('hide');
+            $('#edi_escondeForm').show();
         }
     })
+
 }
 
 //MOSTRAR EVIDENCIA CON AJAX

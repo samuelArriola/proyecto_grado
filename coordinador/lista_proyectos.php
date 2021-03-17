@@ -52,24 +52,16 @@
 
 	
 
+	
+
+
 
 <div class="row" style="position: relative; top: -40px"> 
 <div style="overflow-x: auto;">
-
+	
 	<table id="tabla">	
-		<!-- PRELOAD -->
 		<div class="center hide" id="loar" type="" style="margin-top: 50px">
-			<div class="preloader-wrapper small active">
-				<div class="spinner-layer spinner-green-only">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div><div class="gap-patch">
-					<div class="circle"></div>
-				</div><div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-				</div>
-			</div>
+			<?php include("../include/preloader.php"); ?>
 		</div> 
 
 	</table>

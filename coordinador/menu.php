@@ -12,20 +12,20 @@
 
 <div class="navbar-fixed">
 <div class="navbar-fixed">
-<nav>  
-  <div class="nav-wrapper" style="background-color: orange;">
-    <a href="" class="brand-logo" style="margin-left: 10px;font-size: 1em;">PROYECTOS INEX</a>
-    <a href="" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <ul class="right hide-on-med-and-down">
-    <li><a class="dropdown-trigger" href="" data-target="dropdown1">
-        <?php  echo $type_user; ?>
-        <i class="material-icons right">arrow_drop_down</i>
-        </a> 
-    </li>
-    </ul>
-  </div> 
+  <nav>  
+    <div class="nav-wrapper" style="background-color: orange;">
+      <a href="" class="brand-logo" style="margin-left: 10px;font-size: 1em;">PROYECTOS INEX</a>
+      <a href="" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+      <li><a class="dropdown-trigger" href="" data-target="dropdown1">
+          <?php  echo $type_user; ?>
+          <i class="material-icons right">arrow_drop_down</i>
+          </a> 
+      </li>
+      </ul>
+    </div> 
 
-</nav> 
+  </nav> 
 </div>
 
 <nav class="hide-on-med-and-down">  
