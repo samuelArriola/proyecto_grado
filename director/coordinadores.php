@@ -125,7 +125,8 @@
 				<th>Nombre</th>
 				<th>Apellido</th>		
 				<th>Correo</th>
-				<th>Roles</th>
+				<!-- <th>Roles</th> -->
+				<th>Estado</th>
 				<th>Opciones</th>
 			</tr>
 			</thead>

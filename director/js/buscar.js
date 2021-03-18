@@ -1,16 +1,23 @@
 console.log('conectago a buscar.js');
 (obtenerDAt());
 
-function obtenerDAt(datos){
+function obtenerDAt(datos) {
+
+    let lis_load = $('#lis_load');
+    lis_load.removeClass('hide');
+
+
     $.ajax({
-        url:'dataBase/buscar_proyecto.php',
-        type:'POST',
-        dataType:'html',
-        data:{dato:datos},
-       })
-    .done(function(resultado){
-        $("#tabla").html(resultado)
-    })    
+            url: 'dataBase/buscar_proyecto.php',
+            type: 'POST',
+            dataType: 'html',
+            data: { dato: datos },
+        })
+        .done(function(resultado) {
+            $("#tabla").html(resultado);
+            lis_load.addClass('hide');
+
+        })
 }
 
 //BUSCAR PROYECTOS
@@ -18,20 +25,21 @@ $('#buscar_p').keyup(function() {
     var buscar = $('#buscar_p').val();
     if (buscar != "") {
         obtenerDAt(buscar);
-    }else{
+    } else {
         obtenerDAt();
     }
-    
+
 });
 
 mostrar_tabla();
+
 function mostrar_tabla(datos) {
     $.ajax({
-        type:"POST",
-        url:"dataBase/buscar_proyA.php",
-        data:{dato:datos},
+        type: "POST",
+        url: "dataBase/buscar_proyA.php",
+        data: { dato: datos },
 
-        success: function (response) {
+        success: function(response) {
             $('#tablaProyA').html(response);
         }
     });
@@ -42,8 +50,8 @@ $('#buscar_pA').keyup(function() {
     var buscarA = $('#buscar_pA').val();
     if (buscarA != "") {
         mostrar_tabla(buscarA);
-    }else{
+    } else {
         mostrar_tabla();
     }
-    
+
 });

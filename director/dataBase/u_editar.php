@@ -17,6 +17,11 @@
      if(!$resul){
         echo 'error al editar, contacte a su ingeniero de sistemas';
      }else{
+      foreach ($rol_u as $value){
+         $query2="UPDATE inex_usuarios_roles SET item_rol ='$value' WHERE iden_usua= '$cedula' "; 
+         $resul2=mysqli_query($con,$query2); 
+       }
+
       echo 'Usuario editado exitosamente';
      }
 

@@ -19,9 +19,15 @@
       foreach ($rol_u as $value){
         $query2="INSERT INTO `inex_usuarios_roles`(`iden_usua`, `item_rol`) VALUES ('$cedula','$value')";
         $resul2=mysqli_query($con,$query2); 
+  
+      }
+      if (!$resul) {
+        echo 'Error: Contacte a su Ingeniero de sistemas';
+      } else {
+        echo('Usuario registrado exitosamente');
       }
 
-      echo('Usuario registrado exitosamente');
+     
   }
 
   mysqli_close($con);

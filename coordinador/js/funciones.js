@@ -392,7 +392,7 @@ function subirEvidenciaA(e) {
     })
 
 }
-
+// 
 //MOSTRAR EVIDENCIA CON AJAX
 function mostrarEvidenciaA(id_acti) {
 
