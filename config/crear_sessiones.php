@@ -7,7 +7,7 @@ $role = $_POST['role'];
 // $sql = "SELECT * FROM inex_usuarios WHERE iden_usua = '$iden' ";
 $sql ="SELECT u.iden_usua, u.nomb_usua, u.apel_usua, d.item_rol, u.item_dep
 ,(SELECT nombre_dep FROM inex_dependencias WHERE item_dep = u.item_dep) as nombre_dep 
-FROM inex_usuarios u, inex_usuarios_roles d WHERE u.iden_usua = d.iden_usua AND u.iden_usua = '$iden' AND d.item_rol ='$role' ";
+FROM inex_usuarios u, inex_usuarios_roles d WHERE  estado = 'ACTIVO' AND u.iden_usua = d.iden_usua AND u.iden_usua = '$iden' AND d.item_rol ='$role' ";
 $rs = mysqli_query($con,$sql);
 
 if($fila = mysqli_fetch_array($rs))

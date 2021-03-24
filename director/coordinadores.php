@@ -197,6 +197,30 @@
 			</div> 
 		</div>
 	</div>
+	
+	<!--  confirmacion eliminado logico de  usuario -->
+	<div id="eliminaULogico" class="modal">
+		<div class="modal-content">
+		<input  id="obtieneIDLogico" type="hidden">
+		<h5 class="center" >¿Estás seguro de eliminar este usuario?</h5>
+			<div class="center">
+			<button   onclick="eliminarUsuariosLogicos('DESACTIVO')" type="button" class="btn-small red modal-close">Si</button>
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+			</div> 
+		</div>
+	</div>
+
+	<!--  confirmacion restaurarULogico logico de  usuario -->
+	<div id="restaurarULogico" class="modal">
+		<div class="modal-content">
+		<input  id="obtieneIDLogicoRestau" type="hidden">
+		<h5 class="center" >¿Estás seguro de restaurar este usuario?</h5>
+			<div class="center">
+			<button   onclick="rstaurarUsuariosLogicos('ACTIVO')" type="button" class="btn-small red modal-close">Si</button>
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+			</div> 
+		</div>
+	</div>
 
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>

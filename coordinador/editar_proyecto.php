@@ -29,7 +29,7 @@
 
 	//Muestras todos los lideres
 	$queryLider = "SELECT u.iden_usua, u.nomb_usua, u.apel_usua, d.item_rol, u.item_dep, u.correo ,(SELECT nombre_dep FROM inex_dependencias WHERE item_dep = u.item_dep) as nombre_dep
-	FROM inex_usuarios u, inex_usuarios_roles d WHERE u.iden_usua = d.iden_usua AND d.item_rol ='L'";
+	FROM inex_usuarios u, inex_usuarios_roles d WHERE u.estado = 'ACTIVO' AND u.iden_usua = d.iden_usua AND d.item_rol ='L'";
 	$resul_lider = mysqli_query($con,$queryLider);
 
 	session_start(); 

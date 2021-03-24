@@ -2,6 +2,12 @@
 
     include("../config/conexion.php");
     $id_usuario = $_GET['id_u'];  
+	
+	$roles['C'] = '';
+	$roles['L'] = '';
+	$roles_desc['C'] = 'COORDINADOR';
+	$roles_desc['L'] = 'LIDER';
+
 
 	//trae item_roll
 	$queryRol = "SELECT r.item_rol, r.iden_usua FROM inex_usuarios u, inex_usuarios_roles r WHERE u.iden_usua = r.iden_usua AND r.iden_usua = '$id_usuario' ";
@@ -69,20 +75,16 @@
 					 	 <span>*Tipo de usuario</span> <br><br>
 							<p>	
 							<?php 
-							$check1="<label>
-								<input value='C' name='checkTipE' type='checkbox' class='filled-in' />
-								<span>COORDINADO &nbsp &nbsp &nbsp</span>
-							</label>";
-							$check2 = "<label>
-								<input value='D' name='checkTipE' type='checkbox' class='filled-in' />
-								<span>LIDER</span>
-							</label>";
 							while($rowRol = mysqli_fetch_array($resultadoRol)) { 	
-							 $check.="<label>
-								<input value='".$rowRol['item_rol']."' name='checkTipE' type='checkbox' class='filled-in' checked='checked' />
-								<span> ".$rowRol['item_rol']." &nbsp &nbsp &nbsp</span>
-								</label>";	
+								$roles[$rowRol['item_rol']] = 'checked';
 							}	
+
+							foreach ($roles as $key => $value) {
+								$check.="<label>
+								   <input value='".$key."' name='checkTipE' type='checkbox' class='filled-in' ".$value."/>
+								   <span> ".$roles_desc[$key]." &nbsp &nbsp &nbsp</span>
+								   </label>";	
+							}
 							echo $check;
 							 ?>
 							</p>

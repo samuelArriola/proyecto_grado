@@ -82,7 +82,7 @@ $(document).ready(function() {
         e.preventDefault();
         var checkedE = [];
         $("input[name='checkTipE']:checked").each(function() {
-            checked.push(($(this).attr("value")));
+            checkedE.push(($(this).attr("value")));
         });
 
         const datos_u = {
@@ -148,11 +148,68 @@ $('#eliminarUsuarios').click(function() {
     })
 })
 
+//Eliminado logico de usuarios
+function eliminarUsuariosLogicos(estado) {
+    let id_ul = $('#obtieneIDLogico').val();
+    $.ajax({
+        type: "POST",
+        url: "dataBase/u_borrarAlogico.php",
+        data: {
+            id_ul,
+            estado
+        },
+        dataType: "html",
+        success: function(response) {
+            mostrarU();
+            if (response == 'ok') {
+                M.toast({ html: "Usuario eliminado", classes: 'rounded' });
+            } else {
+                M.toast({ html: "no eliminado, CONTACTE A SU INGENIRO DE SISTEMAS", classes: 'rounded' });
+
+            }
+            console.log(response);
+        }
+    })
+}
+//rstaurarUsuariosLogicos logico de usuarios
+function rstaurarUsuariosLogicos(estado) {
+    let id_ul = $('#obtieneIDLogicoRestau').val();
+    $.ajax({
+        type: "POST",
+        url: "dataBase/u_borrarAlogico.php",
+        data: {
+            id_ul,
+            estado
+        },
+        dataType: "html",
+        success: function(response) {
+            mostrarU();
+            if (response == 'ok') {
+                M.toast({ html: "Usuario Restaurado", classes: 'rounded' });
+            } else {
+                M.toast({ html: "no eliminado, CONTACTE A SU INGENIRO DE SISTEMAS", classes: 'rounded' });
+
+            }
+
+        }
+    })
+}
+
+//trae id para camdarlo a la ventana confirm eliminar Logico de usuario
+function recibeIDLogico(id_u) {
+    $('#obtieneIDLogico').val(id_u);
+}
+
 //trae id para camdarlo a la ventana confirm eliminar usuario
 function recibeID(id_u) {
     $('#obtieneID').val(id_u);
-
 }
+//trae id para camdarlo a la ventana confirm recibeIDLogicoREST usuario
+function recibeIDLogicoREST(id_u) {
+    $('#obtieneIDLogicoRestau').val(id_u);
+}
+
+
 
 //MOSTRAR USUARIOS CON AJAX
 function mostrarU(dat) {
