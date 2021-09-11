@@ -29,7 +29,7 @@
    $sql = "SELECT * FROM inex_proyectos WHERE esta_proy ='$uno' AND (item_dep = '$dep_u' OR item_dep = '3') ORDER BY item_proy DESC "; 
 
    if(isset($_POST['dato'])){
-      $bucador=$_POST['dato'];
+      $bucador=mysqli_real_Escape_string($con ,$_POST['dato']);
    $sql = "SELECT * FROM inex_proyectos WHERE esta_proy ='$uno' AND	nomb_proy LIKE '%$bucador%' AND (item_dep = '$dep_u' OR item_dep = '3') ORDER BY item_proy DESC "; 
    }
 

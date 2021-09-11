@@ -57,6 +57,8 @@ $(document).ready(function() {
             return M.toast({ html: 'Cedula de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else if (isEmpty(datos_u.correo_u)) {
             return M.toast({ html: 'Correo de usuario vacío, por favor complete el campo', classes: 'rounded' });
+        } else if (isEmpty(datos_u.rol_u)) {
+            return M.toast({ html: 'Tipo de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else {
             $.ajax({
                 type: "POST",
@@ -94,8 +96,16 @@ $(document).ready(function() {
             }
             // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
 
-        if (datos_u.nombre_u == "" || datos_u.apellido_u == "" || datos_u.cedula_u == "" || datos_u.telefono_u == "" || datos_u.pass_u == "" || datos_u.direccion_u == "" || datos_u.correo_u == "") {
-            M.toast({ html: 'Datos Incompletos, por favor Complete todos los campos' })
+        if (isEmpty(datos_u.nombre_u)) {
+            return M.toast({ html: 'Nombre de usuario vacío, por favor complete todos los campos' });
+        } else if (isEmpty(datos_u.apellido_u)) {
+            return M.toast({ html: 'Apellido de usuario vacío, por favor complete el campo', classes: 'rounded' });
+        } else if (isEmpty(datos_u.cedula_u)) {
+            return M.toast({ html: 'Cedula de usuario vacío, por favor complete el campo', classes: 'rounded' });
+        } else if (isEmpty(datos_u.correo_u)) {
+            return M.toast({ html: 'Correo de usuario vacío, por favor complete el campo', classes: 'rounded' });
+        } else if (isEmpty(datos_u.rol_u)) {
+            return M.toast({ html: 'Tipo de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else {
             $.ajax({
                 type: "POST",
@@ -228,8 +238,10 @@ function mostrarU(dat) {
 
 //CAMBIAR ESTADO            
 function cambiaEstado(estado) {
-    // e.preventDefault();  
+    // e.preventDefault(); 
+    let nomb_proy = $('#EpNombreProy').val();
     const datos_u = {
+            nomb_proy,
             id_proy: $('#id_pro').val(),
             estado_p: estado,
 
@@ -258,7 +270,6 @@ function cambiaEstado(estado) {
 }
 
 //actualizar PROYECTO
-
 $("#actualizar").click(function(e) {
     const datos = {
         id: $("#id_pro").val(),
@@ -283,11 +294,16 @@ $("#actualizar").click(function(e) {
 //INGRESA COMENTARIOS MANDA A CORRECION LOS PROYECTOS
 function corregirProyecto(estado) {
     // e.preventDefault();
+
+    let nomb_proy = $('#EpNombreProy').val();
+
     const datos_c = {
+        nomb_proy,
         id_proy: $('#id_pro').val(),
         estado_p: estado,
         comentario_p: $('#comentarioProyecto').val()
     }
+
 
     if (isEmpty(datos_c.comentario_p)) {
         M.toast({ html: 'Comentarios Vacío, por favor Complete el campos' })
@@ -310,6 +326,23 @@ function corregirProyecto(estado) {
         });
     }
 }
+
+
+//muestras los lideres de proyecto 
+function mostrarLiderP(id_proy) {
+    let id_proye = id_proy;
+    $.ajax({
+        url: 'dataBase/mostrarLiderP.php',
+        type: 'POST',
+        data: { id_proye },
+        success: (response) => {
+            let mostrarLiderP = document.getElementById('mostrarLiderP');
+            mostrarLiderP.innerHTML = response;
+
+        }
+    })
+}
+
 
 //FUNCION VISTO
 function visto(id_p, estado) {

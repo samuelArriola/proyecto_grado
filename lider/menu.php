@@ -3,6 +3,7 @@
   $_SESSION["IDEN"];
   $_SESSION["NOMB"];
   $_SESSION["ROLE"];
+  $dep_u = $_SESSION["NOM_D"];
   
   if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
     if ($_SESSION["ROLE"] == "L") {
@@ -37,6 +38,11 @@
 </a></li>
 
 </ul>
+
+<ul class="right hide-on-med-and-down">
+<li style="position: relative; left:-13px;"><span style="color:black"><?php echo $dep_u ?></span></li>
+</ul>
+
 </div>
 </nav>
 

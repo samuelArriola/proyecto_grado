@@ -27,7 +27,7 @@
        $iden = $_SESSION["IDEN"];
        $role = $_SESSION["ROLE"];
 
-       $sql = "SELECT * FROM inex_proyectos  WHERE jefe_proy = '$iden' ORDER BY vistoL ASC ,item_proy DESC "; 
+       $sql = "SELECT * FROM inex_proyectos WHERE jefe_proy = '$iden' ORDER BY vistoL ASC ,item_proy DESC "; 
        
        if(isset($_POST['dato'])){
           $q=$_POST['dato'];
@@ -36,9 +36,7 @@
         if($q==4){
            $sql = "SELECT * FROM inex_proyectos WHERE jefe_proy = '$iden' ORDER BY vistoL ASC ,item_proy DESC ";   
        };
-      if($role == "L"){
-         $sql = "SELECT * FROM inex_proyectos  WHERE esta_proy ='$cero' AND liderAcargo ='$iden'  ORDER BY vistoL ASC ,item_proy DESC "; 
-      };
+
        $resul=mysqli_query($con,$sql);
 
        //$fila=mysqli_fetch_row($resul);

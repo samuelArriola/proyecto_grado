@@ -53,6 +53,7 @@
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link rel="icon" type="image/png" href="../img/logo.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
 <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
@@ -290,17 +291,22 @@
 
 	<!--  confirmacion enviar proyecto -->
 	<div id="confirmP" class="modal">
-    <div class="modal-content">
-       <h5 class="center" >¿Estás seguro de enviar este proyecto?</h5>
-	 <div class="center">
-	   <a onclick="visto(<?php echo $item?>, <?php echo $visto?>, <?php echo $vistoL?> ); cambiaEstado(1)" class="btn-small red">Si</a>
-	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
-	 </div> 
-	</div>
+		<div class="center hide" id="EnviaP_load" type="" style="margin-top: 50px">
+		 <BR><BR><BR><BR>	<?php include("../include/preloader.php"); ?> <BR><BR><BR><BR><BR>
+		</div> 
+		<div id="EnviaP_esconde">
+			<div class="modal-content">
+				<h5 class="center" >¿Estás seguro de enviar este proyecto?</h5>
+				<div class="center">
+					<a onclick="visto(<?php echo $item?>, <?php echo $visto?>, <?php echo $vistoL?> ); cambiaEstado(1)" class="btn-small red">Si</a>
+					<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+				</div> 
+			</div>
+		</div>	
     </div>
 
 
-	<!-- Modal Structure -->
+	<!-- Eliminar Proyectos  Structure -->
 	<div id="modal3" class="modal">
     <div class="modal-content">
        <h5 class="center" >¿Estás seguro de eliminar este proyecto?</h5>
@@ -326,14 +332,14 @@
 	
 	<!-- Modal Structure elimina lider de proyectos  -->
 	<div id="eliminarLiderP" class="modal">
-	<input  id="obtieneIDL" type="hidden">
-		<div class="modal-content">
-		<h5 class="center" >¿Estás seguro de eliminar este lider?</h5>
-			<div class="center">
-			<button  onclick="eliminarLiderP()"  id="eliminarLiderPro" type="button" class="btn-small red modal-close">Si</button>
-			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
-			</div> 
-		</div>
+		<input  id="obtieneIDL" type="hidden">
+			<div class="modal-content">
+			<h5 class="center" >¿Estás seguro de eliminar este lider?</h5>
+				<div class="center">
+				<button  onclick="eliminarLiderP()"  id="eliminarLiderPro" type="button" class="btn-small red modal-close">Si</button>
+				<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+				</div> 
+			</div>
 	</div>
 		
 	<!-- Modal para agregar arcivos -->

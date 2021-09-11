@@ -25,7 +25,9 @@
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link rel="icon" type="image/png" href="../img/logo.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
 <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 </head>

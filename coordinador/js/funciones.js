@@ -281,8 +281,11 @@ $('#btn_create_p').click((e) => {
 
 })
 
-
+//muestras los lideres de proyecto :se llama desde editar_proyectos.php
 function mostrarLiderP(id_proy) {
+
+
+    console.log('mostrar lista de proyectos');
     let id_proye = id_proy;
     $.ajax({
         url: 'dataBase/mostrarLiderP.php',
@@ -339,12 +342,20 @@ function visto(id_p, estado, estadoL) {
 }
 
 
+//Tambien Manda los proyectos
 function cambiaEstado(estado) {
     // e.preventDefault();  
+    
+    let nomb_proy = $('#nombre_proye').val();
+    let EnviaP_load = $('#EnviaP_load');
+    $('#EnviaP_esconde').hide();
+    EnviaP_load.removeClass('hide');
+
+    
     const datos_u = {
             id_proy: $('#id_pro').val(),
             estado_p: estado,
-
+            nomb_proy,
         }
         // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
 
@@ -356,13 +367,15 @@ function cambiaEstado(estado) {
             url: "dataBase/p_aprobar.php",
             data: datos_u,
             success: function(response) {
+                 M.toast({ html: response });
                 console.log(response);
 
                 setTimeout(tiempo, 1000);
-
                 function tiempo() {
+                    EnviaP_load.addClass('hide');
                     window.location.href = 'lista_proyectos.php';
-                }
+                    // $('#EnviaP_esconde').show();
+                } 
 
             }
         });

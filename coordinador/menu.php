@@ -3,7 +3,9 @@
   $_SESSION["IDEN"];
   $_SESSION["NOMB"];
   $_SESSION["ROLE"];
-  
+  $dep_u = $_SESSION["NOM_D"];
+
+
   if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "C"){
     if ($_SESSION["ROLE"] == "C") {
       $type_user = 'COORDINADOR' ; 
@@ -35,8 +37,12 @@
 <li><a class="black-text" id="mnuProy" style="font-size: 0.8em; text-align: center; height: 64px;" href="lista_proyectos.php" >
   <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">account_balance</i>Proyectos
 </a></li>
-
 </ul>
+
+<ul class="right hide-on-med-and-down">
+<li style="position: relative; left:-13px;"><span style="color:black"><?php echo $dep_u ?></span></li>
+</ul>
+
 </div>
 </nav>
 

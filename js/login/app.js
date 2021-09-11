@@ -23,7 +23,7 @@ $(document).ready(function() {
             $('#loarU').hide();
 
         } else {
-            $.get("https://axis.curn.edu.co/apildap/api/ldap/account/" + usuario).then(resp => {
+            $.get("https://axis.curn.edu.co/apildap/api/ldap/account/" + users).then(resp => {
                 $('#loarU').hide();
                 var obj = $.parseJSON(resp);
                 var nombreO = obj['msg'];

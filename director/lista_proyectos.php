@@ -11,6 +11,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
 	<title>PROYECTOS</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link rel="icon" type="image/png" href="../img/logo.png" />
 	<link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 	<style>
 	.hoverA:hover {

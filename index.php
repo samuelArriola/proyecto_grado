@@ -9,6 +9,7 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/login/materialize-login.min.css"  media="screen,projection"/>
     <link rel="stylesheet" type="text/css" href="css/login/login.css?">
+	<link rel="icon" type="image/png" href="img/logo.png" />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>

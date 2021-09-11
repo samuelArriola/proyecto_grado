@@ -3,10 +3,13 @@
     include("../config/conexion.php");
     $id_usuario = $_GET['id_u'];  
 	
+	//nos indica los checkbox chekeados 
 	$roles['C'] = '';
 	$roles['L'] = '';
+	$roles['D'] = '';
 	$roles_desc['C'] = 'COORDINADOR';
 	$roles_desc['L'] = 'LIDER';
+	$roles_desc['D'] = 'DIRECTOR';
 
 
 	//trae item_roll
@@ -36,6 +39,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link rel="icon" type="image/png" href="../img/logo.png" />
 	<link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
     <title>Editar Usuarios</title>
 </head>
@@ -80,10 +84,17 @@
 							}	
 
 							foreach ($roles as $key => $value) {
-								$check.="<label>
-								   <input value='".$key."' name='checkTipE' type='checkbox' class='filled-in' ".$value."/>
-								   <span> ".$roles_desc[$key]." &nbsp &nbsp &nbsp</span>
-								   </label>";	
+								if ($key=="D") {
+									$check.="<label>
+										<input value='".$key."' name='checkTipE' type='checkbox' class='filled-in'  ".$value."/>
+									</label>";	
+								} else {
+									$check.="<label>
+											<input value='".$key."' name='checkTipE' type='checkbox' class='filled-in' ".$value."/>
+											<span> ".$roles_desc[$key]." &nbsp &nbsp &nbsp</span>
+										</label>";	
+								}
+								
 							}
 							echo $check;
 							 ?>

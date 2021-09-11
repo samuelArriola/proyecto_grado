@@ -1,7 +1,7 @@
 <?php 
 
 // session_start(); 
-$dep_u = $_SESSION["NOM_D"]
+$dep_u = $_SESSION["NOM_D"];
 
 ?>
 

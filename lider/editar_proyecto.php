@@ -58,7 +58,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
+<link rel="icon" type="../image/png" href="../img/logo.png" />
 <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 
 </head>
@@ -74,7 +74,10 @@
 	<div style="overflow-x: auto;"><div>
 
 	<?php if ($row = mysqli_fetch_array($rs)) 
-	{  $estado_proyecto = $row["esta_proy"]; 	?> 
+	{  $estado_proyecto = $row["esta_proy"]; 	
+	    $jefe_proy = $row['jefe_proy'];
+	    $nomb_proy = $row['nomb_proy'];
+	?> 
 
 	<!-- Modal cometarios  -->
 	<div id="cometariosP" class="modal"> <br><br>
@@ -92,7 +95,9 @@
     <form id=""> 
 	<div class="input-field col s12">
 	<b>Nombre del proyecto:</b> 
+	   <input  type="hidden" value="<?php echo $row["jefe_proy"] ?>" id="coordinador_proye">
 	   <input  type="hidden" value="<?php echo $item ?>" id="id_pro">
+	   <input  type="hidden" value="<?php echo $estado_proyecto ?>" id="EpEstado_proyecto">
 	   <input value = "<?php echo $row["nomb_proy"] ?>" name="nombre_proye" id="nombre_proye" type="text" class="validate caracteresEpesiales"> 
 		<div style="text-align: center; margin-top: -95px; margin-left: 93%;"><?php echo $icon_estado[$row["esta_proy"]] ?><div style="font-size: 0.7em; margin-top: 8px;"> <?php echo $desc_estado[$row["esta_proy"]] ?></div></div>
 		<?php if($estado_proyecto==3){ ?>	
@@ -165,58 +170,69 @@
 
 </div>
 
-<div id="container_actividades">
-<?php
-	$sql = "select *
-	 from inex_actividades as a where a.item_proy = '".$item."'";
-	$rs = mysqli_query($con, $sql);
-?>
-	<div class="row">
-	<div class="teal-text">INFORMACIÓN DE LAS ACTIVIDADES</div>
-	<div style="overflow-x: auto;"><table>
-	<tr>
-		<th>Actividad</th>
-		<th>Descripción</th>
-		<th>Fecha Inicial</th>
-		<th>Fecha Final</th>
-		<th>Valor</th>
-		<th>Opciones</th>
-		
-	</tr>
-<?php
-	while ($row = mysqli_fetch_array($rs)) {
 
-		$id_acti = $row['item_acti'];
-		if($row["valo_acti"]=='') $row["valo_acti"] = 0; 
-?>
-	 <input  type="hidden" value="<?php echo $id_acti ?>" id="id_actividadA">  <!--id del la consulta de acticidades -->
-    <tr>
-		<td><?php echo $row['nomb_acti'] ?></td>
-		<td><?php echo $row['descripcion_a'] ?></td>
-		<td><?php echo $row['fecha_ia'] ?></td>
-		<td><?php echo $row['fecha_fa'] ?></td>
-		<td><?php echo $row['valo_acti'] ?></td>
+		<?php
+		$sql = "select *
+		from inex_actividades as a where a.item_proy = '".$item."'";
+		$rs = mysqli_query($con, $sql);
+		?>
+	<div id="container_actividades">
+		<div class="row">
+		 <div class="teal-text">INFORMACIÓN DE LAS ACTIVIDADES</div>
+			<div style="overflow-x: auto;">
+				<table>
+					<thead>
+						<tr>
+							<th>Actividad</th>
+							<th>Descripción</th>
+							<th>Fecha Inicial</th>
+							<th>Fecha Final</th>
+							<th>Valor</th>
+							<th>Opciones</th>
+							
+						</tr>
+					</thead>
+					<tbody id="mostrarActividadA">
+						
 
-		<?php if($estado_proyecto==1 || $estado_proyecto==2){ ?>	 
-		 <td >  
-		   <?php if($estado_proyecto==2){ ?>	
-	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text" onclick="mostrarEvidenciaA(<?php echo $id_acti ?>);" href="#modal2">attach_file</a>
-			<?php } ?>
-			<li  title="Editar" class='material-icons ' style="pointer-events:none; color:#999999; opacity:0.9;" ><a  class="hoverable grey-text " href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
-			<li  title="Eliminar" class='material-icons' style="pointer-events:none; opacity:0.6;" ><a  class="hoverable  modal-trigger grey-text "  href="#modal1">delete</a></li>
-		</td>
-		<?php } else if($estado_proyecto==0 || $estado_proyecto==3){ ?>
-		<td>
-			<li title="Editar" class='material-icons'><a class="hoverable  orange-text" href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
-			<li title="Eliminar" class='material-icons'><a class="hoverable  modal-trigger red-text" href="#modal1">delete</a></li>
-		</td> 
-		<?php } ?> 
-		
-	</tr> 
-         
-<?php } ?> 
 
-	</table></div></div>
+
+
+
+
+
+
+
+								
+
+
+
+
+
+
+
+
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 
 
@@ -232,12 +248,12 @@
 
  
 
-	<!-- Modal Structure -->
+	<!-- Modal Structure eliminar -->
 	<div id="modal1" class="modal">
     <div class="modal-content">
        <h5 class="center" >¿Estás seguro de eliminar esta actividad?</h5>
 	 <div class="center">
-	   <a href="dataBase/eliminar_actividad.php?id=<?php echo $id_acti ?>&id_proy=<?php echo $item ?>"class="btn-small red">Si</a>
+	   <button   id="eliminarActividadA" type="button" class="btn-small red modal-close">Si</button> 
 	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
 	 </div> 
 	</div>
@@ -248,25 +264,25 @@
 	
    <!-- Modal Structure elimina Evidencia  -->
 	<div id="eliminarEvidencia" class="modal">
-    <div class="modal-content">
-	<input  id="IdEvi" type="hidden">
-	<input  id="IdRuta" type="hidden">
-       <h5 class="center" >¿Estás seguro de eliminar esta Evidencia?</h5>
-	 <div class="center">
-	   <button   id="eliminarEvidenciasA" type="button" class="btn-small red modal-close">Si</button>
-	   <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
-	 </div> 
-	</div>
+		<div class="modal-content">
+			<input  id="IdEvi" type="hidden">
+			<input  id="IdRuta" type="hidden">
+			<h5 class="center" >¿Estás seguro de eliminar esta Evidencia?</h5>
+				<div class="center">
+					<button   id="eliminarEvidenciasA" type="button" class="btn-small red modal-close">Si</button>
+					<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+				</div> 
+		</div>
     </div>
 	
 		
 	<!-- Modal para agregar arcivos -->
 	<div id="modal2" class="modal ">
 		<div class="modal-content" >
-		<div class="center"><i class="large material-icons teal-text">file_upload</i></div>
+		 <div class="center"><i class="large material-icons teal-text">file_upload</i></div>
 		 <div class="center"><h4 class="">SUBIR EVIDENCIAS</h4></div> <br> 
 		<form action="" method="" enctype="multipart/form-data" id="subirEvidencia" >
-			<div class="row">  
+			<div class="row" id="edi_escondeForm">  
 			<span class="center-align" style="opacity: 0.5; position:relative; top: -15px" >&nbsp;&nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span> <br>
 				<div class="input-field col s6">
 					<input placeholder="Ingrese el nombre de la evidencia" name="nombre_a" id="first_name_e" type="text" class="validate caracteresEpesiales" required>
@@ -285,6 +301,11 @@
 					<input value="" id="idActiEvidencia" name="item_acty" type="hidden" class="validate" type="text" required>
 				</div>
 			</div>
+			 
+			 <div class="center hide" id="edi_load" type="" style="margin-top: 50px">
+				<?php include("../include/preloader.php"); ?>
+			</div>
+			 
 			  <div class="center">
 			  	  <button class="btn orange"  type="button" onclick="subirEvidenciaA()">Subir </button>
 				  <a href="#!" class=" modal-close waves-effect waves-green btn-flat white-text red ">Atras</a>
@@ -292,21 +313,22 @@
 		</form>
 		</div> <br><br> 
 
+      <!-- DESCARGAR LAS ACTIVIDADES -->
 		<div class="center"><h4 class="">DESCARGAR EVIDENCIAS</h4></div>
 
 		<div class=" section">
-		<table class="container responsive-table">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Archivo</th>
-					<th>Lista  de Opciones</th>			
-				</tr>
-		   </thead>
-		   <tbody id="mostrarEvidenciaA">
-			
-		  </tbody>
-		</table>	 
+			<table class="container responsive-table">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Archivo</th>
+						<th>Lista  de Opciones</th>			
+					</tr>
+				</thead>
+			<tbody id="mostrarEvidenciaA">
+				
+			</tbody>
+			</table>	 
 		</div> <br> <br>
     </div>
 
@@ -318,6 +340,8 @@
 <script src="js/validaciones.js"></script>
 <script>
 	mostrarLiderP( <?php echo $item ?>);
+	// mostrarActividadA(<?php echo $item ?>);
+	
 </script>
  
 </body>

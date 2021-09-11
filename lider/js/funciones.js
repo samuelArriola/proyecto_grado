@@ -184,6 +184,33 @@ $(document).ready(function() {
     });
 
 
+    //ELIMINAR ACTIVIDADES
+    $('#eliminarActividadA').click(function() {
+
+        let id = $('#id_actividadA').val();
+        let id_proy = $('#id_pro').val();
+        let jefe_proy = $('#coordinador_proye').val();
+        let nomb_proy = $('#nombre_proye').val();
+        let nombre_act = $('#nomb_acti').val();
+
+        $.ajax({
+            type: "POST",
+            url: "dataBase/eliminar_actividad.php",
+            data: {
+                id,
+                id_proy,
+                jefe_proy,
+                nomb_proy,
+                nombre_act,
+            },
+            dataType: "html",
+            success: function(response) {
+                M.toast({ html: response });
+                window.location.href = 'editar_proyecto.php?id=' + id_proy;
+            }
+        })
+    })
+
 
 
 });
@@ -276,6 +303,9 @@ function estadoLPVvisto(id_pro, id_usua, estado) {
 //SUBIR EVIDENCIA CON AJAX
 function subirEvidenciaA(e) {
     let datoE = new FormData($('#subirEvidencia')[0]);
+    $('#edi_escondeForm').hide();
+    let edi_load = $('#edi_load');
+    edi_load.removeClass('hide');
 
     $.ajax({
         url: 'dataBase/subirEvidenciaA.php',
@@ -287,9 +317,12 @@ function subirEvidenciaA(e) {
             M.toast({ html: response, classes: 'rounded' });
             $('#subirEvidencia')[0].reset(); //limpia las casjas de texto
             mostrarEvidenciaA(datoE.get("item_acty"));
+            edi_load.addClass('hide');
+            $('#edi_escondeForm').show();
         }
     })
 }
+
 
 //MOSTRAR EVIDENCIA CON AJAX
 function mostrarEvidenciaA(id_acti) {
@@ -308,6 +341,28 @@ function mostrarEvidenciaA(id_acti) {
         }
     })
 }
+
+
+//MOSTRAR Actividades  CON AJAX
+
+function mostrarActividadA(itemProy) {
+    let EpEstado_proyecto = $('#EpEstado_proyecto').val();
+    $.ajax({
+        url: 'dataBase/mostrarActividad.php',
+        type: 'POST',
+        data: {
+            itemProy,
+            EpEstado_proyecto
+        },
+        success: (response) => {
+            let evidencia_proy = document.getElementById('mostrarActividadA');
+            evidencia_proy.innerHTML = response;
+
+        }
+    })
+}
+
+
 
 //borrar las evidencias con ajax con ajax
 $('#eliminarEvidenciasA').click(function() {

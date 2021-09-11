@@ -10,7 +10,7 @@
     $query="SELECT * FROM inex_usuarios WHERE  item_dep = '$dep' AND iden_usua != '$ide'" ;
 
     if (isset($_POST['dato'])) {
-     $buscar_u = $_POST['dato'];
+     $buscar_u = mysqli_real_Escape_string ($con,$_POST['dato']);
      $query="SELECT * FROM inex_usuarios WHERE    (iden_usua LIKE '%$buscar_u%' OR nomb_usua  LIKE '%$buscar_u%' OR apel_usua LIKE'%$buscar_u%' OR correo LIKE '%$buscar_u%') AND item_dep = '$dep' AND iden_usua != '$ide'"; 
    }
    $resul_u=mysqli_query($con,$query);
@@ -21,12 +21,14 @@
          $id_u = $row_u['iden_usua'];
          $eliminar ="<li title='Borrar' class='material-icons '><a href='#eliminaULogico' type='button'  onclick='recibeIDLogico(".$row_u['iden_usua'].")' class='hoverable red-text modal-trigger'>delete</a></li>";
          $restaurar =" <li title='Restaurar' class='material-icons '><a href='#restaurarULogico' type='button'  onclick='recibeIDLogicoREST(".$row_u['iden_usua'].")' class='hoverable orange-text modal-trigger'>restore</a></li>";
-            
+         $editar = "<li title='Editar' class='material-icons'><a href='u_editar.php?id_u=".$row_u['iden_usua']."' class='hoverable modal-trigger'>edit</a></li>";  
          
            if($row_u['estado'] ==='ACTIVO' ){
                $restaurar="";
            }else{
                $eliminar="";
+               $editar="";
+
            }
 
         /*  //trae item_roll
@@ -48,7 +50,7 @@
                    <td> ".$row_u['correo']." </td>
                    <td> ".$row_u['estado']." </td>
                    <td>
-                       <li title='Editar' class='material-icons'><a href='u_editar.php?id_u=".$row_u['iden_usua']."' class='hoverable modal-trigger'>edit</a></li>
+                        ". $editar ."  
                         ".$restaurar."
                         ".$eliminar."                
                                          
