@@ -42,13 +42,13 @@ $(document).ready(function(){
         //  console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
         
         if (isEmpty(datos_u.nombre_u)) {
-           return   M.toast({html: 'Nombre de usuario Vacío, por favor Complete todos los campos'});
+           return   M.toast({html: 'Nombre de usuario vacío, por favor complete todos los campos'});
         } else if (isEmpty(datos_u.apellido_u)) {
-           return  M.toast({html: 'Apellido de usuario Vacío, por favor, complete el campo', classes: 'rounded'});
+           return  M.toast({html: 'Apellido de usuario vacío, por favor complete el campo', classes: 'rounded'});
         }else if(isEmpty(datos_u.cedula_u)){
-            return M.toast({html: 'Identificación de usuario Vacío, por favor, complete el campo', classes: 'rounded'});
+            return M.toast({html: 'Identificación de usuario vacío, por favor complete el campo', classes: 'rounded'});
         }else if(isEmpty(datos_u.correo_u)){
-            return M.toast({html: 'Correo de usuario Vacío, por favor, complete el campo', classes: 'rounded'});
+            return M.toast({html: 'Correo de usuario vacío, por favor complete el campo', classes: 'rounded'});
         }else {
             $.ajax({
                 type:"POST",
@@ -88,7 +88,6 @@ $(document).ready(function(){
                 url:"dataBase/u_editar.php",
                 data:datos_u,
                 success: function (response_e) {
-                    console.log(response_e);
                 M.toast({html: response_e });
                 // $('#editar_u')[0].reset(); //limpia las casjas de texto
 
@@ -209,7 +208,7 @@ $("#actualizar").click(function(e){
     e.preventDefault();
 }); 
 
-    //INGRESA COMENTARIOS MANDA A CORRECION LOS PROYECTOS
+//INGRESA COMENTARIOS MANDA A CORRECION LOS PROYECTOS
     function corregirProyecto(estado) {
         // e.preventDefault();
         const datos_c={
@@ -239,7 +238,7 @@ $("#actualizar").click(function(e){
         }
     }
 
-    //FUNCION VISTO
+//FUNCION VISTO
     function visto(id_p, estado) {
        
         $.ajax({
@@ -256,6 +255,24 @@ $("#actualizar").click(function(e){
             }
         });   
     }
+
+//MOSTRAR EVIDENCIA CON AJAX
+function mostrarEvidenciaA(id_acti) {
+    let id_actividad =id_acti;
+    // $('#idActiEvidencia').val(id_actividad);
+    console.log(id_actividad);
+     $.ajax({
+         url:'dataBase/mostrarEvidenciaA.php',
+         type:'POST',
+         data:{id_actividad},
+         success:(response) => {
+          let evidencia_proy= document.getElementById('mostrarEvidenciaA2');
+          evidencia_proy.innerHTML  = response ;
+             
+         }
+     })
+ } 
+
 //caracteres vacíos 
     function isEmpty(str) {
         return (!str || 0 === str.length);

@@ -32,7 +32,7 @@
 					<content>Acceder</content>
 				</h1>
 				<div id="name_app" class="text-normal">
-					<content>Ir a </content>
+					<content>INEX</content>
 				</div>
 			</div>
 			<div class="col s12 form">
@@ -64,7 +64,7 @@
 					<content>Acceder</content>
 				</h1>
 				<div id="name_app" class="text-normal">
-					<content>Ir a </content>
+					<content>INEX </content>
 				</div>
 			</div>
 			<div class="col s12 form">

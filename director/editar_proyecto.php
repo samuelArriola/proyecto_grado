@@ -103,17 +103,17 @@
     </div>
 	
 	<div class="input-field col s12">
-	<b>Lider a Cargo:</b> 
+	<b>Lider a cargo:</b> 
 	   <h6><?php echo $row["responsable"] ?></h6>
 	</div>
 
 		<?php if($estado_proyecto==2){ ?>
 		<div class="input-field col s12">
-	    	<div class="center"><button class="btn orange"  id="actualizar" >Actualizar fechas</button></div>
+	    	<div class="center"><button disabled class="btn orange"  id="actualizar" >Actualizar fechas</button></div>
 		</div>
 		<?php }else{ ?>
 		<div class="input-field col s12">
-    		<div class="center" ><button disabled class="btn orange red"  id="actualizar" >Actualizar fechas </button></div>
+    		<div class="center" ><button  class="btn orange red"  id="actualizar" >Actualizar fechas </button></div>
 		</div>
 		<?php } ?>
 
@@ -134,8 +134,8 @@
 	<tr>
 		<th>Actividad</th>
 		<th>Descripción</th>
-		<th>Fecha Inicial</th>
-		<th>Fecha Final</th>
+		<th>Fecha inicial</th>
+		<th>Fecha final</th>
 		<th>Valor</th>
 		<?php if($estado_proyecto==2){ ?>	
 		<th>Evidencias</th>
@@ -159,7 +159,7 @@
 		<td><?php echo $row['valo_acti'] ?></td>
 		<?php if($estado_proyecto==2){ ?>	 
 		<td>  
-	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text"  href="#modal2">attach_file</a>
+	   	    <li title="Evidencia " class='material-icons'><a class="hoverable  modal-trigger blue-text" onclick="mostrarEvidenciaA(<?php echo $row['item_acti'] ?>)" href="#modal2">attach_file</a>
 		</td>
 		<?php }?>
 	</tr> 
@@ -182,16 +182,17 @@
 	
 
 	<!-- Modal enviar cometarios  -->
-	<div id="corregirProyecto" class="modal">
+	<div id="corregirProyecto" class="modal"><br>
 	<div class="center"><i class="large material-icons red-text">email</i></div>
 		<br><br><div class="center"><h4 class="">COMENTARIOS</h4></div>
     <div class="modal-content">
+	<span style="opacity: 0.5; " class="left">&nbsp;&nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span>  
 		<div class="row">
 		<form class="col s12" id="formCorregir">
 		<div class="row">
 			<div class="input-field col s12">
 			<textarea  required id="comentarioProyecto" class="materialize-textarea caracteresEpesiales validate" maxlength="1100"></textarea>
-			<label for="comentarioProyecto">ingresar comentarios * </label>
+			<label for="comentarioProyecto">* Ingresar comentarios  </label>
 			</div>
 		</div>
 		</form>
@@ -238,8 +239,8 @@
 	<!-- Modal para agregar arcivos -->
 	<div id="modal2" class="modal ">
 		<br><br>
-
-		<div class="center"><h4 class="">Descargar evidencias</h4></div>
+		<div class="center"><i class="large material-icons teal-text">download</i></div>
+		<div class="center"><h4 class="">DESCARGAR EVIDENCIAS</h4></div>
 
 		<div class="container section">
 		<table class="responsive-table">
@@ -250,20 +251,7 @@
 					<th>Lista  de Opciones</th>			
 				</tr>
 		   </thead>
-		   <tbody>
-			<?php while ($row_e= mysqli_fetch_array($ver_e)) 
-			{ ?>
-
-				<tr>
-					<td><?php echo $row_e['nombre_e'];?></td>
-					<td><?php echo $row_e['ruta_e'];?></td>
-					<td>
-					 <li title="Descargar" class='material-icons'><a href="../lider/dataBase/<?php echo $row_e['ruta_e'];?>" download="<?php echo $row_e['ruta_e'];?>">file_download</a></li>
-				     <!-- <li title="Editar" class='material-icons'><a class="hoverable  orange-text" href="editar_actividad.php?id=<?php echo $item ?>&id_a=<?php echo $id_acti ?>">edit</a></li>
-					 <li title="Eliminar" class='material-icons'><a class="hoverable  red-text" href="dataBase/eliminar_evidencia.php?id_e=<?php echo $row_e['id_e']?>&ruta_e=<?php echo  $row_e['ruta_e'] ?>" >delete</a></li> -->
-					</td>
-				</tr>
-			<?php }?>
+		   <tbody id="mostrarEvidenciaA2">
 			</tbody>
 		</table>	 
 		</div> <br> <br>

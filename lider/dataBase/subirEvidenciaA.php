@@ -12,10 +12,11 @@ include("../../config/conexion.php");
  $evidencia_a="INSERT INTO inex_evidencia(item_acti, nombre_e, ruta_e, fecha_e) VALUES('$item_acty','$nombreE','$ruta','$fecha_e')";
  $resul_e=mysqli_query($con,$evidencia_a);
 
+
  if ($resul_e) {
     echo 'Evidencia subida correctamente';
 } else {
-    echo 'hay problemas en el lugar donde se estan almacenado los archivos, por favor concatate a su ingeniero de software';
+    echo 'Evidencia existente <br> Renombre el nombre la imagen y vuelva a intentar, sino concatate a su ingeniero de software';
 }
 
 ?>

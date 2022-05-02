@@ -1,7 +1,6 @@
 <?php
-
+    session_start(); 
 	include("../config/conexion.php");
-
     $icon_estado = array('0' => '<i class="material-icons">edit</i>',
 	'1' => '<i class="material-icons">send</i>',
 	'2' => '<i class="material-icons">check_circle</i>',
@@ -15,15 +14,7 @@
 	'1' => 'Enviado',
 	'2' => 'Aprobado',
 	'3' => 'Corregir');
-
-	session_start(); 
-
-	$_SESSION["IDEN"];
-	$_SESSION["NOMB"];
-	$_SESSION["ROLE"];
-
 	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){    
-
 ?>
 
 <html> 
@@ -50,7 +41,7 @@
   <select class="browser-default" id="buscar" style="position: relative; left :-15px">
     <option value="TODOS" selected>TODOS</option>
     <option value="APROBADOS">APROBADOS</option>
-    <option value="CONSTRUCCION">CONSTRUCCION</option>
+    <option value="CONSTRUCCION">CONSTRUCCIÓN</option>
     <option value="CORREGIR">CORREGIR</option>
 	<option value="ENVIADOS">ENVIADOS</option>
   </select>

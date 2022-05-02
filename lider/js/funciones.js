@@ -5,7 +5,6 @@ var f = new Date();
  var y =f.getFullYear();
  var m =f.getMonth();
  var d= f.getDate();
-
    
 $(document).ready(function(){
     $('select').formSelect();
@@ -16,8 +15,6 @@ $(document).ready(function(){
         format:'yyyy/mm/dd',
         }  
     );
-
-  
     
     // crear proyecto
     $('.datepicker1').datepicker({
@@ -203,7 +200,7 @@ $(document).ready(function(){
              M.toast({html: 'Corregir fecha inicial: La fecha inicial no puede ser mayor a la fecha final', classes: 'rounded'});
              console.log(datos.fecha_ipro+"  "+datos.fecha_fpro);
         }else{
-            $.post('database/actualizar_proyecto.php',datos,function(response){
+            $.post('dataBase/actualizar_proyecto.php',datos,function(response){
                 if(response){
                     M.toast({html: 'Proyecto actualizado', classes: 'rounded'});
                 }
@@ -213,7 +210,6 @@ $(document).ready(function(){
         e.preventDefault();
     }); 
     
-
 }); 
 
 $('#btn_create_p').click((e) => {
@@ -259,7 +255,6 @@ $('#btn_create_p').click((e) => {
     
 })
 
-
 //FUNCION VISTO PROYECTOS EN CONSTRUCCIÓN 
 function visto(id_p, estado,estadoL) {
     $.ajax({
@@ -271,7 +266,7 @@ function visto(id_p, estado,estadoL) {
             estadoL
         },
         success: function (response) {
-        M.toast({html: response});
+       console.log(response);
         // $('#editar_u')[0].reset(); //limpia las casjas de texto
         }
     });   
@@ -306,24 +301,23 @@ function cambiaEstado (estado) {
         }
 } 
 
+//SUBIR EVIDENCIA CON AJAX
+function subirEvidenciaA(e) {
+    let datoE = new FormData($('#subirEvidencia')[0]); 
 
-    //SUBIR EVIDENCIA CON AJAX
-    function subirEvidenciaA(e) {
-        let datoE = new FormData($('#subirEvidencia')[0]); 
-    
-        $.ajax({
-            url:'dataBase/subirEvidenciaA.php',
-            type:'POST',
-            data:datoE,
-            contentType:false,
-            processData: false,
-            success:(response) => {
-                M.toast({html: response, classes: 'rounded'});
-                 $('#subirEvidencia')[0].reset(); //limpia las casjas de texto
-                 mostrarEvidenciaA(datoE.get("item_acty"));
-            }
-        })
-    }
+    $.ajax({
+        url:'dataBase/subirEvidenciaA.php',
+        type:'POST',
+        data:datoE,
+        contentType:false,
+        processData: false,
+        success:(response) => {
+            M.toast({html: response, classes: 'rounded'});
+                $('#subirEvidencia')[0].reset(); //limpia las casjas de texto
+                mostrarEvidenciaA(datoE.get("item_acty"));
+        }
+    })
+}
 
 //MOSTRAR EVIDENCIA CON AJAX
     function mostrarEvidenciaA(id_acti) {
@@ -343,28 +337,28 @@ function cambiaEstado (estado) {
         })
     } 
 
-    //borrar las evidencias con ajax con ajax
-    $('#eliminarEvidenciasA').click(function () {
-        let datoE2 = new FormData($('#subirEvidencia')[0]); 
-       let IdEvi = $('#IdEvi').val();   
-        let IdRuta= $('#IdRuta').val();   
-            $.ajax({
-                type: "POST",
-                url: "dataBase/eliminar_evidencia.php",
-                data:{id_e:IdEvi,
-                    ruta_e:IdRuta} ,
-                dataType: "html",
-                success: function (response) {
-                    mostrarEvidenciaA(datoE2.get("item_acty"));
-                    M.toast({html: response});
-                    console.log(response); 
-                }
-            })
-    })
+//borrar las evidencias con ajax con ajax
+$('#eliminarEvidenciasA').click(function () {
+    let datoE2 = new FormData($('#subirEvidencia')[0]); 
+    let IdEvi = $('#IdEvi').val();   
+    let IdRuta= $('#IdRuta').val();   
+        $.ajax({
+            type: "POST",
+            url: "dataBase/eliminar_evidencia.php",
+            data:{id_e:IdEvi,
+                ruta_e:IdRuta} ,
+            dataType: "html",
+            success: function (response) {
+                mostrarEvidenciaA(datoE2.get("item_acty"));
+                M.toast({html: response});
+                console.log(response); 
+            }
+        })
+})
 
-     //trae id y laruta para camdarlo a la ventana confirm eliminar usuario
-     function recibeIdEvi(id_e,id_ruta) {
-        $('#IdEvi').val(id_e);   
-        $('#IdRuta').val(id_ruta);            
-              
-    }
+    //trae id y laruta para camdarlo a la ventana confirm eliminar usuario
+    function recibeIdEvi(id_e,id_ruta) {
+    $('#IdEvi').val(id_e);   
+    $('#IdRuta').val(id_ruta);            
+            
+}

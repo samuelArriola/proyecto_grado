@@ -85,7 +85,7 @@
 	   <input value = "<?php echo $row["nomb_proy"] ?>" name="nombre_proye" id="nombre_proye" type="text" class="validate caracteresEpesiales"> 
 		<div style="text-align: center; margin-top: -75px; margin-left: 93%;"><?php echo $icon_estado[$row["esta_proy"]] ?><div style="font-size: 0.7em; margin-top: 8px;"> <?php echo $desc_estado[$row["esta_proy"]] ?></div></div>
 		<?php if($estado_proyecto==3){ ?>	
-			<div style="text-align: center; margin-top: -49px; margin-left: 75%;">
+			<div style="text-align: center; margin-top: -49px; margin-left: 75%;" class="hide-on-small-only">
 			 <li title="COMETARIOS" class='material-icons'><a class="hoverable  modal-trigger red-text" href="#cometariosP">comment</a></li>
 			<div style="font-size: 0.7em; margin-top: 10px;"> Comentarios</div></div>			
 		<?php } ?>
@@ -122,7 +122,7 @@
     </div>
 	
 	<div class="input-field col s12">
-	<b>Lider a Cargo:</b> 
+	<b>Lider a cargo:</b> 
 	   <input disabled value = "<?php echo $row["responsable"] ?>" name="lider_proye" id="lider_proye" type="text" class="validate">
 	</div>
 	
@@ -134,9 +134,11 @@
 			   <button class="btn orange" id="actualizar" >Actualizar</button>
 			   <?php if($estado_proyecto==0){ ?>	
 				 <a class="btn red modal-trigger " id="eliminar_p" href="#modal3">eliminar</a> 
-
 				<?php } ?> 
 		  <?php } ?> 
+		  <?php if($estado_proyecto==3){ ?>	
+			<a class="hoverable  modal-trigger red btn hide-on-med-and-up" href="#cometariosP">COMENTARIO</a>			
+		<?php } ?>
 	</div>
     </div>
 	</form>
@@ -152,7 +154,7 @@
 	$rs = mysqli_query($con, $sql);
 ?>
 	<div class="row">
-	<div class="teal-text">INFORMACIÓN DEL ACTIVIDADES</div>
+	<div class="teal-text">INFORMACIÓN DE LAS ACTIVIDADES</div>
 	<div style="overflow-x: auto;"><table>
 	<tr>
 		<th>Actividad</th>
@@ -270,12 +272,13 @@
 	<!-- Modal para agregar arcivos -->
 	<div id="modal2" class="modal ">
 		<div class="modal-content" >
-		 <div class="center"><h4 class="">Subir evidencias</h4></div> <br>
+		<div class="center"><i class="large material-icons teal-text">file_upload</i></div>
+		 <div class="center"><h4 class="">SUBIR EVIDENCIAS</h4></div> <br> 
 		<form action="" method="" enctype="multipart/form-data" id="subirEvidencia" >
 			<div class="row">  
-			<span style="opacity: 0.5;" >Los campos señalados con "*" son campos obligatorios</span>  <br>
+			<span class="center-align" style="opacity: 0.5; position:relative; top: -15px" >&nbsp;&nbsp;&nbsp;&nbsp;Los campos señalados con "*" son campos obligatorios</span> <br>
 				<div class="input-field col s6">
-					<input placeholder="Ingrese el nombre de la evidencia" name="nombre_a" id="first_name_e" type="text" class="validate" required>
+					<input placeholder="Ingrese el nombre de la evidencia" name="nombre_a" id="first_name_e" type="text" class="validate caracteresEpesiales" required>
 					<label for="first_name_e">* Nombre</label>
 				</div>
 				<div class="col s6">
@@ -293,9 +296,9 @@
 			</div>
 			  <div class="center"><button class="btn orange"  type="button" onclick="subirEvidenciaA()">Subir </button></div>
 		</form>
-		</div> <br><br>
+		</div> <br><br> 
 
-		<div class="center"><h4 class="">Descargar evidencias</h4></div>
+		<div class="center"><h4 class="">DESCARGAR EVIDENCIAS</h4></div>
 
 		<div class=" section">
 		<table class="container responsive-table">
