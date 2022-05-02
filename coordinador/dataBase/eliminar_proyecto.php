@@ -1,12 +1,8 @@
 <?php  
-
 include("../../config/conexion.php");
 
-    $item = $_GET['id_p'];
-     
-
+     $item = $_GET['id_p'];
      $query="DELETE FROM inex_proyectos WHERE  item_proy='$item'";
-
      $resul=mysqli_query($con,$query);
 
      if(!$resul){

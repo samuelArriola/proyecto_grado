@@ -1,7 +1,7 @@
 <?php 
 
 // session_start(); 
-$dep_u = $_SESSION["NOM_D"]
+$dep_u = $_SESSION["NOM_D"];
 
 ?>
 
@@ -16,7 +16,7 @@ $dep_u = $_SESSION["NOM_D"]
         DIRECTOR
         <i class="material-icons right">arrow_drop_down</i>
         </a> 
-    </li>
+    </li> 
     </ul>
   </div> 
 
@@ -31,7 +31,7 @@ $dep_u = $_SESSION["NOM_D"]
   <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">account_balance</i>Proyectos
 </a></li>
 <li><a class="black-text" id="mnuProy" style="font-size: 0.8em; text-align: center; height: 64px;" href="coordinadores.php" >
-  <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">supervisor_account</i>Coordinadores
+  <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">supervisor_account</i>Usuarios
 </a></li>
 </ul>
 
@@ -60,7 +60,7 @@ $dep_u = $_SESSION["NOM_D"]
 	<i class="material-icons teal-text ">account_balance</i>Proyectos </a>
 </li>
 <li><a class="black-text" id="mnuProy" style="padding-left: 16px;" href="coordinadores.php" >
-  <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">supervisor_account</i>Coordinadores
+  <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">supervisor_account</i>Usuarios
 </a></li>
 
 <li class="divider"></li>

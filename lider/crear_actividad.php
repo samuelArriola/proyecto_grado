@@ -2,13 +2,15 @@
 session_start(); 
 include("../config/conexion.php");
 $item = $_GET['id'];
-    $query = "SELECT DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip FROM inex_proyectos WHERE item_proy ='$item'";
+    $query = "SELECT  nomb_proy, jefe_proy, DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip FROM inex_proyectos WHERE item_proy ='$item'";
     $result = mysqli_query($con,$query); 
     while ($row = mysqli_fetch_array($result)) {
         $fecha_i= $row['fecha_ip'];
         $fecha_f= $row['fecha_fp'];
+        $jefe_pro = $row['jefe_proy'];
+        $nomb_proy = $row['nomb_proy'];
     }
-if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
+if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L" ){
 ?>
 
 <!-- <!DOCTYPE html> -->
@@ -19,7 +21,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	  <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
+    <link rel="icon" type="../image/png" href="../img/logo.png" />
     <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 
 <style>
@@ -43,6 +45,8 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
         <div class="row">
         <div class="input-field col s12">
             <input type="hidden" value=" <?php echo $item ?>" name="id_pro2" id="id_pro2">
+             <input type="hidden" value=" <?php echo $jefe_pro ?>" name="id_jefeProy" id="id_jefeProy">
+            <input type="hidden" value=" <?php echo $nomb_proy ?>" name="nomb_proy" id="nomb_proy">
             <input placeholder="Ingrese el nombre de la actividad" name="nombre_act" id="nombre_act"   maxlength="240" autofocus type="text" class="validate caracteresEpesiales" required >
             <label for="nombre_act" >* Nombre de la Actividad</label>
         </div>

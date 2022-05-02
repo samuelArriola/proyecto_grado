@@ -19,6 +19,7 @@
 	<title>Coordinadores</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link rel="icon" type="image/png" href="../img/logo.png" />
 	<link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 	<style>
 	.hoverA:hover {
@@ -68,8 +69,21 @@
 							<label for="i9">*Cedula</label>
 						</div>
 						<div class="input-field col m12 s12">
-							<input name="correo" id="i7" type="email" class="validate " required>
+							<input name="correo" id="i7" type="email" class="validate caracteresEpesiales" required>
 							<label for="i7">*Correo</label>
+						</div>
+						<div class="input-field col s12"  >
+						<span>*Tipo de usuario</span> <br><br>
+							<p>
+							<label>
+								<input value="C" name="checkTip" type="checkbox" class="filled-in" />
+								<span>COORDINADO &nbsp &nbsp &nbsp</span>
+							</label>
+							<label>
+								<input value="L" name="checkTip" type="checkbox" class="filled-in" />
+								<span>LIDER</span>
+							</label>				
+							</p>
 						</div>
 					 </div>
 						
@@ -112,6 +126,8 @@
 				<th>Nombre</th>
 				<th>Apellido</th>		
 				<th>Correo</th>
+				<!-- <th>Roles</th> -->
+				<th>Estado</th>
 				<th>Opciones</th>
 			</tr>
 			</thead>
@@ -178,6 +194,30 @@
 		<h5 class="center" >¿Estás seguro de eliminar este usuario?</h5>
 			<div class="center">
 			<button   id="eliminarUsuarios" type="button" class="btn-small red modal-close">Si</button>
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+			</div> 
+		</div>
+	</div>
+	
+	<!--  confirmacion eliminado logico de  usuario -->
+	<div id="eliminaULogico" class="modal">
+		<div class="modal-content">
+		<input  id="obtieneIDLogico" type="hidden">
+		<h5 class="center" >¿Estás seguro de eliminar este usuario?</h5>
+			<div class="center">
+			<button   onclick="eliminarUsuariosLogicos('INACTIVO')" type="button" class="btn-small red modal-close">Si</button>
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
+			</div> 
+		</div>
+	</div>
+
+	<!--  confirmacion restaurarULogico logico de  usuario -->
+	<div id="restaurarULogico" class="modal">
+		<div class="modal-content">
+		<input  id="obtieneIDLogicoRestau" type="hidden">
+		<h5 class="center" >¿Estás seguro de restaurar este usuario?</h5>
+			<div class="center">
+			<button   onclick="rstaurarUsuariosLogicos('ACTIVO')" type="button" class="btn-small red modal-close">Si</button>
 			<a href="#!" class="modal-close waves-effect waves-green btn-flat btn-small orange">No</a>
 			</div> 
 		</div>

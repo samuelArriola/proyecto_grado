@@ -4,6 +4,7 @@ include("../config/conexion.php");
 //muestra las independencias
 $mostrar_i = "SELECT * FROM inex_dependencias";
 $resul_mi = mysqli_query($con,$mostrar_i);
+
   
 if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
 ?>
@@ -15,7 +16,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	  <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
+    <link rel="icon" type="../image/png" href="../img/logo.png" />
     <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 
 <style>
@@ -55,13 +56,13 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
         </div>
         <div class="col s12"> 
          <label>* Escoja la dependencia a la que pertenece el proyecto</label>
-             <select class="browser-default" name="dependencia" id="dependencia">
+             <select class="browser-default"  name="dependencia" id="dependencia">
                 <option value="" disabled selected>Seleccione</option>
                 <?php while ($row_mi=mysqli_fetch_array($resul_mi)) {?>
                   <option value="<?php echo $row_mi['item_dep']?>"><?php echo $row_mi['nombre_dep'] ?></option>
-                <?php } ?>
+                <?php } ?>    
               </select>
-          </div> 
+          </div>  <br>
          <div class="input-field col s12" style="position:relative; top:15px" >
            <input disabled value="<?php echo $_SESSION["NOMB"] ?>" name="lider_proye" id="nombre" type="text" class="validate">
            <input value="<?php echo $_SESSION["IDEN"] ?>" name="iden_lider" id="iden_lider" type="hidden" class="validate">

@@ -1,6 +1,5 @@
- 
- 
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -10,6 +9,7 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/login/materialize-login.min.css"  media="screen,projection"/>
     <link rel="stylesheet" type="text/css" href="css/login/login.css?">
+	<link rel="icon" type="image/png" href="img/logo.png" />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
@@ -39,11 +39,19 @@
 				<div class="row">
 					<div id="divnameuser">
 						<div class="col s12 input-field" >
-							<input type="text" name="nameuser" id="nameuser" class="validate" required>
+							<input type="text" name="nameuser" id="nameuser" class="validate" autofocus required>
 							<label for="nameuser">Nombre de usuario</label>
 						</div>
 						<div id="msgError1" class="col error s12 red-text">
 						</div>
+						<div class="col m7 s8 offset-m3 offset-s3 ">
+							<select class="browser-default" id="Tdependencia" style="position: relative; left :-15px">
+								<option value="D" selected>Director</option>
+								<option value="C">Coordinador</option>
+								<option value="L">Lider</option>
+							</select>
+						</div>
+
 					</div>	
 				</div>
 			</div>
@@ -71,7 +79,7 @@
 				<div class="row">	
 					<div id="divpassU">
 						<div class="col s12 input-field " >
-							<input type="password" name="nameuser" id="passU">
+							<input type="password" name="nameuser" id="passU" >
 							<label for="passU">Contraseña</label>
 						</div>
 						<div id="msgErrorpss" class="col error s12 red-text">
@@ -80,8 +88,9 @@
 				</div>
 			</div>
 			<div class="col s12 " style="position: relative; top: -18px">
-				<div class="center">
+				<div class="center" >
 					<button id="btnPass"  class="btn-flat btn-text btn-radius orange darken-2 white-text ">Siguiente</button>
+					<span id = "confirPass"></span>
 				</div>
 			</div>
 		</div>
@@ -91,5 +100,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/login/materialize-login.min.js"></script>
   <script src="js/login/app.js"></script>
+  <script>
+
+  </script>
 </body> 
 </html>

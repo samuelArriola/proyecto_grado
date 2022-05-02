@@ -14,7 +14,9 @@
 	'1' => 'Enviado',
 	'2' => 'Aprobado',
 	'3' => 'Corregir');
-	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){    
+
+	if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L" ){  
+		   
 ?>
 
 <html> 
@@ -22,8 +24,9 @@
 <title>PROYECTOS INEX</title> 
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" type="../image/png" href="../img/logo.png" />
 <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
 <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 </head>
@@ -33,52 +36,45 @@
 
 <div class="container">
 
-<div class="teal-text">REGISTROS DE PROYECTOS</div> <br>
+<div class="teal-text">REGISTROS DE PROYECTOS</div> <br><br><br>
 
- <div class="row">
- <label>MOSTRAR:</label> 
- <div class="input-field col s12">
-  <select class="browser-default" id="buscar" style="position: relative; left :-15px">
-    <option value="TODOS" selected>TODOS</option>
-    <option value="APROBADOS">APROBADOS</option>
-    <option value="CONSTRUCCION">CONSTRUCCIÓN</option>
-    <option value="CORREGIR">CORREGIR</option>
-	<option value="ENVIADOS">ENVIADOS</option>
-  </select>
-</div>
+	<!-- filtro de busqueda -->
+	<div class="row">
+		<label>MOSTRAR:</label> 
+		<div class="input-field col s12">
+		<select class="browser-default" id="buscar" style="position: relative; left :-15px">
+			<option value="TODOS" selected>TODOS</option>
+			<option value="APROBADOS">APROBADOS</option>
+			 <option value="CONSTRUCCION">CONSTRUCCIÓN</option>
+			<option value="CORREGIR">CORREGIR</option>
+			<!-- <option value="ENVIADOS">ENVIADOS</option> -->
+		</select>
+		</div>
+	</div> 
+
+	<div class="row" style="position: relative; top: -40px"> 
+	<div style="overflow-x: auto;">
+		<table id="tabla">	
+			<!-- PRELOAD -->
+			<div class="center hide" id="loar" type="" style="margin-top: 50px">
+				<div class="preloader-wrapper small active">
+					<?php include("../include/preloader.php"); ?>
+				</div>
+			</div> 
+
+		</table>
+
+	</div>
+	</div>
+
+
+ <div class="fixed-action-btn" > 
+ 	<a  onclick="obtenerDAt();" class='btn-floating btn-large waves-effect waves-light orange  tooltipped' data-position='left'  data-tooltip='ACTUALIZAR LISTA'  id='flotante' ><i class='material-icons'>refresh</i></a>
  </div> 
 
-	
-
-
-<div class="row" style="position: relative; top: -40px"> 
-<div style="overflow-x: auto;">
-
-	<table id="tabla">	
-		<!-- PRELOAD -->
-		<div class="center hide" id="loar" type="" style="margin-top: 50px">
-			<div class="preloader-wrapper small active">
-				<div class="spinner-layer spinner-green-only">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div><div class="gap-patch">
-					<div class="circle"></div>
-				</div><div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-				</div>
-			</div>
-		</div> 
-
-	</table>
-
-</div>
-</div>
-
-<div class="fixed-action-btn" > 
-<a  class="btn-floating btn-large waves-effect waves-light orange  tooltipped"  href="crear_proyecto.php" data-position="left"  data-tooltip="CREAR PROYECTO"  id="flotante" ><i class="material-icons">add</i></a>
-</div>
   
+
+
 </div>
 
 

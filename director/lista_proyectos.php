@@ -11,6 +11,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
 	<title>PROYECTOS</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link rel="icon" type="image/png" href="../img/logo.png" />
 	<link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 	<style>
 	.hoverA:hover {
@@ -57,11 +58,19 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
 			<div class="row"> 
 			<div style="overflow-x: auto;">
 				<table id="tabla" >
+				<div class="center hide" id="lis_load" type="" style="margin-top: 50px">
+					<?php include("../include/preloader.php"); ?> 
+				</div> 
 							
 				</table>
 			</div>
 			</div>
 		</section>
+
+		<div class="fixed-action-btn" > 
+ 			<a  onclick="obtenerDAt();" class='btn-floating btn-large waves-effect waves-light orange  tooltipped' data-position='left'  data-tooltip='ACTUALIZAR LISTA'  id='' ><i class='material-icons'>refresh</i></a>
+ 		</div>
+
 	</div>
    </div>
 
@@ -98,6 +107,8 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "D"){
 	  </div>
 
   </div>
+
+  
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>

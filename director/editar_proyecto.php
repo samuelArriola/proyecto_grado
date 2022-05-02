@@ -21,7 +21,7 @@
 	
 
 	include("../config/conexion.php");
-	$sql = "select item_proy, nomb_proy, desc_proy, jefe_proy, esta_proy, visto, item_dep, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip , DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, comentarios_p
+	$sql = "select item_proy, nomb_proy, desc_proy, jefe_proy, esta_proy, visto, item_dep, liderAcargo, DATE_FORMAT(fecha_ip, '%Y/%m/%d') as fecha_ip , DATE_FORMAT(fecha_fp, '%Y/%m/%d') as fecha_fp, comentarios_p
 	,(select concat(nomb_usua,' ',apel_usua) from inex_usuarios where iden_usua = a.jefe_proy) AS responsable, a.esta_proy
 	from inex_proyectos as a where a.item_proy = '".$item."'";
 	$rs = mysqli_query($con, $sql); 
@@ -50,6 +50,7 @@
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link rel="icon" type="image/png" href="../img/logo.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
 <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
@@ -67,12 +68,14 @@
 
 	<?php if ($row = mysqli_fetch_array($rs)) 
 	{  $estado_proyecto = $row["esta_proy"]; 
-	   $dep_proy = $row["item_dep"];	?> 
+	   $dep_proy = $row["item_dep"];
+	 	?> 
 	
     <form id="">
 	<div class="input-field col s12">
 	<b>Nombre del proyecto:</b> 
 	   <input  type="hidden" value="<?php echo $item ?>" id="id_pro"><br>
+	   <input  type="hidden" value="<?php echo $row["nomb_proy"] ?>" id="EpNombreProy"><br>
 	   <h6><?php echo $row["nomb_proy"] ?></h6>
 	<div style="text-align: center; margin-top: -75px; margin-left: 93%;"><?php echo $icon_estado[$row["esta_proy"]] ?><div style="font-size: 0.7em; margin-top: 8px;"> <?php echo $desc_estado[$row["esta_proy"]] ?></div></div></div>
 	
@@ -103,8 +106,30 @@
     </div>
 	
 	<div class="input-field col s12">
-	<b>Lider a cargo:</b> 
+	<b>Coordinador a cargo:</b> 
 	   <h6><?php echo $row["responsable"] ?></h6>
+	</div>
+	<div class="input-field col s12">
+	
+				<div class="teal-text">LIDERES DE APOYO</div>
+
+			<div class=" section">
+			<table class="container responsive-table">
+				<thead>
+					<tr>
+						<th>Cedula</th>
+						<th>Nombre</th>
+						<th>Correo</th>	
+					</tr>
+			</thead>
+			<tbody id="mostrarLiderP">
+				
+			</tbody>
+			</table>	 
+			</div> <br> <br>
+
+
+
 	</div>
 
 		<?php if($estado_proyecto==2){ ?>
@@ -124,8 +149,7 @@
 
 <div id="container_actividades">
 <?php
-	$sql = "select *
-	 from inex_actividades as a where a.item_proy = '".$item."'";
+	$sql = "select * from inex_actividades as a where a.item_proy = '".$item."'";
 	$rs = mysqli_query($con, $sql);
 ?><br>
 	<div class="row">
@@ -263,6 +287,9 @@
 <script type="text/javascript" src="../js/funciones.js?t=<?php echo time(); ?>"></script> 
 <script src="js/funciones.js"></script> 
 <script src="js/validaciones.js"></script>
+<script>
+	mostrarLiderP( <?php echo $item ?>);
+</script>
  
 </body>
 

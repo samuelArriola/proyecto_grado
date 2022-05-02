@@ -13,6 +13,8 @@ $resultado = mysqli_query($con,$query);
 $rw = mysqli_fetch_array($resultado);
 $fecha_ip= $rw['fecha_ip'];
 $fecha_fp=$rw['fecha_fp'];
+$nomb_proy = $rw['nomb_proy'];
+$jefe_proy = $rw['jefe_proy'];
 
 while ($row = mysqli_fetch_array($rs)) {
     $nombre_a = $row['nomb_acti'];
@@ -31,7 +33,7 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	  <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!-- <link rel="shortcut icon" href="https://tic.curn.edu.co:2641/gestion/comun/logo.png" />-->
+    <link rel="icon" type="../image/png" href="../img/logo.png" />
     <link href="../css/all.css?t=<?php echo time(); ?>" rel="stylesheet"> 
 
 <style>
@@ -55,6 +57,8 @@ if(isset($_SESSION["ROLE"]) && $_SESSION["ROLE"] == "L"){
         <form class="col s12" action="" method="" id="form2">
         <div class="row">
         <div class="input-field col s12">
+            <input type="hidden" value=" <?php echo $nomb_proy ?>" name="Eanomb_proy" id="Eanomb_proy">
+            <input type="hidden" value=" <?php echo $jefe_proy ?>" name="Eajefe_proy" id="Eajefe_proy">
             <input type="hidden" value=" <?php echo $item_p ?>" name="id_pro2" id="id_pro2">
             <input type="hidden" value=" <?php echo $item_a?>" name="" id="id_a2">
             <input value = "<?php echo $nombre_a ?>" maxlength="240" name="nombre_act" id="nombre_act" type="text" class="caracteresEpesiales validate" >
