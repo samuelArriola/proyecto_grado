@@ -28,11 +28,6 @@
     if(!$resul){
       echo 'Actividad no actualizada';
     }else{
-<<<<<<< HEAD
-      echo'Actividad actualizada';
-    }
-
-=======
      
      //se envia el correo
      $correo =  $row_d['correo'];
@@ -74,7 +69,6 @@
      include('../../config/enviar_email.php');
     } 
  
->>>>>>> 08f137702f8b9a5b19ec697c84494b530dc8d3d6
      // cerra conexion 
     mysqli_close($con);
 

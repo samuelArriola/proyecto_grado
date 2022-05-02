@@ -17,11 +17,7 @@ include("../../config/conexion.php");
  if ($resul_e) {
     echo 'Evidencia subida correctamente';
 } else {
-<<<<<<< HEAD
-    echo 'Evidencia existente <br> Renombre el nombre la imagen y vuelva a intentar, sino concatate a su ingeniero de software';
-=======
     echo 'Evidencia existente <br> Renombre el nombre la imagen y vuelva a intentar, sino contacte a su ingeniero de software';
->>>>>>> 08f137702f8b9a5b19ec697c84494b530dc8d3d6
 }
 
 ?>
