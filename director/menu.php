@@ -30,8 +30,11 @@ $dep_u = $_SESSION["NOM_D"];
 <li><a class="black-text" id="mnuProy" style="font-size: 0.8em; text-align: center; height: 64px;" href="lista_proyectos.php" >
   <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">account_balance</i>Proyectos
 </a></li>
-<li><a class="black-text" id="mnuProy" style="font-size: 0.8em; text-align: center; height: 64px;" href="coordinadores.php" >
+<li><a class="black-text" id="" style="font-size: 0.8em; text-align: center; height: 64px;" href="coordinadores.php" >
   <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">supervisor_account</i>Usuarios
+</a></li>
+<li><a class="black-text" id="" style="font-size: 0.8em; text-align: center; height: 64px;" href="herencia.php" >
+  <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">swap_horiz</i>Herencia  <!-- compare,join_right  -->
 </a></li>
 </ul>
 
@@ -51,16 +54,19 @@ $dep_u = $_SESSION["NOM_D"];
 </div>
 
 <ul  id="mobile-demo" class="sidenav">
-<li style="padding-left: 10px; background-color: #757575;">
-  <div style="color: white; font-size: 0.8em; font-weight: 500;">
+<li style="padding-left: 10px; background-color: orange;">
+  <div style="color: white; font-size: 0.8em; font-weight: 500; ">
   <?php echo $_SESSION["NOMB"]; ?>
   </div>
 <!-- <li><a href="javascript: $('.sidenav').sidenav('close');"  style="padding-left: 16px;"> -->
 <li><a href="lista_proyectos.php"  style="padding-left: 16px;">
 	<i class="material-icons teal-text ">account_balance</i>Proyectos </a>
 </li>
-<li><a class="black-text" id="mnuProy" style="padding-left: 16px;" href="coordinadores.php" >
+<li><a class="black-text" id="" style="padding-left: 16px;" href="coordinadores.php" >
   <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">supervisor_account</i>Usuarios
+</a></li>
+<li><a class="black-text" id="" style="padding-left: 16px;" href="herencia.php" >
+  <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">swap_horiz</i>Herencia  <!-- compare,join_right  -->
 </a></li>
 
 <li class="divider"></li>

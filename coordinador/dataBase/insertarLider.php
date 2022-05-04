@@ -9,7 +9,7 @@ include '../../config/conexion.php';
 $datos="SELECT * FROM inex_usuarios WHERE iden_usua = '$iden_usua' ";
 $resul_d=mysqli_query($con,$datos);
 $row_d=mysqli_fetch_array($resul_d);
-echo  $row_d['correo'];
+// echo  $row_d['correo'];
 
 include('../../config/enviar_email.php');
 

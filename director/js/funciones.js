@@ -27,6 +27,48 @@ $(document).ready(function() {
         },
     });
 
+    //Motrar usuarios por dependencia
+    $('#d_proy').change(function() {
+        let id_proy = $("#d_proy").val();
+        $('.d_coor').removeClass( 'hide');
+            $.ajax({
+                type: "POST",
+                url: "dataBase/d_mostrat.php",
+                data: {id_proy},
+                success: function(response) {
+                    $('#d_coordinador').html(response);
+                    mostrarDetalles(id_proy);    
+                }
+            });
+    });
+
+    //HERENCIA DE PROY 
+    $('#d_guarda_c').click(function(e) {
+        e.preventDefault();
+        const data = {
+            item_proy:$("#d_proy").val(),
+            iden_usua: $('#d_coordinador').val(),
+        }
+
+        if (isEmpty(data.item_proy)) {
+            return M.toast({ html: 'Proyecto vacío, por favor complete el campo', classes: 'rounded' });
+        }else if(isEmpty(data.iden_usua)){
+            return M.toast({ html: 'Coordinador vacío, por favor complete el campo', classes: 'rounded' });
+        }else{
+            $.ajax({
+                type: "POST",
+                url: "dataBase/herencia.php",
+                data: data,
+                success: function(response) {
+                    M.toast({ html: response });
+                    mostrarDetalles(data.item_proy);      
+                }
+            }); 
+        }
+    });
+
+    
+
 
     //GUARDAR USUARIO CON AJAX
     $('#guardar_usuario').click(function(e) {
@@ -50,7 +92,7 @@ $(document).ready(function() {
             }
             //  console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
         if (isEmpty(datos_u.nombre_u)) {
-            return M.toast({ html: 'Nombre de usuario vacío, por favor complete todos los campos' });
+            return M.toast({ html: 'Nombre de usuario vacío, por favor complete todos los campos',  classes: 'rounded' });
         } else if (isEmpty(datos_u.apellido_u)) {
             return M.toast({ html: 'Apellido de usuario vacío, por favor complete el campo', classes: 'rounded' });
         } else if (isEmpty(datos_u.cedula_u)) {
@@ -74,8 +116,6 @@ $(document).ready(function() {
                 }
             });
         }
-
-
     });
 
 
@@ -201,6 +241,20 @@ function rstaurarUsuariosLogicos(estado) {
 
             }
 
+        }
+    })
+}
+
+function mostrarDetalles(item_proy){
+    console.log(item_proy);
+    let h_detalle = document.getElementById('h_detalle');
+    $.ajax({
+        type: "POST",
+        url: "dataBase/h_detalles.php",
+        data: { item_proy },
+        dataType: "html",
+        success: function(response) {
+            h_detalle.innerHTML = response;
         }
     })
 }
