@@ -1,8 +1,6 @@
 var log = console.log;
 log('conectado a la ventana  funciones.js');
 
-
-
 $(document).ready(function() {
     $('select').formSelect();
     $('.tooltipped').tooltip();
@@ -22,53 +20,33 @@ $(document).ready(function() {
             console.log(fecha_2);
             var instance = M.Datepicker.getInstance($('.datepickerE2'));
             instance.options.minDate = new Date(y2, m2, d2);
-
-
         },
-    });
-
-    //Motrar usuarios por dependencia
-    $('#d_proy').change(function() {
-        let id_proy = $("#d_proy").val();
-        $('.d_coor').removeClass( 'hide');
-            $.ajax({
-                type: "POST",
-                url: "dataBase/d_mostrat.php",
-                data: {id_proy},
-                success: function(response) {
-                    $('#d_coordinador').html(response);
-                    mostrarDetalles(id_proy);    
-                }
-            });
     });
 
     //HERENCIA DE PROY 
     $('#d_guarda_c').click(function(e) {
         e.preventDefault();
         const data = {
-            item_proy:$("#d_proy").val(),
-            iden_usua: $('#d_coordinador').val(),
+            old_usua:$("#h_old_usua").val(),
+            new_usua: $('#h_new_usua').val(),
         }
-
-        if (isEmpty(data.item_proy)) {
-            return M.toast({ html: 'Proyecto vacío, por favor complete el campo', classes: 'rounded' });
-        }else if(isEmpty(data.iden_usua)){
+       if(isEmpty(data.new_usua)){
             return M.toast({ html: 'Coordinador vacío, por favor complete el campo', classes: 'rounded' });
         }else{
-            $.ajax({
+             $.ajax({
                 type: "POST",
                 url: "dataBase/herencia.php",
                 data: data,
                 success: function(response) {
                     M.toast({ html: response });
-                    mostrarDetalles(data.item_proy);      
+                    setTimeout(tiempo, 1000);
+                    function tiempo() {
+                        window.location.href = 'coordinadores.php#mostrarUsuario';
+                    }     
                 }
-            }); 
+            });  
         }
     });
-
-    
-
 
     //GUARDAR USUARIO CON AJAX
     $('#guardar_usuario').click(function(e) {
@@ -108,7 +86,6 @@ $(document).ready(function() {
                 data: datos_u,
                 success: function(response) {
                     console.log(response);
-
                     M.toast({ html: response });
                     $('#registra_u')[0].reset(); //limpia las casjas de texto
                     $(mostrarU());
@@ -117,7 +94,6 @@ $(document).ready(function() {
             });
         }
     });
-
 
     //EDITAR USUARIO CON AJAX
     $('#editar_usuario').click(function(e) {
@@ -134,8 +110,6 @@ $(document).ready(function() {
                 correo_u: $('#e7').val(),
                 rol_u: checkedE
             }
-            // console.log(datos_u.nombre_u,datos_u.apellido_u,datos_u.cedula_u,datos_u.correo_u);
-
         if (isEmpty(datos_u.nombre_u)) {
             return M.toast({ html: 'Nombre de usuario vacío, por favor complete todos los campos' });
         } else if (isEmpty(datos_u.apellido_u)) {
@@ -153,10 +127,7 @@ $(document).ready(function() {
                 data: datos_u,
                 success: function(response_e) {
                     M.toast({ html: response_e });
-                    // $('#editar_u')[0].reset(); //limpia las casjas de texto
-
                     setTimeout(tiempo, 1000);
-
                     function tiempo() {
                         window.location.href = 'coordinadores.php#mostrarUsuario';
                     }
@@ -173,7 +144,6 @@ $(document).ready(function() {
     //BUSCAR USUARIOS
     $('#buscar_u').keyup(function() {
         var buscar = $('#buscar_u').val();
-        console.log(buscar);
         if (buscar != "") {
             mostrarU(buscar);
         } else {
@@ -245,20 +215,6 @@ function rstaurarUsuariosLogicos(estado) {
     })
 }
 
-function mostrarDetalles(item_proy){
-    console.log(item_proy);
-    let h_detalle = document.getElementById('h_detalle');
-    $.ajax({
-        type: "POST",
-        url: "dataBase/h_detalles.php",
-        data: { item_proy },
-        dataType: "html",
-        success: function(response) {
-            h_detalle.innerHTML = response;
-        }
-    })
-}
-
 //trae id para camdarlo a la ventana confirm eliminar Logico de usuario
 function recibeIDLogico(id_u) {
     $('#obtieneIDLogico').val(id_u);
@@ -277,14 +233,12 @@ function recibeIDLogicoREST(id_u) {
 
 //MOSTRAR USUARIOS CON AJAX
 function mostrarU(dat) {
-
     $.ajax({
         type: "POST",
         url: "dataBase/u_buscar.php",
         data: { dato: dat },
         dataType: "html",
     })
-
     .done(function(respuesta) { //done: si el ajax es verdadero, hazme esto es para recibir ... o susses 
         $('#mostrar_usu').html(respuesta);
     })

@@ -33,9 +33,6 @@ $dep_u = $_SESSION["NOM_D"];
 <li><a class="black-text" id="" style="font-size: 0.8em; text-align: center; height: 64px;" href="coordinadores.php" >
   <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">supervisor_account</i>Usuarios
 </a></li>
-<li><a class="black-text" id="" style="font-size: 0.8em; text-align: center; height: 64px;" href="herencia.php" >
-  <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">swap_horiz</i>Herencia  <!-- compare,join_right  -->
-</a></li>
 </ul>
 
 <ul class="right hide-on-med-and-down">
@@ -64,9 +61,6 @@ $dep_u = $_SESSION["NOM_D"];
 </li>
 <li><a class="black-text" id="" style="padding-left: 16px;" href="coordinadores.php" >
   <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">supervisor_account</i>Usuarios
-</a></li>
-<li><a class="black-text" id="" style="padding-left: 16px;" href="herencia.php" >
-  <i class="material-icons teal-text " style="height: 16px; line-height: 48px;">swap_horiz</i>Herencia  <!-- compare,join_right  -->
 </a></li>
 
 <li class="divider"></li>

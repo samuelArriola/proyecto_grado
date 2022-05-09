@@ -11,7 +11,7 @@
 
     if (isset($_POST['dato'])) {
      $buscar_u = mysqli_real_Escape_string ($con,$_POST['dato']);
-     $query="SELECT * FROM inex_usuarios WHERE    (iden_usua LIKE '%$buscar_u%' OR nomb_usua  LIKE '%$buscar_u%' OR apel_usua LIKE'%$buscar_u%' OR correo LIKE '%$buscar_u%') AND item_dep = '$dep' AND iden_usua != '$ide'"; 
+     $query="SELECT * FROM inex_usuarios WHERE    (iden_usua LIKE '%$buscar_u%' OR nomb_usua  LIKE '%$buscar_u%' OR apel_usua LIKE'%$buscar_u%' OR correo LIKE '%$buscar_u%') AND item_dep = '$dep'"; 
    }
    $resul_u=mysqli_query($con,$query);
    $fila =mysqli_num_rows($resul_u); //cuenta los resultados 
@@ -22,12 +22,14 @@
          $eliminar ="<li title='Borrar' class='material-icons '><a href='#eliminaULogico' type='button'  onclick='recibeIDLogico(".$row_u['iden_usua'].")' class='hoverable red-text modal-trigger'>delete</a></li>";
          $restaurar =" <li title='Restaurar' class='material-icons '><a href='#restaurarULogico' type='button'  onclick='recibeIDLogicoREST(".$row_u['iden_usua'].")' class='hoverable orange-text modal-trigger'>restore</a></li>";
          $editar = "<li title='Editar' class='material-icons'><a href='u_editar.php?id_u=".$row_u['iden_usua']."' class='hoverable modal-trigger'>edit</a></li>";  
+         $herencia = "<li title='Herencia de proyecto' class='material-icons'><a href='herencia.php?id_u=".$row_u['iden_usua']."' class='hoverable modal-trigger green-text'>swap_horiz</a></li>";  
          
            if($row_u['estado'] ==='ACTIVO' ){
                $restaurar="";
            }else{
                $eliminar="";
                $editar="";
+               $herencia="";
 
            }
 
@@ -41,7 +43,6 @@
             <li title='Borrar' class='material-icons '><a href='#eliminaU' type='button'  onclick='recibeID(".$row_u['iden_usua'].")' class='hoverable red-text modal-trigger'>delete</a></li>     //eliminar
 
          } */
-
            $tabla_u.="          
                <tr>
                    <td> ".$row_u['iden_usua']." </td>
@@ -51,6 +52,7 @@
                    <td> ".$row_u['estado']." </td>
                    <td>
                         ". $editar ."  
+                        ".$herencia."
                         ".$restaurar."
                         ".$eliminar."                
                                          

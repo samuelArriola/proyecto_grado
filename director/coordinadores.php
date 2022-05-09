@@ -132,8 +132,7 @@
 			</tr>
 			</thead>
 			<tbody id="mostrar_usu">
-				
-			</tbody>  
+			</tbody>
 		</table>
 		</div>
 	</div>
